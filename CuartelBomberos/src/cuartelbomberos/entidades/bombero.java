@@ -1,7 +1,6 @@
 
 package cuartelbomberos.entidades;
 
-
-public class brigada {
+public class bombero {
     
 }
