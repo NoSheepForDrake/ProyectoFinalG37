@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 03-10-2023 a las 00:33:21
+-- Servidor: localhost
+-- Tiempo de generación: 04-10-2023 a las 00:29:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -33,7 +33,8 @@ CREATE TABLE `bombero` (
   `nombreApellido` varchar(50) NOT NULL,
   `fechaNac` date NOT NULL,
   `celular` varchar(15) NOT NULL,
-  `codBrigada` int(11) NOT NULL
+  `codBrigada` int(11) NOT NULL,
+  `gSanguineo` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -93,13 +94,15 @@ CREATE TABLE `siniestro` (
 --
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`idBombero`),
-  ADD UNIQUE KEY `dni` (`dni`);
+  ADD UNIQUE KEY `dni` (`dni`),
+  ADD UNIQUE KEY `codBrigada` (`codBrigada`);
 
 --
 -- Indices de la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  ADD PRIMARY KEY (`codBrigada`);
+  ADD PRIMARY KEY (`codBrigada`),
+  ADD KEY `nroCuartel` (`nroCuartel`);
 
 --
 -- Indices de la tabla `cuartel`
@@ -111,7 +114,8 @@ ALTER TABLE `cuartel`
 -- Indices de la tabla `siniestro`
 --
 ALTER TABLE `siniestro`
-  ADD PRIMARY KEY (`codigo`);
+  ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `codBrigada` (`codBrigada`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -140,6 +144,28 @@ ALTER TABLE `cuartel`
 --
 ALTER TABLE `siniestro`
   MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `bombero`
+--
+ALTER TABLE `bombero`
+  ADD CONSTRAINT `bombero_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`codBrigada`);
+
+--
+-- Filtros para la tabla `brigada`
+--
+ALTER TABLE `brigada`
+  ADD CONSTRAINT `brigada_ibfk_3` FOREIGN KEY (`nroCuartel`) REFERENCES `cuartel` (`codCuartel`);
+
+--
+-- Filtros para la tabla `siniestro`
+--
+ALTER TABLE `siniestro`
+  ADD CONSTRAINT `siniestro_ibfk_1` FOREIGN KEY (`codBrigada`) REFERENCES `brigada` (`codBrigada`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
