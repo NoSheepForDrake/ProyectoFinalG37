@@ -1,2 +1,1 @@
-# EjercicioTeoriaPractica
-Primer ejercicio guia 2
+# Ignorar este archivo
