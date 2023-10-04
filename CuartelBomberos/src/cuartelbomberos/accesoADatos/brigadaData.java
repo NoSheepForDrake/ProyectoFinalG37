@@ -1,4 +1,3 @@
-
 package cuartelbomberos.accesoADatos;
 
 import cuartelbomberos.entidades.brigada;
@@ -12,9 +11,13 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class brigadaData {
+
     private Connection con = null;
 
-    
+    public brigadaData() {
+        con = Conexion.getConexion();
+    }
+
     public void guardarBrigada(brigada brigada) {
         String sql = "INSERT INTO brigada( nombreBriga, especialidad, libre, nroCuartel) "
                 + "VALUES (?,?,?,?)";
