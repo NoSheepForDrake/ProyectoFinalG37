@@ -105,7 +105,7 @@ public class brigadaData {
                 brigada.setNroCuartel(rs.getInt("nroCuartel"));
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe una brigada con ese codigo");
+                JOptionPane.showMessageDialog(null, "No existe una brigada con ese codigo de identificación");
                 ps.close();
             }
 
@@ -122,7 +122,6 @@ public class brigadaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
                 brigada brigadas = new brigada();
                 brigadas.setCodBrigada(rs.getInt("codBrigada"));
                 brigadas.setEspecialidad(rs.getString("especialidad"));
@@ -130,6 +129,7 @@ public class brigadaData {
                 brigadas.setNombreBriga(rs.getString("nombreBriga"));
                 brigadas.setNroCuartel(rs.getInt("nroCuartel"));
                 brigada.add(brigadas);
+            while (rs.next()) {
             }
 
             ps.close();
