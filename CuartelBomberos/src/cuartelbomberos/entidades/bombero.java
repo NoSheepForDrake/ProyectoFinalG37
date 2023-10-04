@@ -9,28 +9,28 @@ public class bombero {
     private String nombreApellido;
     private LocalDate fechaNac;
     private String celular;
-    private int codBrigada;
+    private brigada brigada;
     private String gSanguineo;
 
     public bombero() {
     }
 
-    public bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, int codBrigada, String gSanguineo) {
+    public bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, brigada brigada, String gSanguineo) {
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.codBrigada = codBrigada;
+        this.brigada = brigada;
         this.gSanguineo = gSanguineo;
     }
 
-    public bombero(int idBombero, String dni, String nombreApellido, LocalDate fechaNac, String celular, int codBrigada, String gSanguineo) {
+    public bombero(int idBombero, String dni, String nombreApellido, LocalDate fechaNac, String celular, brigada brigada, String gSanguineo) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
-        this.codBrigada = codBrigada;
+        this.brigada = brigada;
         this.gSanguineo = gSanguineo;
     }
 
@@ -74,12 +74,12 @@ public class bombero {
         this.celular = celular;
     }
 
-    public int getCodBrigada() {
-        return codBrigada;
+    public brigada getbrigada() {
+        return brigada;
     }
 
-    public void setCodBrigada(int codBrigada) {
-        this.codBrigada = codBrigada;
+    public void setCodBrigada(brigada brigada) {
+        this.brigada = brigada;
     }
 
     public String getgSanguineo() {
@@ -92,7 +92,7 @@ public class bombero {
 
     @Override
     public String toString() {
-        return  dni + "," + nombreApellido + "," + fechaNac + "," + celular + "," + codBrigada + "," + gSanguineo;
+        return  dni + "," + nombreApellido + "," + fechaNac + "," + celular + "," + brigada.getNombreBriga() + "," + gSanguineo;
     }
     
 }
