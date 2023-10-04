@@ -3,19 +3,19 @@ package cuartelbomberos.entidades;
 
 import java.time.LocalDate;
 
-public class bombero {
+public class Bombero {
     private int idBombero;
     private String dni;
     private String nombreApellido;
     private LocalDate fechaNac;
     private String celular;
-    private brigada brigada;
+    private Brigada brigada;
     private String gSanguineo;
 
-    public bombero() {
+    public Bombero() {
     }
 
-    public bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, brigada brigada, String gSanguineo) {
+    public Bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo) {
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
@@ -24,7 +24,7 @@ public class bombero {
         this.gSanguineo = gSanguineo;
     }
 
-    public bombero(int idBombero, String dni, String nombreApellido, LocalDate fechaNac, String celular, brigada brigada, String gSanguineo) {
+    public Bombero(int idBombero, String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
@@ -74,11 +74,11 @@ public class bombero {
         this.celular = celular;
     }
 
-    public brigada getbrigada() {
+    public Brigada getbrigada() {
         return brigada;
     }
 
-    public void setCodBrigada(brigada brigada) {
+    public void setCodBrigada(Brigada brigada) {
         this.brigada = brigada;
     }
 

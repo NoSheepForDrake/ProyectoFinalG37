@@ -1,6 +1,6 @@
 package cuartelbomberos.accesoADatos;
 
-import cuartelbomberos.entidades.bombero;
+import cuartelbomberos.entidades.Bombero;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class bomberoData {
         con = Conexion.getConexion();
     }
 
-    public void guardarBombero(bombero bomber) {
+    public void guardarBombero(Bombero bomber) {
 
         String sql = "INSERT INTO bombero (dni, nompreApellido, fechaNac, celular, gSanguineo)"
                 + "VALUES (?,?,?,?,?)";
@@ -42,7 +42,7 @@ public class bomberoData {
         }
     }
 
-    public void editarBombero(bombero bomber) {
+    public void editarBombero(Bombero bomber) {
 
         String sql = "UPDATE bombero SET dni=?, nompreApellido=?, fechaNac=?, celular=?, gSanguineo=?"
                 + "WHERE idBombero=?";
@@ -92,8 +92,8 @@ public class bomberoData {
 
     }
 
-    public bombero buscarBombero(String dni) {
-        bombero bomber = null;
+    public Bombero buscarBombero(String dni) {
+        Bombero bomber = null;
 
         String sql = "SELECT idBombero ,dni, nompreApellido, fechaNac, celular, gSanguineo FROM bombero WHERE dni = ?";
         PreparedStatement ps = null;
@@ -105,7 +105,7 @@ public class bomberoData {
 
             if (rs.next()) {
 
-                bomber = new bombero();
+                bomber = new Bombero();
                 bomber.setIdBombero(rs.getInt("idBombero"));
                 bomber.setDni(dni); // este dato se lo pasamos por parametro 
                 bomber.setNombreApellido(rs.getString("nombreApellido"));
@@ -125,16 +125,16 @@ public class bomberoData {
         return bomber;
     }
 
-    public List<bombero> listarAlumnos() {
+    public List<Bombero> listarAlumnos() {
 
-        List<bombero> bomberos = new ArrayList<>();
+        List<Bombero> bomberos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM bombero";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                bombero bomber = new bombero();
+                Bombero bomber = new Bombero();
 
                 bomber.setIdBombero(rs.getInt("idBombero"));
                 bomber.setDni(rs.getString("dni"));

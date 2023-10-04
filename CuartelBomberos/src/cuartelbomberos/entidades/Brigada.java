@@ -1,24 +1,24 @@
 
 package cuartelbomberos.entidades;
 
-public class brigada {
+public class Brigada {
     private int codBrigada;
     private String nombreBriga;
     private String especialidad;
     private boolean libre;
     private int nroCuartel;
 
-    public brigada() {
+    public Brigada() {
     }
 
-    public brigada(String nombreBriga, String especialidad, boolean libre, int nroCuartel) {
+    public Brigada(String nombreBriga, String especialidad, boolean libre, int nroCuartel) {
         this.nombreBriga = nombreBriga;
         this.especialidad = especialidad;
         this.libre = libre;
         this.nroCuartel = nroCuartel;
     }
 
-    public brigada(int codBrigada, String nombreBriga, String especialidad, boolean libre, int nroCuartel) {
+    public Brigada(int codBrigada, String nombreBriga, String especialidad, boolean libre, int nroCuartel) {
         this.codBrigada = codBrigada;
         this.nombreBriga = nombreBriga;
         this.especialidad = especialidad;
