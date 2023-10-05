@@ -147,7 +147,7 @@ public class bomberoData {
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero" + ex.getMessage());
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }
