@@ -1,7 +1,7 @@
 
 package cuartelbomberos.accesoADatos;
 
-import cuartelbomberos.entidades.cuartel;
+import cuartelbomberos.entidades.Cuartel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class cuartelData {
+public class CuartelData {
       private Connection con = null;
 
-    public cuartelData() {
+    public CuartelData() {
         con = Conexion.getConexion();
     }
-    public void guardarCuartel(cuartel cuartel){
+    public void guardarCuartel(Cuartel cuartel){
       String sql="INSERT INTO cuartel( nombreCuartel, direccion, coord_X, coord_Y, telefono, correo) "
               + "VALUES (?,?,?,?,?,?)";
        try {
@@ -43,7 +43,7 @@ public class cuartelData {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla cuartel");
         }
     }
-    public void editarCuartel(cuartel cuartel){
+    public void editarCuartel(Cuartel cuartel){
         String sql="UPDATE cuartel SET nombreCuartel=?,direccion=?,coord_X=?,coord_Y=?,telefono=?,correo=?"
                 + " WHERE codCuartel=?";
         try {
@@ -89,8 +89,8 @@ public class cuartelData {
         }
 
     }
-    public cuartel buscarCuartel(int codCuartel){
-        cuartel cuartel=null;
+    public Cuartel buscarCuartel(int codCuartel){
+        Cuartel cuartel=null;
         String sql="SELECT codCuartel, nombreCuartel, direccion, coord_X, coord_Y, telefono, correo "
                 + "FROM cuartel WHERE codCuartel=?";
         PreparedStatement ps = null;
@@ -101,7 +101,7 @@ public class cuartelData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                cuartel=new cuartel();
+                cuartel=new Cuartel();
                 cuartel.setCodCuartel(codCuartel);
                 cuartel.setNombreCuartel(rs.getString("nombreCuartel"));
                 cuartel.setDireccion(rs.getString("direccion"));
@@ -121,14 +121,14 @@ public class cuartelData {
         }
         return cuartel;
     }
-     public List<cuartel> listarCuartel() {
-        List<cuartel> cuartel = new ArrayList<>();
+     public List<Cuartel> listarCuartel() {
+        List<Cuartel> cuartel = new ArrayList<>();
         try {
             String sql = "SELECT * FROM alumno WHERE libre = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-                cuartel cuart= new cuartel();
+                Cuartel cuart= new Cuartel();
                  cuart.setCodCuartel(rs.getInt("codCuarte"));
                 cuart.setNombreCuartel(rs.getString("nombreCuartel"));
                 cuart.setDireccion(rs.getString("direccion"));

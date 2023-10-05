@@ -1,6 +1,6 @@
 package cuartelbomberos.accesoADatos;
 
-import cuartelbomberos.entidades.brigada;
+import cuartelbomberos.entidades.Brigada;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,15 +10,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class brigadaData {
+public class BrigadaData {
 
     private Connection con = null;
 
-    public brigadaData() {
+    public BrigadaData() {
         con = Conexion.getConexion();
     }
 
-    public void guardarBrigada(brigada brigada) {
+    public void guardarBrigada(Brigada brigada) {
         String sql = "INSERT INTO brigada( nombreBriga, especialidad, libre, nroCuartel) "
                 + "VALUES (?,?,?,?)";
         try {
@@ -41,7 +41,7 @@ public class brigadaData {
         }
     }
 
-    public void editarBrigada(brigada brigada) {
+    public void editarBrigada(Brigada brigada) {
         String sql = "UPDATE brigada SET nombreBriga=?,especialidad=?,libre=?,nroCuartel=? WHERE codBrigada=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -85,8 +85,8 @@ public class brigadaData {
         }
     }
 
-    public brigada buscarBrigada(int codBrigada) {
-        brigada brigada = null;
+    public Brigada buscarBrigada(int codBrigada) {
+        Brigada brigada = null;
         String sql = "SELECT codBrigada, nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE codBrigada=?";
         PreparedStatement ps = null;
         try {
@@ -96,7 +96,7 @@ public class brigadaData {
 
             if (rs.next()) {
 
-                brigada = new brigada();
+                brigada = new Brigada();
 
                 brigada.setCodBrigada(codBrigada);
                 brigada.setNombreBriga(rs.getString("nombreBriga"));
@@ -115,14 +115,14 @@ public class brigadaData {
         return brigada;
     }
 
-    public List<brigada> listarBrigada() {
-        List<brigada> brigada = new ArrayList<>();
+    public List<Brigada> listarBrigada() {
+        List<Brigada> brigada = new ArrayList<>();
         try {
             String sql = "SELECT * FROM alumno WHERE libre = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-                brigada brigadas = new brigada();
+                Brigada brigadas = new Brigada();
                 brigadas.setCodBrigada(rs.getInt("codBrigada"));
                 brigadas.setEspecialidad(rs.getString("especialidad"));
                 brigadas.setLibre(rs.getBoolean("libre"));
