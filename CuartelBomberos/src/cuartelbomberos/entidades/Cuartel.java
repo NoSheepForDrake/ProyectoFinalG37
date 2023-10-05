@@ -1,7 +1,7 @@
 
 package cuartelbomberos.entidades;
 
-public class cuartel {
+public class Cuartel {
     private int codCuartel;
     private String nombreCuartel;
     private String direccion;
@@ -10,10 +10,10 @@ public class cuartel {
     private String telefono;
     private String correo;
 
-    public cuartel() {
+    public Cuartel() {
     }
 
-    public cuartel(String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
+    public Cuartel(String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
         this.coord_X = coord_X;
@@ -22,7 +22,7 @@ public class cuartel {
         this.correo = correo;
     }
 
-    public cuartel(int codCuartel, String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
+    public Cuartel(int codCuartel, String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
         this.codCuartel = codCuartel;
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;

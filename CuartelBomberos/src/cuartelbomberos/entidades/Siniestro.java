@@ -3,7 +3,7 @@ package cuartelbomberos.entidades;
 
 import java.time.LocalDate;
 
-public class siniestro {
+public class Siniestro {
     private int codigo;
     private String tipo;
     private LocalDate fechaSiniestro;
@@ -14,10 +14,10 @@ public class siniestro {
     private int puntuacion;
     private int codBrigada;
 
-    public siniestro() {
+    public Siniestro() {
     }
 
-    public siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada) {
+    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada) {
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coord_X = coord_X;
@@ -28,7 +28,7 @@ public class siniestro {
         this.codBrigada = codBrigada;
     }
 
-    public siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada) {
+    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
