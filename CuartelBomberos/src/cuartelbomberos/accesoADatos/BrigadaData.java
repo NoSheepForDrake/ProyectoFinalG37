@@ -27,7 +27,8 @@ public class BrigadaData {
             ps.setString(1, brigada.getNombreBriga());
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
-            ps.setInt(4, brigada.getCodBrigada());
+            ps.setInt(4, brigada.getNroCuartel());
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
 
@@ -37,7 +38,7 @@ public class BrigadaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada");
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada"+"- "+ex);
         }
     }
 
@@ -61,7 +62,7 @@ public class BrigadaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada");
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada" +", "+ex);
         }
     }
 
@@ -122,13 +123,13 @@ public class BrigadaData {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-                Brigada brigadas = new Brigada();
-                brigadas.setCodBrigada(rs.getInt("codBrigada"));
-                brigadas.setEspecialidad(rs.getString("especialidad"));
-                brigadas.setLibre(rs.getBoolean("libre"));
-                brigadas.setNombreBriga(rs.getString("nombreBriga"));
-                brigadas.setNroCuartel(rs.getInt("nroCuartel"));
-                brigada.add(brigadas);
+            Brigada brigadas = new Brigada();
+            brigadas.setCodBrigada(rs.getInt("codBrigada"));
+            brigadas.setEspecialidad(rs.getString("especialidad"));
+            brigadas.setLibre(rs.getBoolean("libre"));
+            brigadas.setNombreBriga(rs.getString("nombreBriga"));
+            brigadas.setNroCuartel(rs.getInt("nroCuartel"));
+            brigada.add(brigadas);
             while (rs.next()) {
             }
 
