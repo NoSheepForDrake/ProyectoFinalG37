@@ -175,6 +175,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbsalirActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbeliminar">
       <Properties>
@@ -190,6 +193,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Limpiar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jblimpiarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jrbsi">
       <Properties>
@@ -203,6 +209,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="No"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jrbnoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jbbuscar">
       <Properties>

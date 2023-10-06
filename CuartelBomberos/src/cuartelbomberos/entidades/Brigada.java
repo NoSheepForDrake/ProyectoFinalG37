@@ -6,24 +6,24 @@ public class Brigada {
     private String nombreBriga;
     private String especialidad;
     private boolean libre;
-    private int nroCuartel;
+    private Cuartel cuartel;
 
     public Brigada() {
     }
 
-    public Brigada(String nombreBriga, String especialidad, boolean libre, int nroCuartel) {
+    public Brigada(String nombreBriga, String especialidad, boolean libre, Cuartel cuartel) {
         this.nombreBriga = nombreBriga;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.nroCuartel = nroCuartel;
+        this.cuartel = cuartel;
     }
 
-    public Brigada(int codBrigada, String nombreBriga, String especialidad, boolean libre, int nroCuartel) {
+    public Brigada(int codBrigada, String nombreBriga, String especialidad, boolean libre, Cuartel cuartel) {
         this.codBrigada = codBrigada;
         this.nombreBriga = nombreBriga;
         this.especialidad = especialidad;
         this.libre = libre;
-        this.nroCuartel = nroCuartel;
+        this.cuartel = cuartel;
     }
 
     public int getCodBrigada() {
@@ -58,17 +58,17 @@ public class Brigada {
         this.libre = libre;
     }
 
-    public int getNroCuartel() {
-        return nroCuartel;
+    public Cuartel getCuartel() {
+        return cuartel;
     }
 
-    public void setNroCuartel(int nroCuartel) {
-        this.nroCuartel = nroCuartel;
+    public void setCuartel(Cuartel cuartel) {
+        this.cuartel = cuartel;
     }
 
     @Override
     public String toString() {
-        return nombreBriga + "," + especialidad + "," + libre + "," + nroCuartel;
+        return nombreBriga + "," + especialidad + "," + libre + "," + cuartel.getCodCuartel();
     }
     
 }

@@ -92,7 +92,7 @@ public class Bombero {
 
     @Override
     public String toString() {
-        return  dni + "," + nombreApellido + "," + fechaNac + "," + celular + "," + brigada.getNombreBriga() + "," + gSanguineo;
+        return  dni + "," + nombreApellido + "," + fechaNac + "," + celular + "," + brigada.getCodBrigada() + "," + gSanguineo;
     }
     
 }

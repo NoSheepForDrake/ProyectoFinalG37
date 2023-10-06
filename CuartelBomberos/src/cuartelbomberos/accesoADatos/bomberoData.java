@@ -10,14 +10,18 @@ public class bomberoData {
 
     private Connection con = null;
 
+    
+
     public bomberoData() {
         con = Conexion.getConexion();
     }
 
     public void guardarBombero(Bombero bomber) {
+        brigadaData bd = new brigadaData();
 
-        String sql = "INSERT INTO bombero (dni, nompreApellido, fechaNac, celular, gSanguineo)"
-                + "VALUES (?,?,?,?,?)";
+
+        String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo)"
+                + "VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -26,7 +30,8 @@ public class bomberoData {
             ps.setString(2, bomber.getNombreApellido());
             ps.setDate(3, Date.valueOf(bomber.getFechaNac()));
             ps.setString(4, bomber.getCelular());
-            ps.setString(5, bomber.getgSanguineo());
+            ps.setInt(5, bomber.getbrigada().getCodBrigada());
+            ps.setString(6, bomber.getgSanguineo());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -125,7 +130,7 @@ public class bomberoData {
         return bomber;
     }
 
-    public List<Bombero> listarAlumnos() {
+    public List<Bombero> listarBombero() {
 
         List<Bombero> bomberos = new ArrayList<>();
         try {
