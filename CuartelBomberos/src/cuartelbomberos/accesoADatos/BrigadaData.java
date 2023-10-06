@@ -115,7 +115,7 @@ public class BrigadaData {
         }
         return brigada;
     }
-
+    
     public List<Brigada> listarBrigada() {
         List<Brigada> brigada = new ArrayList<>();
         try {

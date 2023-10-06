@@ -1,13 +1,14 @@
 package cuartelbomberos.accesoADatos;
 
 import cuartelbomberos.entidades.Bombero;
+import cuartelbomberos.entidades.Brigada;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
 public class bomberoData {
-
+    
     private Connection con = null;
 
     public bomberoData() {
@@ -16,8 +17,8 @@ public class bomberoData {
 
     public void guardarBombero(Bombero bomber) {
 
-        String sql = "INSERT INTO bombero (dni, nompreApellido, fechaNac, celular, gSanguineo)"
-                + "VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo)"
+                + "VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -26,7 +27,8 @@ public class bomberoData {
             ps.setString(2, bomber.getNombreApellido());
             ps.setDate(3, Date.valueOf(bomber.getFechaNac()));
             ps.setString(4, bomber.getCelular());
-            ps.setString(5, bomber.getgSanguineo());
+            ps.setInt(5, bomber.getbrigada().getCodBrigada());
+            ps.setString(6, bomber.getgSanguineo());
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -44,7 +46,7 @@ public class bomberoData {
 
     public void editarBombero(Bombero bomber) {
 
-        String sql = "UPDATE bombero SET dni=?, nompreApellido=?, fechaNac=?, celular=?, gSanguineo=?"
+        String sql = "UPDATE bombero SET dni=?, nombreApellido=?, fechaNac=?, celular=?, gSanguineo=?"
                 + "WHERE idBombero=?";
 
         try {
