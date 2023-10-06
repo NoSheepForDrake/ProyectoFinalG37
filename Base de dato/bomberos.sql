@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-10-2023 a las 00:29:30
+-- Tiempo de generación: 06-10-2023 a las 22:52:06
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -37,6 +37,17 @@ CREATE TABLE `bombero` (
   `gSanguineo` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Volcado de datos para la tabla `bombero`
+--
+
+INSERT INTO `bombero` (`idBombero`, `dni`, `nombreApellido`, `fechaNac`, `celular`, `codBrigada`, `gSanguineo`) VALUES
+(8, '1', 'Soto Carlos', '1982-04-20', '12344567', 1, 'RH +'),
+(9, '2', 'Soto Pablo', '1982-04-21', '12344567', 1, 'RH -'),
+(10, '3', 'Soto Juan', '1982-04-22', '12344567', 1, '0-'),
+(11, '4', 'Soto Domingo', '1982-04-23', '12344567', 1, '0+'),
+(12, '5', 'Soto Patricio', '1982-04-24', '12344567', 1, 'A-');
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +61,16 @@ CREATE TABLE `brigada` (
   `libre` tinyint(1) NOT NULL,
   `nroCuartel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `brigada`
+--
+
+INSERT INTO `brigada` (`codBrigada`, `nombreBriga`, `especialidad`, `libre`, `nroCuartel`) VALUES
+(1, 'Dalmatas', 'Incendios', 1, 1),
+(2, 'Canarios', 'Accidentes', 1, 2),
+(3, 'Focas', 'Buceo', 1, 3),
+(4, 'Zorros', 'Accidentes', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -66,6 +87,15 @@ CREATE TABLE `cuartel` (
   `telefono` varchar(15) NOT NULL,
   `correo` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `cuartel`
+--
+
+INSERT INTO `cuartel` (`codCuartel`, `nombreCuartel`, `direccion`, `coord_X`, `coord_Y`, `telefono`, `correo`) VALUES
+(1, 'Cuartel N°17', 'Los Alamos 1337', 1, 1, '120', 'cuartel17@bomberos.ar'),
+(2, 'Cuartel N°201', 'Los Sauces 3232', 2, 2, '121', 'cuartel201@bomberos.ar'),
+(3, 'Cuartel N°332', 'Los Pinos 2044', 3, 3, '122', 'cuartel332@bomberos.ar');
 
 -- --------------------------------------------------------
 
@@ -94,8 +124,7 @@ CREATE TABLE `siniestro` (
 --
 ALTER TABLE `bombero`
   ADD PRIMARY KEY (`idBombero`),
-  ADD UNIQUE KEY `dni` (`dni`),
-  ADD UNIQUE KEY `codBrigada` (`codBrigada`);
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- Indices de la tabla `brigada`
@@ -125,19 +154,19 @@ ALTER TABLE `siniestro`
 -- AUTO_INCREMENT de la tabla `bombero`
 --
 ALTER TABLE `bombero`
-  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBombero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `brigada`
 --
 ALTER TABLE `brigada`
-  MODIFY `codBrigada` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codBrigada` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `cuartel`
 --
 ALTER TABLE `cuartel`
-  MODIFY `codCuartel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codCuartel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `siniestro`
