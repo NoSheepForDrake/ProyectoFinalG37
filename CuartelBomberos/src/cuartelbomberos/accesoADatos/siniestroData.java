@@ -43,4 +43,25 @@ public class siniestroData {
         }
     }
     
+        public void eliminarSiniestro(int cod) {
+
+        String sql = "DELETE FROM `siniestro` WHERE codigo = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cod);
+            int fila = ps.executeUpdate();
+
+            if (fila == 1) {
+
+                JOptionPane.showMessageDialog(null, "Siniestro Eliminado");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla siniestro");
+        }
+
+    }
+    
 }
