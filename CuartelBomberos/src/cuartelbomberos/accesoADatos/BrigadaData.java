@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class brigadaData {
+public class BrigadaData {
 
     private Connection con = null;
-    private cuartelData cd;
+    private CuartelData cd;
 
-    public brigadaData() {
+    public BrigadaData() {
         con = Conexion.getConexion();
     }
 
@@ -89,7 +89,7 @@ public class brigadaData {
     }
 
     public Brigada buscarBrigada(int codBrigada) {
-        cuartelData cd = new cuartelData();
+        CuartelData cd = new CuartelData();
         Brigada brigada = null;
         String sql = "SELECT codBrigada, nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE codBrigada=?";
         PreparedStatement ps = null;

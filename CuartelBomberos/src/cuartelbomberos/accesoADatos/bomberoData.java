@@ -17,7 +17,7 @@ public class bomberoData {
     }
 
     public void guardarBombero(Bombero bomber) {
-        brigadaData bd = new brigadaData();
+        BrigadaData bd = new BrigadaData();
 
 
         String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo)"

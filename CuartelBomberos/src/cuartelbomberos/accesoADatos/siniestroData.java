@@ -13,7 +13,7 @@ public class siniestroData {
     private Connection con = null;
     
     public void guardarSiniestro(Siniestro sini) {
-
+        Connection con = Conexion.getConexion();
         String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`) "
                 + "VALUES (?,?,?,?,?,?,?,?)";
 
@@ -42,8 +42,8 @@ public class siniestroData {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla siniestros.");
         }
     }
-    
-        public void eliminarSiniestro(int cod) {
+
+    public void eliminarSiniestro(int cod) {
 
         String sql = "DELETE FROM `siniestro` WHERE codigo = ?";
         PreparedStatement ps = null;
@@ -63,5 +63,37 @@ public class siniestroData {
         }
 
     }
-    
+
+    public void editarSiniestro(Siniestro sini){
+        Connection con = Conexion.getConexion();
+        String sql = "UPDATE siniestro SET tipo = ?, fechaSiniestro = ?, coord_X = ?, coord_Y = ?, detalle = ?, fechaResol = ?, "
+                + "puntuacion = ?, codBrigada = ? WHERE codigo = ?";
+        
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setString(1, sini.getTipo());
+            ps.setDate(2, Date.valueOf(sini.getFechaSiniestro()));
+            ps.setInt(3, sini.getCoord_X());
+            ps.setInt(4, sini.getCoord_Y());
+            ps.setString(5, sini.getText());
+            ps.setDate(6, Date.valueOf(sini.getFechaResol()));
+            ps.setInt(7, sini.getPuntuacion());
+            ps.setInt(8, sini.getCodBrigada());
+            ps.setInt(9, sini.getCodigo());
+
+            int exito = ps.executeUpdate();
+
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Siniestro modificado");
+            } else {
+                JOptionPane.showMessageDialog(null, "El siniestro no existe en la Base de datos");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla siniestro");
+        }
+    }
+            
 }

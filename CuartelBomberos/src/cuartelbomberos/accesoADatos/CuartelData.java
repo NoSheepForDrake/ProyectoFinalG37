@@ -11,10 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-public class cuartelData {
+public class CuartelData {
       private Connection con = null;
 
-    public cuartelData() {
+    public CuartelData() {
         con = Conexion.getConexion();
     }
     public void guardarCuartel(Cuartel cuartel){
