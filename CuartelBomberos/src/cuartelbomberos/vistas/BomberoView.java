@@ -146,7 +146,7 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                         .addGap(5, 5, 5)
                         .addComponent(jrbno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jcbbrigada, 0, 174, Short.MAX_VALUE)))
+                        .addComponent(jcbbrigada, 0, 273, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -175,7 +175,7 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                     .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jrbsi)
                     .addComponent(jrbno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbsalir)
                     .addComponent(jbeliminar)
