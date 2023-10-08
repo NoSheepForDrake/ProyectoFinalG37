@@ -25,7 +25,6 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jdcfechaNac = new com.toedter.calendar.JDateChooser();
         jtdni = new javax.swing.JTextField();
         jtnomyapell = new javax.swing.JTextField();
         jtcelular = new javax.swing.JTextField();
@@ -135,9 +134,7 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jdcfechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                                    .addComponent(jtcelular))))
+                                .addComponent(jtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,9 +159,7 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                     .addComponent(jLabel2)
                     .addComponent(jtnomyapell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jdcfechaNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +227,6 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
     private javax.swing.JButton jblimpiar;
     private javax.swing.JButton jbsalir;
     private javax.swing.JComboBox<String> jcbbrigada;
-    private com.toedter.calendar.JDateChooser jdcfechaNac;
     private javax.swing.JRadioButton jrbno;
     private javax.swing.JRadioButton jrbsi;
     private javax.swing.JTextField jtcelular;

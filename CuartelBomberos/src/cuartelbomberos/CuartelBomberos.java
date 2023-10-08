@@ -17,15 +17,8 @@ import javax.swing.JOptionPane;
 public class CuartelBomberos {
 
     public static void main(String[] args) {
-        
-        
-        Siniestro h = new Siniestro(1,"Accidente", LocalDate.of(2023, 01, 12), 2, 2, "Incendio en una vivienda", LocalDate.of(2023, 01, 12), 2,1);
-        siniestroData sd = new siniestroData();
-        sd.editarSiniestro(h);
-        
-
-
     
+        
     }
     
 }

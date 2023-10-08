@@ -126,7 +126,7 @@ public class BrigadaData {
     public List<Brigada> listarBrigada() {
         List<Brigada> brigada = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM alumno WHERE libre = 1";
+            String sql = "SELECT * FROM brigada WHERE libre = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 

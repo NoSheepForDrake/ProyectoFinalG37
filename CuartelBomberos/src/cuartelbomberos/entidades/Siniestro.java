@@ -13,11 +13,12 @@ public class Siniestro {
     private LocalDate fechaResol;
     private int puntuacion;
     private int codBrigada;
+    private boolean resuelto;
 
     public Siniestro() {
     }
 
-    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada) {
+    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada, boolean resuelto) {
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coord_X = coord_X;
@@ -26,9 +27,10 @@ public class Siniestro {
         this.fechaResol = fechaResol;
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
+        this.resuelto = resuelto;
     }
 
-    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada) {
+    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada, boolean resuelto) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
@@ -38,6 +40,7 @@ public class Siniestro {
         this.fechaResol = fechaResol;
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
+        this.resuelto = resuelto;
     }
 
     public int getCodigo() {
@@ -111,10 +114,18 @@ public class Siniestro {
     public void setCodBrigada(int codBrigada) {
         this.codBrigada = codBrigada;
     }
-
+    
+    public boolean getResuelto(){
+        return resuelto;
+    }
+    
+    public void setResuelto(boolean resuelto){
+        this.resuelto = resuelto;
+    }
+    
     @Override
     public String toString() {
-        return tipo + "," + fechaSiniestro + "," + coord_X + "," + coord_Y + "," + text + "," + fechaResol + "," + puntuacion + "," + codBrigada;
+        return tipo + "," + fechaSiniestro + "," + coord_X + "," + coord_Y + "," + text + "," + fechaResol + "," + puntuacion + "," + codBrigada + "," + resuelto;
     }
     
 }
