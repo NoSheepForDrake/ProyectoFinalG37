@@ -128,11 +128,11 @@ public class BrigadaData {
         List<Brigada> brigadas = new ArrayList<>();
         ResultSet rs = null;
         try {
-<<<<<<< Updated upstream
+
             String sql = "SELECT * FROM brigada WHERE libre = 1";
-=======
-            String sql = "SELECT * FROM brigada";
->>>>>>> Stashed changes
+
+           
+
             PreparedStatement ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
 
