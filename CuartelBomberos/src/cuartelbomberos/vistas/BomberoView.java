@@ -1,22 +1,26 @@
-
 package cuartelbomberos.vistas;
 
+import cuartelbomberos.accesoADatos.BomberoData;
+import cuartelbomberos.accesoADatos.BrigadaData;
+import cuartelbomberos.entidades.Bombero;
+import cuartelbomberos.entidades.Brigada;
+import java.sql.Date;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 public class BomberoView extends javax.swing.JInternalFrame {
-private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioButton)
-   
+
     public BomberoView() {
         initComponents();
         setTitle("Bombero");
-         // Inicializa el ButtonGroup
-    botonesAgrupados = new javax.swing.ButtonGroup();
+        cargarComboBox();
+   
 
-    // Agrega los RadioButtons al ButtonGroup
-    botonesAgrupados.add(jrbsi);
-    botonesAgrupados.add(jrbno);
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -34,9 +38,9 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
         jbeliminar = new javax.swing.JButton();
         jbguardar = new javax.swing.JButton();
         jblimpiar = new javax.swing.JButton();
-        jrbsi = new javax.swing.JRadioButton();
-        jrbno = new javax.swing.JRadioButton();
         jbbuscar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jtgSang = new javax.swing.JTextField();
 
         jLabel1.setText("DNI: ");
 
@@ -71,25 +75,16 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
         jbeliminar.setText("Eliminar");
 
         jbguardar.setText("Guardar");
+        jbguardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbguardarActionPerformed(evt);
+            }
+        });
 
         jblimpiar.setText("Limpiar");
         jblimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jblimpiarActionPerformed(evt);
-            }
-        });
-
-        jrbsi.setText("Si");
-        jrbsi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbsiActionPerformed(evt);
-            }
-        });
-
-        jrbno.setText("No");
-        jrbno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jrbnoActionPerformed(evt);
             }
         });
 
@@ -99,6 +94,8 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                 jbbuscarActionPerformed(evt);
             }
         });
+
+        jLabel6.setText("Grupo Sanguineo");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,6 +131,7 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4))
                                 .addGap(18, 18, 18)
+<<<<<<< Updated upstream
                                 .addComponent(jtcelular, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -144,6 +142,20 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                         .addComponent(jrbno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbbrigada, 0, 273, Short.MAX_VALUE)))
+=======
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jdcfechaNac, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+                                    .addComponent(jtcelular)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6))
+                                .addGap(23, 23, 23)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 20, Short.MAX_VALUE)))
+>>>>>>> Stashed changes
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -167,10 +179,12 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jrbsi)
-                    .addComponent(jrbno))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                    .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jtgSang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbsalir)
                     .addComponent(jbeliminar)
@@ -182,14 +196,8 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbbrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbrigadaActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here               
     }//GEN-LAST:event_jcbbrigadaActionPerformed
-
-    private void jrbsiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbsiActionPerformed
-        // TODO add your handling code here:
-         // Habilita el JComboBox cuando se selecciona "Sí"
-    jcbbrigada.setEnabled(true);
-    }//GEN-LAST:event_jrbsiActionPerformed
 
     private void jtdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtdniActionPerformed
         // TODO add your handling code here:
@@ -197,6 +205,34 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
 
     private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
         // TODO add your handling code here:
+        String dni = jtdni.getText();
+        BomberoData bd = new BomberoData();
+
+        if (dni.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe escribir un DNI a buscar");
+            return;
+        }
+
+        Bombero bombero = bd.buscarBombero(dni); // Buscamos en la BD el dni
+
+        if (bombero != null) {
+            jtnomyapell.setText(bombero.getNombreApellido());
+            jtcelular.setText(bombero.getCelular());
+            jtgSang.setText(bombero.getgSanguineo());
+            if (bombero.getFechaNac() != null) {
+                jdcfechaNac.setDate(Date.valueOf(bombero.getFechaNac()));
+            } else {
+                jdcfechaNac.setDate(null); // Para borrar la fecha si no hay fecha de nacimiento
+            }
+            // Faltaria corroborar si esta o no en una brigada
+            Brigada brigadaDelBombero = bombero.getBrigada();
+            jcbbrigada.setSelectedItem(brigadaDelBombero.getNombreBriga() + " - " + brigadaDelBombero.getEspecialidad());
+
+        } else {
+            JOptionPane.showMessageDialog(null, "El Bombero no se encuentra en la Base de Datos.");
+        }
+
+
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jblimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblimpiarActionPerformed
@@ -204,15 +240,71 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
         limpiarPlanilla();
     }//GEN-LAST:event_jblimpiarActionPerformed
 
-    private void jrbnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbnoActionPerformed
-        // TODO add your handling code here:
-        // Deshabilita el JComboBox cuando se selecciona "No"
-    jcbbrigada.setEnabled(false);
-    }//GEN-LAST:event_jrbnoActionPerformed
-
     private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
         // TODO add your handling code here:
+        setVisible(false);  //Cerrar ventana
     }//GEN-LAST:event_jbsalirActionPerformed
+
+    private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
+        // TODO add your handling code here:
+        BrigadaData bd = new BrigadaData();
+        Brigada brigada = new Brigada();
+
+        // Obtener los valores de los campos
+        String dni = jtdni.getText();
+        String nombreApellido = jtnomyapell.getText();
+        String celular = jtcelular.getText();
+        // Obtener la fecha de nacimiento en formato Date
+        java.util.Date utilDate = jdcfechaNac.getDate();
+        String gSanguineo = jtgSang.getText();
+
+        //Capturamos el nombre de la Brigada
+        String brigadaSelec = (String) jcbbrigada.getSelectedItem();
+        if (brigadaSelec != null) {
+            // Dividir el elemento seleccionado en nombre y especialidad
+            String[] partes = brigadaSelec.split(" - ");
+            if (partes.length > 0) {
+                String nombreBrigada = partes[0].trim();
+                //JOptionPane.showMessageDialog(null,"Nombre de la brigada: "+ nombreBrigada);
+
+                //Buscamo la brigada por el nombre
+                brigada = bd.buscarBrigadaXNombre(nombreBrigada);
+                //JOptionPane.showMessageDialog(null, "N° Brigada: "+ brigada.getCodBrigada());
+            }
+
+            // Verificar que los campos obligatorios no estén vacíos
+            if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
+                    || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada") 
+                    || jdcfechaNac.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+                return;
+            }
+            // Convertir la fecha de util.Date a LocalDate
+            Instant instant = utilDate.toInstant();
+            LocalDate fechaNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
+            //Bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo)
+            
+            Bombero bombero = new Bombero(dni, nombreApellido, fechaNac, celular, brigada, gSanguineo);
+            
+            //JOptionPane.showMessageDialog(null, "ID Bombero: "+ bombero.getIdBombero());
+            BomberoData bdata = new BomberoData();
+
+            // Verificar si el bombero ya existe
+            Bombero existente = bdata.buscarBombero(dni);
+            int idbombero = bdata.idBombero(dni);
+            Bombero bombero2 = new Bombero(idbombero,dni, nombreApellido, fechaNac, celular, brigada, gSanguineo);
+            if (existente != null) {
+                // Si el bombero ya existe, modificarlo
+                bdata.editarBombero(bombero2);
+                //JOptionPane.showMessageDialog(null, "Datos modificados");
+            } else {
+                // Si el bombero no existe, guardarlo
+                bdata.guardarBombero(bombero);
+                //JOptionPane.showMessageDialog(null, "Bombero Guardado");
+            }
+        }
+    }//GEN-LAST:event_jbguardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -221,25 +313,42 @@ private final javax.swing.ButtonGroup botonesAgrupados; //agrupa botones(RadioBu
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbbuscar;
     private javax.swing.JButton jbeliminar;
     private javax.swing.JButton jbguardar;
     private javax.swing.JButton jblimpiar;
     private javax.swing.JButton jbsalir;
     private javax.swing.JComboBox<String> jcbbrigada;
+<<<<<<< Updated upstream
     private javax.swing.JRadioButton jrbno;
     private javax.swing.JRadioButton jrbsi;
+=======
+    private com.toedter.calendar.JDateChooser jdcfechaNac;
+>>>>>>> Stashed changes
     private javax.swing.JTextField jtcelular;
     private javax.swing.JTextField jtdni;
+    private javax.swing.JTextField jtgSang;
     private javax.swing.JTextField jtnomyapell;
     // End of variables declaration//GEN-END:variables
 
-public void limpiarPlanilla(){
+    public void limpiarPlanilla() {
         jtdni.setText(""); // Limpia los campos
         jtnomyapell.setText("");
         jtcelular.setText("");
-        jrbno.setSelected(false);
-        jrbsi.setSelected(false);
+        jtgSang.setText("");
         jdcfechaNac.setDate(null);
-}
+    }
+
+    public void cargarComboBox() {
+        BrigadaData bd = new BrigadaData();
+        List<Brigada> listaBrigada = bd.listarBrigadas();
+
+        for (Brigada brigada : listaBrigada) {
+
+            jcbbrigada.addItem(brigada.getNombreBriga() + " - " + brigada.getEspecialidad());
+        }
+
+    }
+
 }
