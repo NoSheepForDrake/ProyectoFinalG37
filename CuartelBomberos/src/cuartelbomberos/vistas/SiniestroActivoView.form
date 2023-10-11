@@ -72,11 +72,11 @@
                   <Group type="102" attributes="0">
                       <Component id="jBguardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBmodificar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBaniadirC" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jButton4" max="32767" attributes="0"/>
+                      <Component id="jBbuscar" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -171,9 +171,9 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jBguardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBmodificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBaniadirC" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBbuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="33" max="32767" attributes="0"/>
@@ -193,6 +193,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTcod">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Solo ingresar n&#xfa;mero para buscar."/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -210,6 +213,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="toolTipText" type="java.lang.String" value="Ingrese los detalles del siniestro."/>
           </Properties>
         </Component>
       </SubComponents>
@@ -225,6 +229,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTcoordX">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Coordenada X"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -232,6 +239,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTcoordY">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Coordenada Y"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -244,8 +254,14 @@
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDinicio">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione la fecha de comienzo del siniestro."/>
+      </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="jDfinalizo">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Seleccione la fecha de finalizacion del siniestro"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
       <Properties>
@@ -253,6 +269,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTpuntuacion">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Ingrese un valor n&#xfa;merico del 1 al 10."/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTpuntuacionActionPerformed"/>
       </Events>
@@ -292,12 +311,15 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBguardarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="jBmodificar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modificar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBmodificarActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton3">
+    <Component class="javax.swing.JButton" name="jBaniadirC">
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir cuartel"/>
       </Properties>
@@ -308,6 +330,10 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTcuartelDispo">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="toolTipText" type="java.lang.String" value="Informaci&#xf3;n del cuartel mas cercano en respuesta al siniestro"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
       <Properties>
@@ -315,11 +341,18 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTcodBriga">
-    </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Salir"/>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="toolTipText" type="java.lang.String" value="Brigada a cargo de ejecucion bajo orden del cuartel que se muesta arriba."/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="jBbuscar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Buscar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBbuscarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

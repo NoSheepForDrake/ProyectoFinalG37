@@ -3,6 +3,7 @@ package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.siniestroData;
 import cuartelbomberos.entidades.Siniestro;
+import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -45,13 +46,13 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jRsiOno = new javax.swing.JRadioButton();
         jCtipo = new javax.swing.JComboBox<>();
         jBguardar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBmodificar = new javax.swing.JButton();
+        jBaniadirC = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jTcuartelDispo = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jTcodBriga = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        jBbuscar = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("Siniestro");
@@ -60,24 +61,36 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Tipo:");
 
+        jTcod.setToolTipText("Solo ingresar número para buscar.");
+
         jLabel3.setText("Detalle:");
 
         jTAdetalle.setColumns(20);
         jTAdetalle.setRows(5);
+        jTAdetalle.setToolTipText("Ingrese los detalles del siniestro.");
         jScrollPane1.setViewportView(jTAdetalle);
 
         jLabel4.setText("Ubicacion:");
 
         jLabel5.setText("X");
 
+        jTcoordX.setToolTipText("Coordenada X");
+
         jLabel6.setText("Y");
+
+        jTcoordY.setToolTipText("Coordenada Y");
 
         jLabel7.setText("Fecha Inicio:");
 
         jLabel8.setText("Fecha Term:");
 
+        jDinicio.setToolTipText("Seleccione la fecha de comienzo del siniestro.");
+
+        jDfinalizo.setToolTipText("Seleccione la fecha de finalizacion del siniestro");
+
         jLabel9.setText("Puntuacion:");
 
+        jTpuntuacion.setToolTipText("Ingrese un valor númerico del 1 al 10.");
         jTpuntuacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTpuntuacionActionPerformed(evt);
@@ -104,15 +117,31 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Modificar");
+        jBmodificar.setText("Modificar");
+        jBmodificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmodificarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Añadir cuartel");
+        jBaniadirC.setText("Añadir cuartel");
 
         jLabel11.setText("Cuartel disponible:");
 
+        jTcuartelDispo.setEditable(false);
+        jTcuartelDispo.setToolTipText("Información del cuartel mas cercano en respuesta al siniestro");
+
         jLabel12.setText("codBrigada:");
 
-        jButton4.setText("Salir");
+        jTcodBriga.setEditable(false);
+        jTcodBriga.setToolTipText("Brigada a cargo de ejecucion bajo orden del cuartel que se muesta arriba.");
+
+        jBbuscar.setText("Buscar");
+        jBbuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBbuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,11 +186,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBguardar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(jBmodificar)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(jBaniadirC)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jBbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -233,9 +262,9 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                         .addComponent(jDfinalizo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jBguardar)
-                        .addComponent(jButton2)
-                        .addComponent(jButton3)
-                        .addComponent(jButton4)))
+                        .addComponent(jBmodificar)
+                        .addComponent(jBaniadirC)
+                        .addComponent(jBbuscar)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -276,11 +305,59 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 
+    private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
+        try{siniestroData cod = new siniestroData();
+        int codigo = Integer.parseInt(jTcod.getText());
+        
+        jTcod.setText(String.valueOf(cod.buscarSiniestro(codigo).getCodigo()));
+        jCtipo.setSelectedItem(String.valueOf(cod.buscarSiniestro(codigo).getTipo()));
+        jDinicio.setDate(Date.valueOf(cod.buscarSiniestro(codigo).getFechaSiniestro()));
+        jTcoordX.setText(String.valueOf(cod.buscarSiniestro(codigo).getCoord_X()));
+        jTcoordY.setText(String.valueOf(cod.buscarSiniestro(codigo).getCoord_Y()));
+        jTAdetalle.setText(cod.buscarSiniestro(codigo).getText());
+        jDfinalizo.setDate(Date.valueOf(cod.buscarSiniestro(codigo).getFechaResol()));
+        jTpuntuacion.setText(String.valueOf(cod.buscarSiniestro(codigo).getPuntuacion()));
+        jTcodBriga.setText(String.valueOf(cod.buscarSiniestro(codigo).getCodBrigada()));
+        jRsiOno.setSelected(cod.buscarSiniestro(codigo).getResuelto());
+        } catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, e);
+        } catch (NumberFormatException a){
+            JOptionPane.showMessageDialog(null, a);
+        }
+    }//GEN-LAST:event_jBbuscarActionPerformed
+
+    private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+        try {
+            int cod =Integer.parseInt(jTcod.getText());
+            String tipo = String.valueOf(jCtipo.getSelectedItem());
+            java.util.Date fechaI = jDinicio.getDate();
+            int x = Integer.parseInt(jTcoordX.getText());
+            int y = Integer.parseInt(jTcoordY.getText());
+            String detalle = jTAdetalle.getText();
+            java.util.Date fechaF = jDfinalizo.getDate();
+            int puntuacion = Integer.parseInt(jTpuntuacion.getText());
+            int brigada = Integer.parseInt(jTcodBriga.getText());
+            boolean resuelto = jRsiOno.isSelected();
+            
+            Instant instant = fechaI.toInstant();
+            LocalDate fechaSiniestro = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            Instant instant2 = fechaF.toInstant();
+            LocalDate fechaResol = instant2.atZone(ZoneId.systemDefault()).toLocalDate();
+            
+            Siniestro siniestro = new Siniestro(cod,tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto);
+            siniestroData sis = new siniestroData();
+            sis.editarSiniestro(siniestro);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Valor nulo: " + e);
+        }
+    }//GEN-LAST:event_jBmodificarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBaniadirC;
+    private javax.swing.JButton jBbuscar;
     private javax.swing.JButton jBguardar;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jBmodificar;
     private javax.swing.JComboBox<String> jCtipo;
     private com.toedter.calendar.JDateChooser jDfinalizo;
     private com.toedter.calendar.JDateChooser jDinicio;
