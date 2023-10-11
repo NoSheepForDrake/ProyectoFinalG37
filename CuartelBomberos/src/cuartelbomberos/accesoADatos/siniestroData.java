@@ -14,8 +14,8 @@ public class siniestroData {
     
     public void guardarSiniestro(Siniestro sini) {
         Connection con = Conexion.getConexion();
-        String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`) "
-                + "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`, `resuelto`)"
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -28,7 +28,7 @@ public class siniestroData {
             ps.setDate(6, Date.valueOf(sini.getFechaResol()));
             ps.setInt(7, sini.getPuntuacion());
             ps.setInt(8, sini.getCodBrigada());
-
+            ps.setBoolean(9, sini.getResuelto());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {

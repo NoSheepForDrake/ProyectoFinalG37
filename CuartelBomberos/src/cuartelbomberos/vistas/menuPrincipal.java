@@ -140,7 +140,7 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-         jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
         AgregarBrigadaView b= new AgregarBrigadaView();
         b.setVisible(true);
