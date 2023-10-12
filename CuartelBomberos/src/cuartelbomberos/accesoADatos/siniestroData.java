@@ -14,8 +14,8 @@ public class siniestroData {
     
     public void guardarSiniestro(Siniestro sini) {
         Connection con = Conexion.getConexion();
-        String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`) "
-                + "VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`, `resuelto`)"
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -28,7 +28,7 @@ public class siniestroData {
             ps.setDate(6, Date.valueOf(sini.getFechaResol()));
             ps.setInt(7, sini.getPuntuacion());
             ps.setInt(8, sini.getCodBrigada());
-
+            ps.setBoolean(9, sini.getResuelto());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -69,7 +69,7 @@ public class siniestroData {
     public void editarSiniestro(Siniestro sini){
         Connection con = Conexion.getConexion();
         String sql = "UPDATE siniestro SET tipo = ?, fechaSiniestro = ?, coord_X = ?, coord_Y = ?, detalle = ?, fechaResol = ?, "
-                + "puntuacion = ?, codBrigada = ? WHERE codigo = ?";
+                + "puntuacion = ?, codBrigada = ?, resuelto = ? WHERE codigo = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -82,8 +82,9 @@ public class siniestroData {
             ps.setDate(6, Date.valueOf(sini.getFechaResol()));
             ps.setInt(7, sini.getPuntuacion());
             ps.setInt(8, sini.getCodBrigada());
-            ps.setInt(9, sini.getCodigo());
-
+            ps.setBoolean(9, sini.getResuelto());
+            ps.setInt(10, sini.getCodigo());
+            
             int exito = ps.executeUpdate();
 
             if (exito == 1) {
@@ -102,7 +103,8 @@ public class siniestroData {
         
         Connection con = Conexion.getConexion();
         Siniestro sini = null;
-        String sql = "SELECT codigo, tipo, fechaSiniestro, coord_X, coord_Y, detalle, fechaResol, puntuacion, codBrigada FROM siniestro WHERE codigo = ?";
+        String sql = "SELECT codigo, tipo, fechaSiniestro, coord_X, coord_Y, detalle, fechaResol, puntuacion, codBrigada, resuelto"
+                + " FROM siniestro WHERE codigo = ?";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -122,6 +124,7 @@ public class siniestroData {
             sini.setFechaResol(rs.getDate("fechaResol").toLocalDate());
             sini.setPuntuacion(rs.getInt("puntuacion"));
             sini.setCodBrigada(rs.getInt("codBrigada"));
+            sini.setResuelto(rs.getBoolean("resuelto"));
             
         } else {
             JOptionPane.showMessageDialog(null, "No existe un siniestro con ese codigo");

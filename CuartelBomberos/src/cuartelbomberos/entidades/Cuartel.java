@@ -9,20 +9,22 @@ public class Cuartel {
     private int coord_Y;
     private String telefono;
     private String correo;
+    private boolean estado;
 
     public Cuartel() {
     }
 
-    public Cuartel(String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
+    public Cuartel(String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo,boolean estado) {
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
         this.coord_X = coord_X;
         this.coord_Y = coord_Y;
         this.telefono = telefono;
         this.correo = correo;
+        this.estado=estado;
     }
 
-    public Cuartel(int codCuartel, String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo) {
+    public Cuartel(int codCuartel, String nombreCuartel, String direccion, int coord_X, int coord_Y, String telefono, String correo,boolean estado ) {
         this.codCuartel = codCuartel;
         this.nombreCuartel = nombreCuartel;
         this.direccion = direccion;
@@ -30,6 +32,7 @@ public class Cuartel {
         this.coord_Y = coord_Y;
         this.telefono = telefono;
         this.correo = correo;
+        this.estado=estado;
     }
 
     public int getCodCuartel() {
@@ -88,9 +91,18 @@ public class Cuartel {
         this.correo = correo;
     }
 
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+
     @Override
     public String toString() {
-        return nombreCuartel + "," + direccion + "," + coord_X + "," + coord_Y + "," + telefono + "," + correo;
+        return nombreCuartel + "," + direccion + "," + coord_X + "," + coord_Y + "," + telefono + "," + correo+", "+estado;
     }
     
     
