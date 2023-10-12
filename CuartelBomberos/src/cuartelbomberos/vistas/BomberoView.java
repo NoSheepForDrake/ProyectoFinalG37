@@ -248,11 +248,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
         // TODO add your handling code here:
-         BomberoData bdata = new BomberoData();
-    BrigadaData bd = new BrigadaData();
-    Brigada brigada = new Brigada();
-
-    // Obtener los valores de los campos
+ // Obtener los valores de los campos
     String dni = jtdni.getText();
     String nombreApellido = jtnomyapell.getText();
     String celular = jtcelular.getText();
@@ -266,66 +262,64 @@ public class BomberoView extends javax.swing.JInternalFrame {
         return;
     }
 
-    //Capturamos el nombre de la Brigada
+    // Capturamos el nombre de la Brigada
     String brigadaSelec = (String) jcbbrigada.getSelectedItem();
     if (brigadaSelec != null) {
         // Dividir el elemento seleccionado en nombre y especialidad
         String[] partes = brigadaSelec.split(" - ");
         if (partes.length > 0) {
             String nombreBrigada = partes[0].trim();
-            //JOptionPane.showMessageDialog(null,"Nombre de la brigada: "+ nombreBrigada);
+            BomberoData bdata = new BomberoData();
+            BrigadaData bd = new BrigadaData();
 
-            //Buscamos la brigada por el nombre
-            brigada = bd.buscarBrigadaXNombre(nombreBrigada);
+            // Buscamos la brigada por el nombre
+            Brigada brigada = bd.buscarBrigadaXNombre(nombreBrigada);
+
+            // Verificar que los campos obligatorios no estén vacíos
+            if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
+                    || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
+                    || jdcfechaNac.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+                return;
+            }
+
+            // Convertir la fecha de util.Date a LocalDate
+            Instant instant = utilDate.toInstant();
+            LocalDate fechaNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fechaActual = LocalDate.now();
+
+            // Comparar la fecha de nacimiento con la fecha actual
+            if (fechaNac.isAfter(fechaActual)) {
+                JOptionPane.showMessageDialog(null, "La fecha de nacimiento no puede ser una fecha futura.");
+                return;
+            }
+
+            int codBrigada = brigada.getCodBrigada();
+
+            // Si el bombero ya existe, modifica su información
+            Bombero existente = bdata.buscarBombero(dni);
+            if (existente != null) {
+                // Verifica si el bombero está siendo asignado a otra brigada
+                if (existente.getBrigada().getCodBrigada() != codBrigada) {
+                    int numeroBomberosEnBrigada = bdata.contarBomberosEnBrigadaExcluyendoBombero(codBrigada, existente.getDni());
+                    if (numeroBomberosEnBrigada >= 5) {
+                        JOptionPane.showMessageDialog(null, "La brigada seleccionada ya tiene el cupo máximo de bomberos. Elige otra brigada.");
+                        return;
+                    }
+                }
+                existente.setNombreApellido(nombreApellido);
+                existente.setFechaNac(fechaNac);
+                existente.setCelular(celular);
+                existente.setBrigada(brigada);
+                existente.setgSanguineo(gSanguineo);
+                bdata.editarBombero(existente);
+                
+            } else {
+                Bombero bombero = new Bombero(dni, nombreApellido, fechaNac, celular, brigada, gSanguineo, true);
+                bdata.guardarBombero(bombero);
+               
+            }
         }
-    }
-
-    // Verificar que los campos obligatorios no estén vacíos
-    if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
-            || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
-            || jdcfechaNac.getDate() == null) {
-        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-        return;
-    }
-
-    // Convertir la fecha de util.Date a LocalDate
-    Instant instant = utilDate.toInstant();
-    LocalDate fechaNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-
-    // Obtener la fecha actual
-    LocalDate fechaActual = LocalDate.now();
-
-    // Comparar la fecha de nacimiento con la fecha actual
-    if (fechaNac.isAfter(fechaActual)) {
-        JOptionPane.showMessageDialog(null, "La fecha de nacimiento no puede ser una fecha futura.");
-        return;
-    }
-
-    // Obtener el código de la brigada seleccionada
-    int codBrigada = brigada.getCodBrigada();
-
-   
-
-    // Verificar si el bombero ya existe
-    Bombero existente = bdata.buscarBombero(dni);
-
-    if (existente != null) {
-        // Si el bombero ya existe, modificarlo
-        int idbombero = existente.getIdBombero();
-        Bombero bombero = new Bombero(idbombero, dni, nombreApellido, fechaNac, celular, brigada, gSanguineo, true);
-        bdata.editarBombero(bombero);
-    } else {
-        
-         // Verificar si la brigada está llena
-    int numeroBomberosEnBrigada = bdata.contarBomberosEnBrigada(codBrigada);
-
-    if (numeroBomberosEnBrigada >= 5) {
-        JOptionPane.showMessageDialog(null, "La brigada seleccionada ya tiene el cupo máximo de bomberos. Elige otra brigada.");
-        return;
-    }
-        // Si el bombero no existe, guardarlo
-        Bombero bombero = new Bombero(dni, nombreApellido, fechaNac, celular, brigada, gSanguineo, true);
-        bdata.guardarBombero(bombero);
     }
     }//GEN-LAST:event_jbguardarActionPerformed
 

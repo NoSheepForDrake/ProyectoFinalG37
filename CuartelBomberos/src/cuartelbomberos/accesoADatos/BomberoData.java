@@ -241,15 +241,15 @@ public class BomberoData {
     return contar;
 }
 
-public int contarBomberosEnBrigadaExcluyendoBrigada(int codBrigada, int codBrigadaExcluir) {
-    // Consulta SQL para contar bomberos en una brigada, excluyendo una brigada específica
-    String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? AND estado = 1 AND codBrigada != ?";
+public int contarBomberosEnBrigadaExcluyendoBombero(int codBrigada, String dniBomberoExcluir) {
+    // Consulta SQL para contar bomberos en una brigada, excluyendo un bombero específico
+    String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? AND estado = 1 AND dni != ?";
     PreparedStatement ps = null;
 
     try {
         ps = con.prepareStatement(sql);
         ps.setInt(1, codBrigada);
-        ps.setInt(2, codBrigadaExcluir);
+        ps.setString(2, dniBomberoExcluir); // Excluir al bombero por su DNI
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
@@ -261,6 +261,7 @@ public int contarBomberosEnBrigadaExcluyendoBrigada(int codBrigada, int codBriga
 
     return 0; // Si ocurre un error, retornamos 0.
 }
+
 
 
 }
