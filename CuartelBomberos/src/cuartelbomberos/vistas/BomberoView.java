@@ -1,3 +1,6 @@
+/*El Boton guardar va a tener doble funcionalidad, va a corroborar que el bombero no se encuentre en la base
+de datos(a traves del DNI), de encontrarse se van a modificar los datos, caso contrario se va a guardar 
+como un bombero nuevo*/
 package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.BomberoData;
@@ -17,7 +20,6 @@ public class BomberoView extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Bombero");
         cargarComboBox();
-   
 
     }
 
@@ -74,6 +76,11 @@ public class BomberoView extends javax.swing.JInternalFrame {
         });
 
         jbeliminar.setText("Eliminar");
+        jbeliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbeliminarActionPerformed(evt);
+            }
+        });
 
         jbguardar.setText("Guardar");
         jbguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,26 +210,30 @@ public class BomberoView extends javax.swing.JInternalFrame {
             return;
         }
 
-        Bombero bombero = bd.buscarBombero(dni); // Buscamos en la BD el dni
+        // Valida que el DNI contenga solo números antes de buscar en la base de datos
+        if (contieneSoloNumeros(dni)) {
+            Bombero bombero = bd.buscarBombero(dni); // Buscamos en la BD el DNI
 
-        if (bombero != null) {
-            jtnomyapell.setText(bombero.getNombreApellido());
-            jtcelular.setText(bombero.getCelular());
-            jtgSang.setText(bombero.getgSanguineo());
-            if (bombero.getFechaNac() != null) {
-                jdcfechaNac.setDate(Date.valueOf(bombero.getFechaNac()));
+            if (bombero != null) {
+                jtnomyapell.setText(bombero.getNombreApellido());
+                jtcelular.setText(bombero.getCelular());
+                jtgSang.setText(bombero.getgSanguineo());
+                if (bombero.getFechaNac() != null) {
+                    jdcfechaNac.setDate(Date.valueOf(bombero.getFechaNac()));
+                } else {
+                    jdcfechaNac.setDate(null); // Para borrar la fecha si no hay fecha de nacimiento
+                }
+                // Faltaria corroborar si esta o no en una brigada
+                Brigada brigadaDelBombero = bombero.getBrigada();
+                jcbbrigada.setSelectedItem(brigadaDelBombero.getNombreBriga() + " - " + brigadaDelBombero.getEspecialidad());
+
             } else {
-                jdcfechaNac.setDate(null); // Para borrar la fecha si no hay fecha de nacimiento
+                JOptionPane.showMessageDialog(null, "El Bombero no se encuentra en la Base de Datos.");
             }
-            // Faltaria corroborar si esta o no en una brigada
-            Brigada brigadaDelBombero = bombero.getBrigada();
-            jcbbrigada.setSelectedItem(brigadaDelBombero.getNombreBriga() + " - " + brigadaDelBombero.getEspecialidad());
-
         } else {
-            JOptionPane.showMessageDialog(null, "El Bombero no se encuentra en la Base de Datos.");
+            JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
+
         }
-
-
     }//GEN-LAST:event_jbbuscarActionPerformed
 
     private void jblimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblimpiarActionPerformed
@@ -237,64 +248,108 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
     private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
         // TODO add your handling code here:
-        BrigadaData bd = new BrigadaData();
-        Brigada brigada = new Brigada();
+         BomberoData bdata = new BomberoData();
+    BrigadaData bd = new BrigadaData();
+    Brigada brigada = new Brigada();
 
-        // Obtener los valores de los campos
-        String dni = jtdni.getText();
-        String nombreApellido = jtnomyapell.getText();
-        String celular = jtcelular.getText();
-        // Obtener la fecha de nacimiento en formato Date
-        java.util.Date utilDate = jdcfechaNac.getDate();
-        String gSanguineo = jtgSang.getText();
+    // Obtener los valores de los campos
+    String dni = jtdni.getText();
+    String nombreApellido = jtnomyapell.getText();
+    String celular = jtcelular.getText();
+    // Obtener la fecha de nacimiento en formato Date
+    java.util.Date utilDate = jdcfechaNac.getDate();
+    String gSanguineo = jtgSang.getText();
 
-        //Capturamos el nombre de la Brigada
-        String brigadaSelec = (String) jcbbrigada.getSelectedItem();
-        if (brigadaSelec != null) {
-            // Dividir el elemento seleccionado en nombre y especialidad
-            String[] partes = brigadaSelec.split(" - ");
-            if (partes.length > 0) {
-                String nombreBrigada = partes[0].trim();
-                //JOptionPane.showMessageDialog(null,"Nombre de la brigada: "+ nombreBrigada);
+    // Validar que el DNI contenga solo números
+    if (!contieneSoloNumeros(dni)) {
+        JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
+        return;
+    }
 
-                //Buscamo la brigada por el nombre
-                brigada = bd.buscarBrigadaXNombre(nombreBrigada);
-                //JOptionPane.showMessageDialog(null, "N° Brigada: "+ brigada.getCodBrigada());
-            }
+    //Capturamos el nombre de la Brigada
+    String brigadaSelec = (String) jcbbrigada.getSelectedItem();
+    if (brigadaSelec != null) {
+        // Dividir el elemento seleccionado en nombre y especialidad
+        String[] partes = brigadaSelec.split(" - ");
+        if (partes.length > 0) {
+            String nombreBrigada = partes[0].trim();
+            //JOptionPane.showMessageDialog(null,"Nombre de la brigada: "+ nombreBrigada);
 
-            // Verificar que los campos obligatorios no estén vacíos
-            if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
-                    || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada") 
-                    || jdcfechaNac.getDate() == null) {
-                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-                return;
-            }
-            // Convertir la fecha de util.Date a LocalDate
-            Instant instant = utilDate.toInstant();
-            LocalDate fechaNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-
-            //Bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo)
-            
-            Bombero bombero = new Bombero(dni, nombreApellido, fechaNac, celular, brigada, gSanguineo);
-            
-            //JOptionPane.showMessageDialog(null, "ID Bombero: "+ bombero.getIdBombero());
-            BomberoData bdata = new BomberoData();
-
-            // Verificar si el bombero ya existe
-            Bombero existente = bdata.buscarBombero(dni);
-            int idbombero = bdata.idBombero(dni);
-            Bombero bombero2 = new Bombero(idbombero,dni, nombreApellido, fechaNac, celular, brigada, gSanguineo);
-            if (existente != null) {
-                // Si el bombero ya existe, modificarlo
-                bdata.editarBombero(bombero2);
-                //JOptionPane.showMessageDialog(null, "Datos modificados");
-            } else {
-                // Si el bombero no existe, guardarlo
-                bdata.guardarBombero(bombero);
-                //JOptionPane.showMessageDialog(null, "Bombero Guardado");
-            }
+            //Buscamos la brigada por el nombre
+            brigada = bd.buscarBrigadaXNombre(nombreBrigada);
         }
+    }
+
+    // Verificar que los campos obligatorios no estén vacíos
+    if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
+            || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
+            || jdcfechaNac.getDate() == null) {
+        JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+        return;
+    }
+
+    // Convertir la fecha de util.Date a LocalDate
+    Instant instant = utilDate.toInstant();
+    LocalDate fechaNac = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+
+    // Obtener la fecha actual
+    LocalDate fechaActual = LocalDate.now();
+
+    // Comparar la fecha de nacimiento con la fecha actual
+    if (fechaNac.isAfter(fechaActual)) {
+        JOptionPane.showMessageDialog(null, "La fecha de nacimiento no puede ser una fecha futura.");
+        return;
+    }
+
+    // Obtener el código de la brigada seleccionada
+    int codBrigada = brigada.getCodBrigada();
+
+   
+
+    // Verificar si el bombero ya existe
+    Bombero existente = bdata.buscarBombero(dni);
+
+    if (existente != null) {
+        // Si el bombero ya existe, modificarlo
+        int idbombero = existente.getIdBombero();
+        Bombero bombero = new Bombero(idbombero, dni, nombreApellido, fechaNac, celular, brigada, gSanguineo, true);
+        bdata.editarBombero(bombero);
+    } else {
+        
+         // Verificar si la brigada está llena
+    int numeroBomberosEnBrigada = bdata.contarBomberosEnBrigada(codBrigada);
+
+    if (numeroBomberosEnBrigada >= 5) {
+        JOptionPane.showMessageDialog(null, "La brigada seleccionada ya tiene el cupo máximo de bomberos. Elige otra brigada.");
+        return;
+    }
+        // Si el bombero no existe, guardarlo
+        Bombero bombero = new Bombero(dni, nombreApellido, fechaNac, celular, brigada, gSanguineo, true);
+        bdata.guardarBombero(bombero);
+    }
     }//GEN-LAST:event_jbguardarActionPerformed
+
+    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+        // TODO add your handling code here:
+         // Obtener los valores de los campos
+        String dni = jtdni.getText();
+        
+        //creamos una instancia de bomberodata
+        BomberoData bd = new BomberoData();
+        
+        //Creamos una instancia de bombero
+        Bombero bom = bd.buscarBombero(dni);
+        JOptionPane.showMessageDialog(null,"DNI del bombero: "+ bom.getDni());
+        JOptionPane.showMessageDialog(null,"Estado del bombero: "+ bom.isEstado());
+        //verificamos si el estado del bombero es true o false
+        if(bom.isEstado()==false){
+        JOptionPane.showMessageDialog(null, "El bombero no se puede eliminar, no hay registros del mismo");
+        }else{
+        bd.eliminarBombero(bom.getDni());
+        }
+        
+        
+    }//GEN-LAST:event_jbeliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -323,6 +378,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
         jtcelular.setText("");
         jtgSang.setText("");
         jdcfechaNac.setDate(null);
+        jcbbrigada.setSelectedIndex(0);
     }
 
     public void cargarComboBox() {
@@ -334,6 +390,11 @@ public class BomberoView extends javax.swing.JInternalFrame {
             jcbbrigada.addItem(brigada.getNombreBriga() + " - " + brigada.getEspecialidad());
         }
 
+    }
+
+    public boolean contieneSoloNumeros(String cadena) {
+        // Utiliza una expresión regular para verificar si la cadena contiene solo números
+        return cadena.matches("[0-9]+");
     }
 
 }

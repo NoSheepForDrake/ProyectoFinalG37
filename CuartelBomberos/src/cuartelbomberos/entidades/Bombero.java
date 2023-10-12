@@ -11,20 +11,22 @@ public class Bombero {
     private String celular;
     private Brigada brigada;
     private String gSanguineo;
+    private boolean estado;
 
     public Bombero() {
     }
 
-    public Bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo) {
+    public Bombero(String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo, boolean estado) {
         this.dni = dni;
         this.nombreApellido = nombreApellido;
         this.fechaNac = fechaNac;
         this.celular = celular;
         this.brigada = brigada;
         this.gSanguineo = gSanguineo;
+        this.estado = estado;
     }
 
-    public Bombero(int idBombero, String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo) {
+    public Bombero(int idBombero, String dni, String nombreApellido, LocalDate fechaNac, String celular, Brigada brigada, String gSanguineo, boolean estado) {
         this.idBombero = idBombero;
         this.dni = dni;
         this.nombreApellido = nombreApellido;
@@ -32,6 +34,15 @@ public class Bombero {
         this.celular = celular;
         this.brigada = brigada;
         this.gSanguineo = gSanguineo;
+        this.estado = estado;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public int getIdBombero() {

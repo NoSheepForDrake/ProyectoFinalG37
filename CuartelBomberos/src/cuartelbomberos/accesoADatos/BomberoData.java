@@ -19,8 +19,8 @@ public class BomberoData {
     public void guardarBombero(Bombero bomber) {
         BrigadaData bd = new BrigadaData();
 
-        String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo)"
-                + "VALUES (?,?,?,?,?,?)";
+        String sql = "INSERT INTO bombero (dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo, estado)"
+                + "VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -32,6 +32,7 @@ public class BomberoData {
             ps.setInt(5, bomber.getBrigada().getCodBrigada());
             //JOptionPane.showMessageDialog(null, "N° brigada: " + bomber.getBrigada().getCodBrigada());
             ps.setString(6, bomber.getgSanguineo());
+            ps.setBoolean(7, true);
 
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
@@ -48,9 +49,9 @@ public class BomberoData {
     }
 
     public void editarBombero(Bombero bomber) {
-//falta editar...
+
         String sql = "UPDATE bombero SET dni=?, nombreApellido=?, fechaNac=?, celular=?, codBrigada= ?, gSanguineo=?"
-                + "WHERE idBombero=?";
+                + "WHERE idBombero=? and estado=1";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -82,7 +83,7 @@ public class BomberoData {
 
     public void eliminarBombero(String dni) {
 
-        String sql = "DELETE FROM bombero WHERE dni = ?";
+        String sql = "UPDATE bombero SET estado = 0 WHERE dni = ?";
         PreparedStatement ps = null;
 
         try {
@@ -105,7 +106,7 @@ public class BomberoData {
         BrigadaData bd = new BrigadaData();
         Bombero bomber = null;
 
-        String sql = "SELECT idBombero, dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo FROM bombero WHERE dni = ?";
+        String sql = "SELECT idBombero, dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo, estado FROM bombero WHERE dni = ? and estado = 1";
         PreparedStatement ps = null;
         //JOptionPane.showMessageDialog(null, dni);
 
@@ -123,6 +124,7 @@ public class BomberoData {
                 bomber.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 bomber.setCelular(rs.getString("celular"));
                 bomber.setgSanguineo(rs.getString("gSanguineo"));
+                bomber.setEstado(rs.getBoolean("estado"));
 
                 int codbrig = rs.getInt("codBrigada");
                 //JOptionPane.showMessageDialog(null, codbrig);
@@ -132,7 +134,7 @@ public class BomberoData {
                 bomber.setBrigada(brigada);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
+               // JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
                 ps.close();
             }
 
@@ -147,7 +149,7 @@ public class BomberoData {
 
         List<Bombero> bomberos = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM bombero";
+            String sql = "SELECT * FROM bombero WHERE estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -179,7 +181,7 @@ public class BomberoData {
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT idBombero FROM bombero WHERE dni = ?";
+            String sql = "SELECT idBombero FROM bombero WHERE dni = ? and estado = 1";
             ps = con.prepareStatement(sql);
             ps.setString(1, dni);
             rs = ps.executeQuery();
@@ -199,7 +201,7 @@ public class BomberoData {
     }
     
     public int idBombero (String dni){
-     String sql = "SELECT idBombero FROM bombero WHERE dni = ?";
+     String sql = "SELECT idBombero FROM bombero WHERE dni = ? and estado = 1";
      
      int idbom = 0;
 
@@ -218,5 +220,47 @@ public class BomberoData {
         }
         return idbom;
      }
+    
+    //metodo para contar bomberos en brigada....
+    public int contarBomberosEnBrigada(int codBrigada) {
+    int contar = 0;
+    try {
+        String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? and estado = 1";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, codBrigada);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            contar = rs.getInt(1);
+        }
+        ps.close();
+        
+    } catch (SQLException ex) {
+        
+        JOptionPane.showMessageDialog(null, "Error: "+ ex.getMessage());
+    }
+    return contar;
+}
+
+public int contarBomberosEnBrigadaExcluyendoBrigada(int codBrigada, int codBrigadaExcluir) {
+    // Consulta SQL para contar bomberos en una brigada, excluyendo una brigada específica
+    String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? AND estado = 1 AND codBrigada != ?";
+    PreparedStatement ps = null;
+
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, codBrigada);
+        ps.setInt(2, codBrigadaExcluir);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return rs.getInt(1);
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(null, "Error al contar bomberos en la brigada: " + ex.getMessage());
+    }
+
+    return 0; // Si ocurre un error, retornamos 0.
+}
+
 
 }
