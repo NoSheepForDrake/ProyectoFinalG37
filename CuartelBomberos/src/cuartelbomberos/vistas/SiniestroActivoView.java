@@ -17,6 +17,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
     
     public SiniestroActivoView() {
         initComponents();
+        setTitle("Siniestro");
         cargarComboBox();
     }
 

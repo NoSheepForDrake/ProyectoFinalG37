@@ -16,6 +16,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
      */
     public ResolucionSiniestroView() {
         initComponents();
+        setTitle("Listar Siniestro");
     }
 
     /**

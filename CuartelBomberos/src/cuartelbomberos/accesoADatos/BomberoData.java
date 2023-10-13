@@ -129,7 +129,7 @@ public class BomberoData {
                 int codbrig = rs.getInt("codBrigada");
                 //JOptionPane.showMessageDialog(null, codbrig);
                 Brigada brigada = bd.buscarBrigada(codbrig);
-       
+       JOptionPane.showMessageDialog(null, brigada.getNombreBriga());
                 // Asignar la brigada al bombero
                 bomber.setBrigada(brigada);
 
@@ -146,7 +146,7 @@ public class BomberoData {
     }
 
     public List<Bombero> listarBombero() {
-
+    BrigadaData bd = new BrigadaData();
         List<Bombero> bomberos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM bombero WHERE estado = 1";
@@ -162,6 +162,14 @@ public class BomberoData {
                 bomber.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 bomber.setCelular(rs.getString("celular"));
                 bomber.setgSanguineo(rs.getString("gSanguineo"));
+                bomber.setEstado(rs.getBoolean("estado"));
+                int codbrig = rs.getInt("codBrigada");
+//               JOptionPane.showMessageDialog(null, codbrig);
+                Brigada bri = bd.buscarBrigada(codbrig);
+//                JOptionPane.showMessageDialog(null, bri.getNombreBriga());
+                // Asignar la brigada al bombero
+                bomber.setBrigada(bri);
+                
                 bomberos.add(bomber);
             }
 
@@ -169,7 +177,7 @@ public class BomberoData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero6" + ex.getMessage());
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Errorrrrrr: " + e.getMessage());
         }
         return bomberos;
     }

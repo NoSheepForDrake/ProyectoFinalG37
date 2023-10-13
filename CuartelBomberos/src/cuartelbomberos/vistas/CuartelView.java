@@ -10,6 +10,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
     public CuartelView() {
         initComponents();
+        setTitle("Cuartel");
         cargarComboBox();
     }
 
@@ -329,6 +330,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
+        setVisible(false);  //Cerrar ventana
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
