@@ -6,6 +6,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
     
     public AgregarBrigadaView() {
         initComponents();
+        setTitle("Brigadas");
     }
 
     @SuppressWarnings("unchecked")
@@ -161,6 +162,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        setVisible(false);  //Cerrar ventana
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jRadioButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRadioButton1StateChanged
