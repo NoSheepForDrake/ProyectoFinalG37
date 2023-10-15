@@ -323,6 +323,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir cuartel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBaniadirCActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>

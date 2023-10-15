@@ -1,7 +1,10 @@
 
 package cuartelbomberos.vistas;
 
+import cuartelbomberos.accesoADatos.BrigadaData;
+import cuartelbomberos.accesoADatos.CuartelData;
 import cuartelbomberos.accesoADatos.siniestroData;
+import cuartelbomberos.entidades.Cuartel;
 import cuartelbomberos.entidades.Siniestro;
 import java.sql.Date;
 import java.time.Instant;
@@ -125,6 +128,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         });
 
         jBaniadirC.setText("Añadir cuartel");
+        jBaniadirC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBaniadirCActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Cuartel disponible:");
 
@@ -280,6 +288,8 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRsiOnoActionPerformed
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
+        //Boton guardar /-/ Carga los datos de un siniestro a la base de datos.
+        
         try {
             String tipo = String.valueOf(jCtipo.getSelectedItem());
             java.util.Date fechaI = jDinicio.getDate();
@@ -306,27 +316,32 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBguardarActionPerformed
 
     private void jBbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBbuscarActionPerformed
-        try{siniestroData cod = new siniestroData();
-        int codigo = Integer.parseInt(jTcod.getText());
+        //Boton buscar /-/ Busca un siniestro mediante un codigo proporcionado.
         
-        jTcod.setText(String.valueOf(cod.buscarSiniestro(codigo).getCodigo()));
-        jCtipo.setSelectedItem(String.valueOf(cod.buscarSiniestro(codigo).getTipo()));
-        jDinicio.setDate(Date.valueOf(cod.buscarSiniestro(codigo).getFechaSiniestro()));
-        jTcoordX.setText(String.valueOf(cod.buscarSiniestro(codigo).getCoord_X()));
-        jTcoordY.setText(String.valueOf(cod.buscarSiniestro(codigo).getCoord_Y()));
-        jTAdetalle.setText(cod.buscarSiniestro(codigo).getText());
-        jDfinalizo.setDate(Date.valueOf(cod.buscarSiniestro(codigo).getFechaResol()));
-        jTpuntuacion.setText(String.valueOf(cod.buscarSiniestro(codigo).getPuntuacion()));
-        jTcodBriga.setText(String.valueOf(cod.buscarSiniestro(codigo).getCodBrigada()));
-        jRsiOno.setSelected(cod.buscarSiniestro(codigo).getResuelto());
-        } catch (NullPointerException e){
+        try {
+            siniestroData cod = new siniestroData();
+            int codigo = Integer.parseInt(jTcod.getText());
+
+            jTcod.setText(String.valueOf(cod.buscarSiniestro(codigo).getCodigo()));
+            jCtipo.setSelectedItem(String.valueOf(cod.buscarSiniestro(codigo).getTipo()));
+            jDinicio.setDate(Date.valueOf(cod.buscarSiniestro(codigo).getFechaSiniestro()));
+            jTcoordX.setText(String.valueOf(cod.buscarSiniestro(codigo).getCoord_X()));
+            jTcoordY.setText(String.valueOf(cod.buscarSiniestro(codigo).getCoord_Y()));
+            jTAdetalle.setText(cod.buscarSiniestro(codigo).getText());
+            jDfinalizo.setDate(Date.valueOf(cod.buscarSiniestro(codigo).getFechaResol()));
+            jTpuntuacion.setText(String.valueOf(cod.buscarSiniestro(codigo).getPuntuacion()));
+            jTcodBriga.setText(String.valueOf(cod.buscarSiniestro(codigo).getCodBrigada()));
+            jRsiOno.setSelected(cod.buscarSiniestro(codigo).getResuelto());
+        } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, e);
-        } catch (NumberFormatException a){
+        } catch (NumberFormatException a) {
             JOptionPane.showMessageDialog(null, a);
         }
     }//GEN-LAST:event_jBbuscarActionPerformed
 
     private void jBmodificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmodificarActionPerformed
+        //Boton modificar /-/ Modifica los datos de un siniestro.
+        
         try {
             int cod =Integer.parseInt(jTcod.getText());
             String tipo = String.valueOf(jCtipo.getSelectedItem());
@@ -352,6 +367,53 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Valor nulo: " + e);
         }
     }//GEN-LAST:event_jBmodificarActionPerformed
+
+    private void jBaniadirCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBaniadirCActionPerformed
+        // Boton añadir cuartel /-/ Localiza el cuartel mas cercano con la brigada disponible.
+        try {
+            BrigadaData bri = new BrigadaData();
+            CuartelData tip = new CuartelData();
+            List<Cuartel> asd = tip.listarCuartel();
+
+            int corX = Integer.parseInt(jTcoordX.getText());
+            int corY = Integer.parseInt(jTcoordY.getText());
+            int[] cx = new int[asd.size()];
+            int[] cy = new int[asd.size()];
+
+            for (int i = 0; i < asd.size(); i++) {
+                Cuartel qwe = asd.get(i);
+                cx[i] = qwe.getCoord_X();
+                cy[i] = qwe.getCoord_Y();
+            }
+
+            int cuartelMasCercano = -1;
+            double distanciaMinima = Double.MAX_VALUE;
+
+            for (int i = 0; i < cx.length; i++) {
+                int deltaX = cx[i] - corX;
+                int deltaY = cy[i] - corY;
+                double distancia = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+                if (distancia < distanciaMinima) {
+                    distanciaMinima = distancia;
+                    cuartelMasCercano = i;
+                }
+            }
+            
+            if (cuartelMasCercano != -1) {
+                jTcuartelDispo.setText(tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getNombreCuartel());
+                int h = tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getCodCuartel();
+                int z = bri.buscarBrigadaCuartel(h).getCodBrigada();
+                //JOptionPane.showMessageDialog(null, z);
+                jTcodBriga.setText(String.valueOf(z));
+            } else {
+                JOptionPane.showMessageDialog(null, "No hay cuarteles disponibles.");
+            }
+            
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Mensaje: " + e);
+        }
+    }//GEN-LAST:event_jBaniadirCActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBaniadirC;

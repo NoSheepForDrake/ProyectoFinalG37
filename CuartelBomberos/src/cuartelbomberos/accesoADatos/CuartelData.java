@@ -241,5 +241,32 @@ public class CuartelData {
         }
         return existe;
     }
+    
+    public Cuartel cuartelPorCoord(int x, int y){
+        Cuartel cuartel = null;
+        String sql = "SELECT codCuartel, nombreCuartel FROM cuartel WHERE coord_X = ? AND coord_Y = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, x);
+            ps.setInt(2, y);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                cuartel = new Cuartel();
+                cuartel.setCodCuartel(rs.getInt("codCuartel"));
+                cuartel.setNombreCuartel(rs.getString("nombreCuartel"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe un cuartel con esas coordenadas.");
+                ps.close();
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla cuartel");
+        }
+        return cuartel;
+    
+    }
 }
 
