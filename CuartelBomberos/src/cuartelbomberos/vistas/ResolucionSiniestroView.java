@@ -1,22 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cuartelbomberos.vistas;
 
-/**
- *
- * @author PC
- */
+import cuartelbomberos.accesoADatos.siniestroData;
+import cuartelbomberos.entidades.Siniestro;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form ResolucionSiniestroView
-     */
+    DefaultTableModel tabla = new DefaultTableModel();
+    siniestroData si = new siniestroData();
+    
     public ResolucionSiniestroView() {
+        
         initComponents();
         setTitle("Listar Siniestro");
+        crearCabecera();
+        cargarComboBox1();
+        
     }
 
     /**
@@ -28,21 +33,213 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablaSiniestro = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jCresuelto = new javax.swing.JCheckBox();
+        jCactivo = new javax.swing.JCheckBox();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jCfecha = new javax.swing.JCheckBox();
+        jDfechaIni = new com.toedter.calendar.JDateChooser();
+        jDfechaFin = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+
+        setClosable(true);
+
+        jTablaSiniestro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTablaSiniestro.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTablaSiniestro);
+
+        jLabel1.setText("Registro de Siniestros");
+
+        jLabel2.setText("Filtrar por:");
+
+        jCresuelto.setText("Resuelto");
+
+        jCactivo.setText("Activo");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo..." }));
+
+        jCfecha.setText("Fecha");
+
+        jButton1.setText("Eliminar");
+
+        jButton2.setText("Limpiar Tabla");
+
+        jButton3.setText("Cargar Tabla");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(516, 516, 516)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(47, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jCresuelto)
+                            .addComponent(jCactivo)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jCfecha)
+                            .addComponent(jDfechaIni, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(jDfechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(297, 297, 297)
+                        .addComponent(jButton3)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton1)
+                        .addGap(27, 27, 27)
+                        .addComponent(jButton2)))
+                .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 378, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jCresuelto)
+                                    .addComponent(jCfecha))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCactivo))
+                            .addComponent(jDfechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDfechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(jButton2)
+                        .addComponent(jButton3)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            if (jCfecha.isSelected()) {
+                java.util.Date utilDate = jDfechaIni.getDate();
+                java.sql.Date sqlDateInicio = new java.sql.Date(utilDate.getTime());
+
+                utilDate = jDfechaFin.getDate();
+                java.sql.Date sqlDateFin = new java.sql.Date(utilDate.getTime());
+
+                List<Siniestro> listaNsiniestros = si.listarSiniXfecha(sqlDateInicio, sqlDateFin);
+                llenarTabla(listaNsiniestros);
+            } else {
+                List<Siniestro> listaNsiniestros = si.listarSiniestros();
+                llenarTabla(listaNsiniestros);
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JCheckBox jCactivo;
+    private javax.swing.JCheckBox jCfecha;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JCheckBox jCresuelto;
+    private com.toedter.calendar.JDateChooser jDfechaFin;
+    private com.toedter.calendar.JDateChooser jDfechaIni;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTablaSiniestro;
     // End of variables declaration//GEN-END:variables
+
+    private void crearCabecera() {
+        tabla.addColumn("Codigo");
+        tabla.addColumn("Tipo");
+        tabla.addColumn("Fecha Inicio");
+        tabla.addColumn("X");
+        tabla.addColumn("Y");
+        tabla.addColumn("Detalle");
+        tabla.addColumn("Fecha Resolucion");
+        tabla.addColumn("Puntuación");
+        tabla.addColumn("Codigo Brigada");
+        tabla.addColumn("Resuelto");
+        tabla.addColumn("Activo");
+        jTablaSiniestro.setModel(tabla);
+        
+    }
+
+    private void cargarComboBox1() {
+
+        String tipos[] = {"Incendio", "Accidente", "Rescate", "Emergencias", "Derrumbes", "Materiales Peligrosos", "Otros..."};
+
+        List<String> taps = Arrays.asList(tipos);
+
+        for (String materia : taps) {
+            jComboBox1.addItem(materia.toString());
+        }
+
+    }
+    
+    private void llenarTabla(List<Siniestro> sini) {
+        // Limpiar la tabla
+        tabla.setRowCount(0);
+
+        // Llenar la tabla con los datos de los alumnos inscritos en la materia
+        for (Siniestro s : sini) {
+            tabla.addRow(new Object[]{s.getCodigo(), s.getTipo(), s.getFechaSiniestro(), s.getCoord_X(), s.getCoord_Y(), s.getText(), s.getFechaResol(),
+            s.getPuntuacion(), s.getCodBrigada(), s.getResuelto(), s.getActivo()});
+        }
+    }
+
 }

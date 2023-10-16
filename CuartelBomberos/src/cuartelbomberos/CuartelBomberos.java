@@ -19,11 +19,12 @@ import javax.swing.JOptionPane;
 public class CuartelBomberos {
 
     public static void main(String[] args) {
+        
         //NO BORRAR ESTO POR FAVOR!!!!!
         CuartelData tip = new CuartelData();
         List<Cuartel> asd = tip.listarCuartel();
-        int corX = 111;
-        int corY = 21;
+        int corX = 11;
+        int corY = 51;
         int[] cx = new int[asd.size()];
         int[] cy = new int[asd.size()];
         
@@ -48,9 +49,9 @@ public class CuartelBomberos {
         }
 
         if (cuartelMasCercano != -1) {
-            System.out.println("El cuartel más cercano al siniestro está en la posición " + cuartelMasCercano);
+            System.out.println("El cuartel más cercano esta en la posición " + cuartelMasCercano);
             System.out.println("Coordenadas del cuartel más cercano: (" + cx[cuartelMasCercano] + ", " + cy[cuartelMasCercano] + ")");
-            System.out.println("Distancia mínima al cuartel más cercano: " + distanciaMinima);
+            System.out.println("Distancia al cuartel más cercano: " + distanciaMinima);
         } else {
             System.out.println("No se encontraron cuarteles para calcular la distancia.");
         }

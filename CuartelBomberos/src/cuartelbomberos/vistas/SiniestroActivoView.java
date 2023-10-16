@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 
@@ -57,6 +58,8 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jLabel12 = new javax.swing.JLabel();
         jTcodBriga = new javax.swing.JTextField();
         jBbuscar = new javax.swing.JButton();
+        jBlimpiarCampos = new javax.swing.JButton();
+        jLdistMetros = new javax.swing.JLabel();
 
         setClosable(true);
         setTitle("Siniestro");
@@ -113,6 +116,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
         jCtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un siniestro..." }));
         jCtipo.setToolTipText("Seleccione el tipo de siniestro.");
+        jCtipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCtipoActionPerformed(evt);
+            }
+        });
 
         jBguardar.setText("Guardar");
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +157,19 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jBbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBbuscarActionPerformed(evt);
+            }
+        });
+
+        jBlimpiarCampos.setText("Limpiar");
+        jBlimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBlimpiarCamposActionPerformed(evt);
+            }
+        });
+
+        jLdistMetros.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jLdistMetrosPropertyChange(evt);
             }
         });
 
@@ -219,8 +240,12 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                             .addComponent(jTcuartelDispo)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jTcodBriga, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 21, Short.MAX_VALUE)))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBlimpiarCampos)
+                    .addComponent(jLdistMetros, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,17 +266,19 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jTcoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jTcoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9)
-                            .addComponent(jTpuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(jTcuartelDispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLdistMetros, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel5)
+                                .addComponent(jTcoordX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6)
+                                .addComponent(jTcoordY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9)
+                                .addComponent(jTpuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel11)
+                                .addComponent(jTcuartelDispo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
@@ -273,8 +300,9 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                         .addComponent(jBguardar)
                         .addComponent(jBmodificar)
                         .addComponent(jBaniadirC)
-                        .addComponent(jBbuscar)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jBbuscar)
+                        .addComponent(jBlimpiarCampos)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,6 +329,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             int puntuacion = Integer.parseInt(jTpuntuacion.getText());
             int brigada = Integer.parseInt(jTcodBriga.getText());
             boolean resuelto = jRsiOno.isSelected();
+            boolean activo = true;
             
             Instant instant = fechaI.toInstant();
             LocalDate fechaSiniestro = instant.atZone(ZoneId.systemDefault()).toLocalDate();
@@ -308,7 +337,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             Instant instant2 = fechaF.toInstant();
             LocalDate fechaResol = instant2.atZone(ZoneId.systemDefault()).toLocalDate();
             
-            Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto);
+            Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto, activo);
             siniestroData sis = new siniestroData();
             sis.guardarSiniestro(siniestro);
         } catch (NullPointerException e) {
@@ -354,6 +383,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             int puntuacion = Integer.parseInt(jTpuntuacion.getText());
             int brigada = Integer.parseInt(jTcodBriga.getText());
             boolean resuelto = jRsiOno.isSelected();
+            boolean activo = true;
             
             Instant instant = fechaI.toInstant();
             LocalDate fechaSiniestro = instant.atZone(ZoneId.systemDefault()).toLocalDate();
@@ -361,7 +391,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             Instant instant2 = fechaF.toInstant();
             LocalDate fechaResol = instant2.atZone(ZoneId.systemDefault()).toLocalDate();
             
-            Siniestro siniestro = new Siniestro(cod,tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto);
+            Siniestro siniestro = new Siniestro(cod,tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto, activo);
             siniestroData sis = new siniestroData();
             sis.editarSiniestro(siniestro);
         } catch (NullPointerException e) {
@@ -376,50 +406,80 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             CuartelData tip = new CuartelData();
             List<Cuartel> asd = tip.listarCuartel();
 
-            int corX = Integer.parseInt(jTcoordX.getText());
-            int corY = Integer.parseInt(jTcoordY.getText());
-            int[] cx = new int[asd.size()];
-            int[] cy = new int[asd.size()];
+            if (jTcoordX.getText().isEmpty() || jTcoordY.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar las coordenadas primero para poder hacer el calculo.");
+            } else {
+                int corX = Integer.parseInt(jTcoordX.getText());
+                int corY = Integer.parseInt(jTcoordY.getText());
+                int[] cx = new int[asd.size()];
+                int[] cy = new int[asd.size()];
 
-            for (int i = 0; i < asd.size(); i++) {
-                Cuartel qwe = asd.get(i);
-                cx[i] = qwe.getCoord_X();
-                cy[i] = qwe.getCoord_Y();
-            }
+                for (int i = 0; i < asd.size(); i++) {
+                    Cuartel qwe = asd.get(i);
+                    cx[i] = qwe.getCoord_X();
+                    cy[i] = qwe.getCoord_Y();
+                }
 
-            int cuartelMasCercano = -1;
-            double distanciaMinima = Double.MAX_VALUE;
+                int cuartelMasCercano = -1;
+                double distanciaMinima = Double.MAX_VALUE;
 
-            for (int i = 0; i < cx.length; i++) {
-                int deltaX = cx[i] - corX;
-                int deltaY = cy[i] - corY;
-                double distancia = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                for (int i = 0; i < cx.length; i++) {
+                    int deltaX = cx[i] - corX;
+                    int deltaY = cy[i] - corY;
+                    double distancia = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-                if (distancia < distanciaMinima) {
-                    distanciaMinima = distancia;
-                    cuartelMasCercano = i;
+                    if (distancia < distanciaMinima) {
+                        distanciaMinima = distancia;
+                        cuartelMasCercano = i;
+                    }
+                }
+
+                if (cuartelMasCercano != -1) {
+
+                    jTcuartelDispo.setText(tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getNombreCuartel());
+                    int h = bri.buscarBrigadaEsp((String) jCtipo.getSelectedItem()).getCodBrigada();
+                    jTcodBriga.setText(String.valueOf(h));
+                    jLdistMetros.setText("Distancia: " + String.valueOf(distanciaMinima));
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "No hay cuarteles o brigadas disponibles.");
                 }
             }
-            
-            if (cuartelMasCercano != -1) {
-                jTcuartelDispo.setText(tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getNombreCuartel());
-                int h = tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getCodCuartel();
-                int z = bri.buscarBrigadaCuartel(h).getCodBrigada();
-                //JOptionPane.showMessageDialog(null, z);
-                jTcodBriga.setText(String.valueOf(z));
-            } else {
-                JOptionPane.showMessageDialog(null, "No hay cuarteles disponibles.");
-            }
-            
+
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Mensaje: " + e);
         }
     }//GEN-LAST:event_jBaniadirCActionPerformed
 
+    private void jCtipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCtipoActionPerformed
+
+    }//GEN-LAST:event_jCtipoActionPerformed
+
+    private void jLdistMetrosPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jLdistMetrosPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLdistMetrosPropertyChange
+
+    private void jBlimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarCamposActionPerformed
+        // Boton limpiar /-/ Hace un set en blanco en todos los campos de texto.
+        
+        jLdistMetros.setText("");
+        jRsiOno.setSelected(false);
+        jTAdetalle.setText("");
+        jTcod.setText("");
+        jTcodBriga.setText("");
+        jTcoordX.setText("");
+        jTcoordY.setText("");
+        jTcuartelDispo.setText("");
+        jTpuntuacion.setText("");
+        jCtipo.setSelectedIndex(0);
+        
+    }//GEN-LAST:event_jBlimpiarCamposActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBaniadirC;
     private javax.swing.JButton jBbuscar;
     private javax.swing.JButton jBguardar;
+    private javax.swing.JButton jBlimpiarCampos;
     private javax.swing.JButton jBmodificar;
     private javax.swing.JComboBox<String> jCtipo;
     private com.toedter.calendar.JDateChooser jDfinalizo;
@@ -436,6 +496,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLdistMetros;
     private javax.swing.JRadioButton jRsiOno;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTAdetalle;
@@ -449,7 +510,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
     private void cargarComboBox() {
 
-        String tipos[] = {"Incendio", "Accidente", "Rescate", "Emergencias", "Derrumbes"};
+        String tipos[] = {"Incendio", "Accidente", "Rescate", "Emergencias", "Derrumbes", "Materiales Peligrosos", "Otros..."};
 
         List<String> taps = Arrays.asList(tipos);
 

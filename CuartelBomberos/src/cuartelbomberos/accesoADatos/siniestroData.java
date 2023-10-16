@@ -14,8 +14,8 @@ public class siniestroData {
     
     public void guardarSiniestro(Siniestro sini) {
         Connection con = Conexion.getConexion();
-        String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`, `resuelto`)"
-                + "VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO `siniestro`(`tipo`, `fechaSiniestro`, `coord_X`, `coord_Y`, `detalle`, `fechaResol`, `puntuacion`, `codBrigada`"
+                + ", `resuelto`, `activo`) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -29,6 +29,7 @@ public class siniestroData {
             ps.setInt(7, sini.getPuntuacion());
             ps.setInt(8, sini.getCodBrigada());
             ps.setBoolean(9, sini.getResuelto());
+            ps.setBoolean(10, sini.getActivo());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -43,7 +44,30 @@ public class siniestroData {
         }
     }
 
-    public void eliminarSiniestro(int cod, int resuelto) {
+    public void eliminarSiniestro(int cod, int activo) {
+
+        String sql = "UPDATE siniestro SET activo = ? WHERE codigo = ?";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, cod);
+            ps.setInt(2, activo);
+            
+            int fila = ps.executeUpdate();
+
+            if (fila == 1) {
+
+                JOptionPane.showMessageDialog(null, "Siniestro Eliminado");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla siniestro");
+        }
+
+    }
+
+    public void resolverSiniestro(int cod, int resuelto) {
 
         String sql = "UPDATE siniestro SET resuelto = ? WHERE codigo = ?";
         PreparedStatement ps = null;
@@ -65,11 +89,11 @@ public class siniestroData {
         }
 
     }
-
+    
     public void editarSiniestro(Siniestro sini){
         Connection con = Conexion.getConexion();
         String sql = "UPDATE siniestro SET tipo = ?, fechaSiniestro = ?, coord_X = ?, coord_Y = ?, detalle = ?, fechaResol = ?, "
-                + "puntuacion = ?, codBrigada = ?, resuelto = ? WHERE codigo = ?";
+                + "puntuacion = ?, codBrigada = ?, resuelto = ?, activo = ? WHERE codigo = ?";
         
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -83,7 +107,8 @@ public class siniestroData {
             ps.setInt(7, sini.getPuntuacion());
             ps.setInt(8, sini.getCodBrigada());
             ps.setBoolean(9, sini.getResuelto());
-            ps.setInt(10, sini.getCodigo());
+            ps.setBoolean(10, sini.getActivo());
+            ps.setInt(11, sini.getCodigo());
             
             int exito = ps.executeUpdate();
 
@@ -103,7 +128,7 @@ public class siniestroData {
         
         Connection con = Conexion.getConexion();
         Siniestro sini = null;
-        String sql = "SELECT codigo, tipo, fechaSiniestro, coord_X, coord_Y, detalle, fechaResol, puntuacion, codBrigada, resuelto"
+        String sql = "SELECT codigo, tipo, fechaSiniestro, coord_X, coord_Y, detalle, fechaResol, puntuacion, codBrigada, resuelto, activo"
                 + " FROM siniestro WHERE codigo = ?";
         PreparedStatement ps = null;
         try {
@@ -125,6 +150,7 @@ public class siniestroData {
             sini.setPuntuacion(rs.getInt("puntuacion"));
             sini.setCodBrigada(rs.getInt("codBrigada"));
             sini.setResuelto(rs.getBoolean("resuelto"));
+            sini.setActivo(rs.getBoolean("activo"));
             
         } else {
             JOptionPane.showMessageDialog(null, "No existe un siniestro con ese codigo");
@@ -145,27 +171,66 @@ public class siniestroData {
             String sql = "SELECT * FROM siniestro WHERE resuelto = 0 OR resuelto = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            
-            Siniestro siniestros = new Siniestro();
-            siniestros.setCodigo(rs.getInt("codigo"));
-            siniestros.setTipo(rs.getString("tipo"));
-            siniestros.setFechaSiniestro(rs.getDate("fechaSiniestro").toLocalDate());
-            siniestros.setCoord_X(rs.getInt("coord_X"));
-            siniestros.setCoord_Y(rs.getInt("coord_Y"));
-            siniestros.setText(rs.getString("detalle"));
-            siniestros.setFechaResol(rs.getDate("fechaResol").toLocalDate());
-            siniestros.setPuntuacion(rs.getInt("puntuacion"));
-            siniestros.setCodBrigada(rs.getInt("codBrigada"));
-            siniestros.setResuelto(rs.getBoolean("resuelto"));
-            
-            sini.add(siniestros);
                 
             while (rs.next()) {
+                Siniestro siniestros = new Siniestro();
+                siniestros.setCodigo(rs.getInt("codigo"));
+                siniestros.setTipo(rs.getString("tipo"));
+                siniestros.setFechaSiniestro(rs.getDate("fechaSiniestro").toLocalDate());
+                siniestros.setCoord_X(rs.getInt("coord_X"));
+                siniestros.setCoord_Y(rs.getInt("coord_Y"));
+                siniestros.setText(rs.getString("detalle"));
+                siniestros.setFechaResol(rs.getDate("fechaResol").toLocalDate());
+                siniestros.setPuntuacion(rs.getInt("puntuacion"));
+                siniestros.setCodBrigada(rs.getInt("codBrigada"));
+                siniestros.setResuelto(rs.getBoolean("resuelto"));
+                siniestros.setActivo(rs.getBoolean("activo"));
+
+                sini.add(siniestros);
             }
 
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro" + ex.getMessage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        return sini;
+        
+    }
+    
+    //"SELECT * FROM `siniestro` WHERE (resuelto = 0 OR resuelto = 1) AND fechaSiniestro BETWEEN ? AND ?"
+    public List<Siniestro> listarSiniXfecha(Date fechaInicio, Date fechaFin){
+        Connection con = Conexion.getConexion();
+        List<Siniestro> sini = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM `siniestro` WHERE (resuelto = 0 OR resuelto = 1) AND fechaSiniestro BETWEEN ? AND ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDate(1, fechaInicio);
+            ps.setDate(2, fechaFin);
+            ResultSet rs = ps.executeQuery();
+                
+            while (rs.next()) {
+                Siniestro siniestros = new Siniestro();
+                siniestros.setCodigo(rs.getInt("codigo"));
+                siniestros.setTipo(rs.getString("tipo"));
+                siniestros.setFechaSiniestro(rs.getDate("fechaSiniestro").toLocalDate());
+                siniestros.setCoord_X(rs.getInt("coord_X"));
+                siniestros.setCoord_Y(rs.getInt("coord_Y"));
+                siniestros.setText(rs.getString("detalle"));
+                siniestros.setFechaResol(rs.getDate("fechaResol").toLocalDate());
+                siniestros.setPuntuacion(rs.getInt("puntuacion"));
+                siniestros.setCodBrigada(rs.getInt("codBrigada"));
+                siniestros.setResuelto(rs.getBoolean("resuelto"));
+                siniestros.setActivo(rs.getBoolean("activo"));
+
+                sini.add(siniestros);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro" + ex.getMessage());
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
         }

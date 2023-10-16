@@ -14,11 +14,12 @@ public class Siniestro {
     private int puntuacion;
     private int codBrigada;
     private boolean resuelto;
+    private boolean activo;
 
     public Siniestro() {
     }
 
-    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada, boolean resuelto) {
+    public Siniestro(String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada, boolean resuelto, boolean activo) {
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
         this.coord_X = coord_X;
@@ -28,9 +29,10 @@ public class Siniestro {
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
         this.resuelto = resuelto;
+        this.activo = activo;
     }
 
-    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada, boolean resuelto) {
+    public Siniestro(int codigo, String tipo, LocalDate fechaSiniestro, int coord_X, int coord_Y, String text, LocalDate fechaResol, int puntuacion, int codBrigada, boolean resuelto, boolean activo) {
         this.codigo = codigo;
         this.tipo = tipo;
         this.fechaSiniestro = fechaSiniestro;
@@ -41,6 +43,7 @@ public class Siniestro {
         this.puntuacion = puntuacion;
         this.codBrigada = codBrigada;
         this.resuelto = resuelto;
+        this.activo = activo;
     }
 
     public int getCodigo() {
@@ -123,9 +126,17 @@ public class Siniestro {
         this.resuelto = resuelto;
     }
     
+    public boolean getActivo(){
+        return activo;
+    }
+    
+    public void setActivo(boolean activo){
+        this.activo = activo;
+    }
+    
     @Override
     public String toString() {
-        return tipo + "," + fechaSiniestro + "," + coord_X + "," + coord_Y + "," + text + "," + fechaResol + "," + puntuacion + "," + codBrigada + "," + resuelto;
+        return tipo + "," + fechaSiniestro + "," + coord_X + "," + coord_Y + "," + text + "," + fechaResol + "," + puntuacion + "," + codBrigada + "," + resuelto + "," + activo;
     }
     
 }

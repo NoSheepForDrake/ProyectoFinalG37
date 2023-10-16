@@ -228,4 +228,38 @@ public class BrigadaData {
         }
         return brigada;
     }
+    
+    public Brigada buscarBrigadaEsp(String especialidad) {
+        CuartelData cd = new CuartelData();
+        Brigada brigada = null;
+        String sql = "SELECT codBrigada, nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE especialidad=?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, especialidad);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()) {
+                
+                brigada = new Brigada();
+                
+                brigada.setCodBrigada(rs.getInt("codBrigada"));
+                brigada.setNombreBriga(rs.getString("nombreBriga"));
+                brigada.setEspecialidad(rs.getString("especialidad"));
+                brigada.setLibre(true);
+                //JOptionPane.showMessageDialog(null, brigada.getNombreBriga());
+                int codigoCuartel = rs.getInt("nroCuartel"); // Obtener el código del cuartel
+                Cuartel cuartel = cd.buscarCuartel(codigoCuartel); // Buscar el cuartel por su código
+                brigada.setCuartel(cuartel);
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe una brigada con ese código de identificación");
+                ps.close();
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+        }
+        return brigada;
+    }
 }
