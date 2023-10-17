@@ -1,17 +1,24 @@
 package cuartelbomberos.vistas;
 
+import cuartelbomberos.accesoADatos.BrigadaData;
 import cuartelbomberos.accesoADatos.CuartelData;
 import cuartelbomberos.entidades.Cuartel;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class CuartelView extends javax.swing.JInternalFrame {
+
+    ArrayList array = new ArrayList();
+    DefaultListModel modelo = new DefaultListModel();
 
     public CuartelView() {
         initComponents();
         setTitle("Cuartel");
         cargarComboBox();
+        jlBrigadas.setModel(modelo);
     }
 
     @SuppressWarnings("unchecked")
@@ -38,12 +45,14 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jbNuevo = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtX = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtY = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jrbEstado = new javax.swing.JRadioButton();
         jlEstado = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jtX = new javax.swing.JTextField();
+        jtY = new javax.swing.JTextField();
+        jtID = new javax.swing.JTextField();
 
         jLabel5.setText("Seleccione el Cuartel");
 
@@ -57,6 +66,11 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtTelefonoActionPerformed(evt);
+            }
+        });
+        jtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtTelefonoKeyTyped(evt);
             }
         });
 
@@ -125,6 +139,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel11.setText("Codigo");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -155,19 +171,25 @@ public class CuartelView extends javax.swing.JInternalFrame {
                     .addComponent(jtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jrbEstado)
-                        .addGap(18, 18, 18)
-                        .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                            .addComponent(jrbEstado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jlEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(19, 19, 19))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -196,25 +218,29 @@ public class CuartelView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4))
+                        .addComponent(jLabel4)
+                        .addComponent(jtY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(jtX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 4, Short.MAX_VALUE)
                         .addComponent(jrbEstado))
-                    .addComponent(jlEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jlEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel11)
+                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 8, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbLimpiar)
@@ -261,6 +287,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtX.setText(String.valueOf(c.getCoord_X()));
         jtY.setText(String.valueOf(c.getCoord_Y()));
         jrbEstado.setSelected(c.isEstado());
+        jtID.setText(String.valueOf(c.getCodCuartel()));
+        cargarJList();
     }//GEN-LAST:event_jcCuartelesActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
@@ -274,15 +302,16 @@ public class CuartelView extends javax.swing.JInternalFrame {
             int x = Integer.parseInt(jtX.getText());
             int y = Integer.parseInt(jtY.getText());
             boolean est = jrbEstado.isSelected();
+            int id = Integer.parseInt(jtID.getText());
 
             if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty() || jtX.getText().isEmpty() || jtY.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
                 return;
             }
-            Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
+            Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
             c.editarCuartel(cuartel);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros"+e);
+            JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
         }
 
     }//GEN-LAST:event_jbEditarActionPerformed
@@ -294,6 +323,9 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtNombre.setText("");
         jtX.setText("");
         jtY.setText("");
+        jtID.setText("");
+        jrbEstado.setSelected(false);
+        limpiarJList();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
@@ -324,7 +356,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
                 c.guardarCuartel(cuartel);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros"+e);
+            JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
@@ -346,11 +378,23 @@ public class CuartelView extends javax.swing.JInternalFrame {
             jlEstado.setText("Inactivo");
         }
     }//GEN-LAST:event_jrbEstadoStateChanged
-
+    private void jtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {
+        //este metodo hace que solo permita escribir numeros y de no ser asi no lo escribe
+        int key = evt.getKeyChar(); //obtengo la tecla que se preciono
+        boolean numero = key >= 48 && key <= 57; //esto significa que recorro los numeros del 0 al 9, xq alt48=0
+        if (!numero) {
+            evt.consume();//evita que se coloque letras o caracteres
+        }
+        //trim remueve los espacios, length es longitud
+        if (jtTelefono.getText().trim().length() == 10) {
+            evt.consume();// si ya se coloco 10 numeros no me deja escribir mas 
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -371,6 +415,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtCorreo;
     private javax.swing.JTextField jtDireccion;
+    private javax.swing.JTextField jtID;
     private javax.swing.JTextField jtNombre;
     private javax.swing.JTextField jtTelefono;
     private javax.swing.JTextField jtX;
@@ -382,6 +427,22 @@ public void cargarComboBox() {
         for (Cuartel cuartel : listaCuartel) {
             jcCuarteles.addItem(cuartel.getNombreCuartel());
         }
+    }
+
+    public DefaultListModel cargarJList() {
+        DefaultListModel modelo = (DefaultListModel) jlBrigadas.getModel();
+        BrigadaData bd = new BrigadaData();
+        int id = Integer.parseInt(jtID.getText());
+        String b = bd.buscarBrigadaCuartel(id).getNombreBriga();
+        //JOptionPane.showMessageDialog(null, b);
+        modelo.addElement(b);
+        return modelo;
+    }
+
+    public DefaultListModel limpiarJList() {
+        DefaultListModel modelo = new DefaultListModel();
+        jlBrigadas.setModel(modelo);
+        return modelo;
     }
 
 }
