@@ -5,9 +5,7 @@ package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.BomberoData;
 import cuartelbomberos.entidades.Bombero;
-import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ConsultaDeBomberos extends javax.swing.JInternalFrame {

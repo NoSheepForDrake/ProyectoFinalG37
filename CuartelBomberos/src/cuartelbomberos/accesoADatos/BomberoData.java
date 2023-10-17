@@ -129,7 +129,7 @@ public class BomberoData {
                 int codbrig = rs.getInt("codBrigada");
                 //JOptionPane.showMessageDialog(null, codbrig);
                 Brigada brigada = bd.buscarBrigada(codbrig);
-       JOptionPane.showMessageDialog(null, brigada.getNombreBriga());
+       //JOptionPane.showMessageDialog(null, brigada.getNombreBriga());
                 // Asignar la brigada al bombero
                 bomber.setBrigada(brigada);
 
