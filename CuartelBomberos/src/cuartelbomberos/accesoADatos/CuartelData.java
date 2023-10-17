@@ -59,6 +59,7 @@ public class CuartelData {
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
             ps.setBoolean(7, cuartel.isEstado());
+            ps.setInt(8, cuartel.getCodCuartel());
 
             int exito = ps.executeUpdate();
 
@@ -201,6 +202,8 @@ public class CuartelData {
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreo(rs.getString("correo"));
                 cuartel.setEstado(rs.getBoolean("estado"));
+                cuartel.setCoord_X(rs.getInt("coord_X"));
+                cuartel.setCoord_Y(rs.getInt("coord_Y"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe un cuartel con ese codigo de identificación");
