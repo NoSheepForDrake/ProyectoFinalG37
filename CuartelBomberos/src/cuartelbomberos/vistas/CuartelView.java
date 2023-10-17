@@ -289,6 +289,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jrbEstado.setSelected(c.isEstado());
         jtID.setText(String.valueOf(c.getCodCuartel()));
         cargarJList();
+
     }//GEN-LAST:event_jcCuartelesActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed

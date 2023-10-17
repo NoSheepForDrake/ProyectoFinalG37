@@ -295,52 +295,55 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         BrigadaData bd = new BrigadaData();
         String nombre = jtBrigada.getText();
         boolean est = jrbEstado.isSelected();
-        
+
     }//GEN-LAST:event_EditarActionPerformed
 
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        BrigadaData bd = new BrigadaData();
-        String nombre = jtBrigada.getText();
-        boolean est = jrbEstado.isSelected();
-        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-        if ("Buscar brigada".equals(especialidadSelec)) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una brigada");
-            return;
-        }
-        String cuartelSelec = (String) jcbCuartel.getSelectedItem();
-        if ("Buscar cuartel".equals(cuartelSelec)) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
-            return;
-        }
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
-            return;
-        }
-        if (cuartelSelec != null) {
-            // Dividir el elemento seleccionado en nombre y especialidad
-            String[] partes = cuartelSelec.split(" - ");
-            if (partes.length > 0) {
-                String nombrecuartel = partes[0].trim();
-                CuartelData cd = new CuartelData();
-                Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
-                int cod = cuartel.getCodCuartel();
-                Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
-                JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
-                bd.guardarBrigada(b);
+        try {
+            BrigadaData bd = new BrigadaData();
+            String nombre = jtBrigada.getText();
+            boolean est = jrbEstado.isSelected();
+            String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+            if ("Buscar brigada".equals(especialidadSelec)) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una brigada");
+                return;
             }
+            String cuartelSelec = (String) jcbCuartel.getSelectedItem();
+            if ("Buscar cuartel".equals(cuartelSelec)) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
+                return;
+            }
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                return;
+            }
+            if (cuartelSelec != null) {
+                // Dividir el elemento seleccionado en nombre y especialidad
+                String[] partes = cuartelSelec.split(" - ");
+                if (partes.length > 0) {
+                    String nombrecuartel = partes[0].trim();
+                    CuartelData cd = new CuartelData();
+                    Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
+                    Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
+                    //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
+                    bd.guardarBrigada(b);
+                }
+            }
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, e);
         }
 
 
     }//GEN-LAST:event_GuardarActionPerformed
 //private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {                                       
-//        if (jrbEstado.isSelected()) {
-//            jtEstado.setForeground(Color.BLUE);
-//            jtEstado.setText("Activo");
-//        } else {
-//            jtEstado.setForeground(Color.RED);
-//            jtEstado.setText("Inactivo");
-//        }
-//    }   
+    //        if (jrbEstado.isSelected()) {
+    //            jtEstado.setForeground(Color.BLUE);
+    //            jtEstado.setText("Activo");
+    //        } else {
+    //            jtEstado.setForeground(Color.RED);
+    //            jtEstado.setText("Inactivo");
+    //        }
+    //    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Editar;
