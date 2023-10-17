@@ -20,7 +20,7 @@ public class CuartelData {
 
     public void guardarCuartel(Cuartel cuartel) {
         String sql = "INSERT INTO cuartel( nombreCuartel, direccion, coord_X, coord_Y, telefono, correo,estado) "
-                + "VALUES (?,?,?,?,?,?)";
+                + "VALUES (?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
