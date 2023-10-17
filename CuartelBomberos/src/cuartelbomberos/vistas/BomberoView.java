@@ -1,6 +1,7 @@
 /*El Boton guardar va a tener doble funcionalidad, va a corroborar que el bombero no se encuentre en la base
 de datos(a traves del DNI), de encontrarse se van a modificar los datos, caso contrario se va a guardar 
 como un bombero nuevo*/
+
 package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.BomberoData;
@@ -56,6 +57,11 @@ public class BomberoView extends javax.swing.JInternalFrame {
         jtdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtdniActionPerformed(evt);
+            }
+        });
+        jtdni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtdniKeyTyped(evt);
             }
         });
 
@@ -356,6 +362,13 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_jbeliminarActionPerformed
+
+    private void jtdniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtdniKeyTyped
+        // TODO add your handling code here:
+        if (jtdni.getText().trim().length() == 8) {
+            evt.consume();// si ya se coloco 8 numeros no me deja escribir mas 
+        }
+    }//GEN-LAST:event_jtdniKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
