@@ -361,6 +361,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
             } else {
                 c.guardarCuartel(cuartel);
             }
+            cargarComboBox();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
         }catch (NullPointerException e){
