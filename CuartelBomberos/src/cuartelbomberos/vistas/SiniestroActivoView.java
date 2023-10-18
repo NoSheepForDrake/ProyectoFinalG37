@@ -433,21 +433,19 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                         cuartelMasCercano = i;
                     }
                 }
-
+                
                 if (cuartelMasCercano != -1) {
-
+                    
                     jTcuartelDispo.setText(tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getNombreCuartel());
                     int h = bri.buscarBrigadaEsp((String) jCtipo.getSelectedItem()).getCodBrigada();
                     jTcodBriga.setText(String.valueOf(h));
                     jLdistMetros.setText("Distancia: " + String.valueOf(distanciaMinima));
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "No hay cuarteles o brigadas disponibles.");
                 }
             }
 
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Mensaje: " + e);
+            JOptionPane.showMessageDialog(null, "No hay brigada disponible en ese cuartel.");
         }
     }//GEN-LAST:event_jBaniadirCActionPerformed
 

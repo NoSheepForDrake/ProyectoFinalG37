@@ -44,15 +44,14 @@ public class siniestroData {
         }
     }
 
-    public void eliminarSiniestro(int cod, int activo) {
-
-        String sql = "UPDATE siniestro SET activo = ? WHERE codigo = ?";
+    public void eliminarSiniestro(int cod) {
+        Connection con = Conexion.getConexion();
+        String sql = "UPDATE siniestro SET activo = 0 WHERE codigo = ?";
         PreparedStatement ps = null;
 
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, cod);
-            ps.setInt(2, activo);
             
             int fila = ps.executeUpdate();
 
@@ -168,7 +167,7 @@ public class siniestroData {
         List<Siniestro> sini = new ArrayList<>();
         
         try {
-            String sql = "SELECT * FROM siniestro WHERE resuelto = 0 OR resuelto = 1";
+            String sql = "SELECT * FROM siniestro WHERE (resuelto = 1 OR resuelto = 0) AND activo = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
                 
@@ -199,16 +198,52 @@ public class siniestroData {
         
     }
     
-    //"SELECT * FROM `siniestro` WHERE (resuelto = 0 OR resuelto = 1) AND fechaSiniestro BETWEEN ? AND ?"
     public List<Siniestro> listarSiniXfecha(Date fechaInicio, Date fechaFin){
         Connection con = Conexion.getConexion();
         List<Siniestro> sini = new ArrayList<>();
         
         try {
-            String sql = "SELECT * FROM `siniestro` WHERE (resuelto = 0 OR resuelto = 1) AND fechaSiniestro BETWEEN ? AND ?";
+            String sql = "SELECT * FROM `siniestro` WHERE activo = 1 AND (resuelto = 0 OR resuelto = 1) AND fechaSiniestro BETWEEN ? AND ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDate(1, fechaInicio);
             ps.setDate(2, fechaFin);
+            ResultSet rs = ps.executeQuery();
+                
+            while (rs.next()) {
+                Siniestro siniestros = new Siniestro();
+                siniestros.setCodigo(rs.getInt("codigo"));
+                siniestros.setTipo(rs.getString("tipo"));
+                siniestros.setFechaSiniestro(rs.getDate("fechaSiniestro").toLocalDate());
+                siniestros.setCoord_X(rs.getInt("coord_X"));
+                siniestros.setCoord_Y(rs.getInt("coord_Y"));
+                siniestros.setText(rs.getString("detalle"));
+                siniestros.setFechaResol(rs.getDate("fechaResol").toLocalDate());
+                siniestros.setPuntuacion(rs.getInt("puntuacion"));
+                siniestros.setCodBrigada(rs.getInt("codBrigada"));
+                siniestros.setResuelto(rs.getBoolean("resuelto"));
+                siniestros.setActivo(rs.getBoolean("activo"));
+
+                sini.add(siniestros);
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla siniestro" + ex.getMessage());
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        }
+        return sini;
+        
+    }
+    
+    public List<Siniestro> listarSiniXtipo(String tipo){
+        Connection con = Conexion.getConexion();
+        List<Siniestro> sini = new ArrayList<>();
+        
+        try {
+            String sql = "SELECT * FROM siniestro WHERE tipo = ? AND activo = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, tipo);
             ResultSet rs = ps.executeQuery();
                 
             while (rs.next()) {

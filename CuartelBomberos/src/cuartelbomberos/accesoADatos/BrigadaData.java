@@ -232,7 +232,7 @@ public class BrigadaData {
     public Brigada buscarBrigadaEsp(String especialidad) {
         CuartelData cd = new CuartelData();
         Brigada brigada = null;
-        String sql = "SELECT codBrigada, nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE especialidad=?";
+        String sql = "SELECT codBrigada, nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE especialidad=? AND libre = 1";
         PreparedStatement ps = null;
         try {
             ps = con.prepareStatement(sql);
@@ -259,6 +259,8 @@ public class BrigadaData {
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+        } catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null, "No hay brigada disponible.");
         }
         return brigada;
     }

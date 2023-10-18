@@ -3,8 +3,9 @@ package cuartelbomberos.vistas;
 import cuartelbomberos.accesoADatos.siniestroData;
 import cuartelbomberos.entidades.Siniestro;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +17,12 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
     siniestroData si = new siniestroData();
     
     public ResolucionSiniestroView() {
-        
         initComponents();
         setTitle("Listar Siniestro");
         crearCabecera();
         cargarComboBox1();
-        
+        fechaEdit();
+        llenarTabla2();
     }
 
     /**
@@ -37,15 +38,13 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
         jTablaSiniestro = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCresuelto = new javax.swing.JCheckBox();
-        jCactivo = new javax.swing.JCheckBox();
         jComboBox1 = new javax.swing.JComboBox<>();
         jCfecha = new javax.swing.JCheckBox();
         jDfechaIni = new com.toedter.calendar.JDateChooser();
         jDfechaFin = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jBfilterF = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -82,22 +81,38 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Filtrar por:");
 
-        jCresuelto.setText("Resuelto");
-
-        jCactivo.setText("Activo");
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo..." }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jCfecha.setText("Fecha");
+        jCfecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCfechaActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Limpiar Tabla");
-
-        jButton3.setText("Cargar Tabla");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jBfilterF.setText("Filtrar Fecha");
+        jBfilterF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBfilterFActionPerformed(evt);
             }
         });
 
@@ -113,23 +128,21 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCresuelto)
-                            .addComponent(jCactivo)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCfecha)
-                            .addComponent(jDfechaIni, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jDfechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(297, 297, 297)
-                        .addComponent(jButton3)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1)
-                        .addGap(27, 27, 27)
-                        .addComponent(jButton2)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(24, 24, 24)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jCfecha)
+                                .addComponent(jDfechaIni, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addComponent(jDfechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jBfilterF)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton1)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton2))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(47, 47, 47))
         );
         layout.setVerticalGroup(
@@ -144,57 +157,96 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jCresuelto)
-                                    .addComponent(jCfecha))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jCactivo))
-                            .addComponent(jDfechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCfecha)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jDfechaIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31))
                     .addComponent(jDfechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton1)
                         .addComponent(jButton2)
-                        .addComponent(jButton3)))
+                        .addComponent(jBfilterF)))
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jCfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCfechaActionPerformed
+        
+        if (jCfecha.isSelected()){
+            jDfechaFin.setEnabled(true);
+            jDfechaIni.setEnabled(true);   
+        }else{
+            jDfechaFin.setEnabled(false);
+            jDfechaIni.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_jCfechaActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // Boton limpiar tabla /-/ deja la tabla en blanco nuevamente.
+        llenarTabla2();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         try {
-            if (jCfecha.isSelected()) {
-                java.util.Date utilDate = jDfechaIni.getDate();
-                java.sql.Date sqlDateInicio = new java.sql.Date(utilDate.getTime());
+            String a = (String) jComboBox1.getSelectedItem();
+            List<Siniestro> listaTsini = si.listarSiniXtipo(a);
+            llenarTabla(listaTsini);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
-                utilDate = jDfechaFin.getDate();
-                java.sql.Date sqlDateFin = new java.sql.Date(utilDate.getTime());
+    private void jBfilterFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfilterFActionPerformed
+        if (jCfecha.isSelected()) {
+            java.util.Date utilDate = jDfechaIni.getDate();
+            java.sql.Date sqlDateInicio = new java.sql.Date(utilDate.getTime());
 
-                List<Siniestro> listaNsiniestros = si.listarSiniXfecha(sqlDateInicio, sqlDateFin);
-                llenarTabla(listaNsiniestros);
-            } else {
-                List<Siniestro> listaNsiniestros = si.listarSiniestros();
-                llenarTabla(listaNsiniestros);
+            utilDate = jDfechaFin.getDate();
+            java.sql.Date sqlDateFin = new java.sql.Date(utilDate.getTime());
+
+            List<Siniestro> listaNsiniestros = si.listarSiniXfecha(sqlDateInicio, sqlDateFin);
+            llenarTabla(listaNsiniestros);
+        }else{tabla.setRowCount(0);}
+    }//GEN-LAST:event_jBfilterFActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Boton eliminar /-/ borrado logico de un siniestro
+        
+        try {
+            int filaSelec = jTablaSiniestro.getSelectedRow();
+            String sel = "";
+            
+            if (filaSelec != -1) {
+                
+                Object[] fila = new Object[tabla.getColumnCount()];
+                
+                for (int i = 0; i < tabla.getColumnCount(); i++) {
+                    fila[i] = tabla.getValueAt(filaSelec, i);
+                }
+                
+                sel = fila[0].toString();
+                si.eliminarSiniestro(Integer.parseInt(sel));
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBfilterF;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCactivo;
     private javax.swing.JCheckBox jCfecha;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JCheckBox jCresuelto;
     private com.toedter.calendar.JDateChooser jDfechaFin;
     private com.toedter.calendar.JDateChooser jDfechaIni;
     private javax.swing.JLabel jLabel1;
@@ -241,5 +293,22 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             s.getPuntuacion(), s.getCodBrigada(), s.getResuelto(), s.getActivo()});
         }
     }
-
+    
+    private void fechaEdit(){
+        jDfechaIni.setEnabled(false);
+        jDfechaFin.setEnabled(false);
+    }
+    
+    private void llenarTabla2() {
+        
+        // Limpiar la tabla
+        tabla.setRowCount(0);
+        List<Siniestro> sini = si.listarSiniestros();
+        // Llenar la tabla con los datos de los alumnos inscritos en la materia
+        for (Siniestro s : sini) {
+            tabla.addRow(new Object[]{s.getCodigo(), s.getTipo(), s.getFechaSiniestro(), s.getCoord_X(), s.getCoord_Y(), s.getText(), s.getFechaResol(),
+            s.getPuntuacion(), s.getCodBrigada(), s.getResuelto(), s.getActivo()});
+        }
+    }
+    
 }
