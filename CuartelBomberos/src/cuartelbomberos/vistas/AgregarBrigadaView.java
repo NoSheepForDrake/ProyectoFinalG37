@@ -318,7 +318,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                 return;
             }
             if (cuartelSelec != null) {
-                // Dividir el elemento seleccionado en nombre y especialidad
+                // Dividir el elemento seleccionado 
                 String[] partes = cuartelSelec.split(" - ");
                 if (partes.length > 0) {
                     String nombrecuartel = partes[0].trim();
