@@ -148,9 +148,13 @@
     <Component class="javax.swing.JTextField" name="jtdni">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtdniActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtdniKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtnomyapell">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtnomyapellKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="jtcelular">
     </Component>

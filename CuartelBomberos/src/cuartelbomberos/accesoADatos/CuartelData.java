@@ -59,6 +59,7 @@ public class CuartelData {
             ps.setString(5, cuartel.getTelefono());
             ps.setString(6, cuartel.getCorreo());
             ps.setBoolean(7, cuartel.isEstado());
+            ps.setInt(8, cuartel.getCodCuartel());
 
             int exito = ps.executeUpdate();
 
@@ -201,6 +202,8 @@ public class CuartelData {
                 cuartel.setTelefono(rs.getString("telefono"));
                 cuartel.setCorreo(rs.getString("correo"));
                 cuartel.setEstado(rs.getBoolean("estado"));
+                cuartel.setCoord_X(rs.getInt("coord_X"));
+                cuartel.setCoord_Y(rs.getInt("coord_Y"));
 
             } else {
                 JOptionPane.showMessageDialog(null, "No existe un cuartel con ese codigo de identificación");
@@ -223,11 +226,12 @@ public class CuartelData {
             String sql = "SELECT codCuartel FROM cuartel WHERE direccion=? AND (estado = 1 OR estado = 0)";
             ps = con.prepareStatement(sql);
             ps.setString(1, direccion);
+            rs=ps.executeQuery();
             if (rs.next()) {
-                int estado = rs.getInt("estado");
-                if (estado == 1) {
+                boolean estado = rs.getBoolean("estado");
+                if (estado) {
                     existe = true;
-                } else if (estado == 0) {
+                } else {
                     inactivo = true;
                 }
             }
