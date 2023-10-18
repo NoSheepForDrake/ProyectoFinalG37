@@ -6,7 +6,9 @@
 package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.BrigadaData;
+import cuartelbomberos.accesoADatos.CuartelData;
 import cuartelbomberos.entidades.Brigada;
+import cuartelbomberos.entidades.Cuartel;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -130,10 +132,15 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jcbEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEspecialidadActionPerformed
+       try{
         String brigadaSelec = (String) jcbEspecialidad.getSelectedItem();
         if ("buscar".equals(brigadaSelec)) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
         }
+        cargarTabla();
+       }catch (NullPointerException e){
+           //JOptionPane.showMessageDialog(null,e);
+       }
 
     }//GEN-LAST:event_jcbEspecialidadActionPerformed
 
@@ -166,16 +173,21 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         tabla.addColumn("Correo");
         Tabla.setModel(tabla);
     }
-
-//    private void cargarTabla() {
-//        BrigadaData bd=new BrigadaData();
-//        String especSelec=(String) jcbEspecialidad.getSelectedItem();
-//        List<Brigada> brigadas= bd.listarBrigadas();
-//        for(Brigada brigada: brigadas){
-//            
-//            Cartel cuartel=bd.buscarBrigadaCuartel()
-//            tabla.addRow(new Object[]{})
-//        }
-
-//    }
+    private void cargarTabla(){
+        tabla.setRowCount(0);//limpiar
+        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+        BrigadaData bd=new BrigadaData();
+        List<Brigada> brigadas=bd.listarBrigadas();
+        Brigada brig=bd.buscarBrigadaEsp(especialidadSelec);
+        for (Brigada brigada:brigadas){
+            
+            //JOptionPane.showMessageDialog(null, brig);
+//            int id=brig.getCuartel().getCodCuartel();
+//            CuartelData cd=new CuartelData();
+//            Cuartel cuartel=cd.buscarCuartel(id);
+        
+            tabla.addRow(new Object[]{brig.getNombreBriga(),brig.getCuartel().getNombreCuartel(),
+            brig.getCuartel().getDireccion(),brig.getCuartel().getTelefono(),brig.getCuartel().getCorreo()});
+            }
+    }
 }
