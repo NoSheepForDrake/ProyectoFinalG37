@@ -226,11 +226,12 @@ public class CuartelData {
             String sql = "SELECT codCuartel FROM cuartel WHERE direccion=? AND (estado = 1 OR estado = 0)";
             ps = con.prepareStatement(sql);
             ps.setString(1, direccion);
+            rs=ps.executeQuery();
             if (rs.next()) {
-                int estado = rs.getInt("estado");
-                if (estado == 1) {
+                boolean estado = rs.getBoolean("estado");
+                if (estado) {
                     existe = true;
-                } else if (estado == 0) {
+                } else {
                     inactivo = true;
                 }
             }

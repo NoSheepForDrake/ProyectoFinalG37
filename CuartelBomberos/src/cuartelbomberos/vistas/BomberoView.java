@@ -65,6 +65,12 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jtnomyapell.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtnomyapellKeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("Asignar a Brigada");
 
         jcbbrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una brigada" }));
@@ -262,6 +268,14 @@ public class BomberoView extends javax.swing.JInternalFrame {
         java.util.Date utilDate = jdcfechaNac.getDate();
         String gSanguineo = jtgSang.getText();
 
+         // Verificar que los campos obligatorios no estén vacíos
+                if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
+                        || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
+                        || jdcfechaNac.getDate() == null) {
+                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+                    return;
+                }
+                
         // Validar que el DNI contenga solo números
         if (!contieneSoloNumeros(dni)) {
             JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
@@ -281,13 +295,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
                 // Buscamos la brigada por el nombre
                 Brigada brigada = bd.buscarBrigadaXNombre(nombreBrigada);
 
-                // Verificar que los campos obligatorios no estén vacíos
-                if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
-                        || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
-                        || jdcfechaNac.getDate() == null) {
-                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-                    return;
-                }
+               
 
                 // Convertir la fecha de util.Date a LocalDate
                 Instant instant = utilDate.toInstant();
@@ -369,6 +377,21 @@ public class BomberoView extends javax.swing.JInternalFrame {
             evt.consume();// si ya se coloco 8 numeros no me deja escribir mas 
         }
     }//GEN-LAST:event_jtdniKeyTyped
+
+    private void jtnomyapellKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtnomyapellKeyTyped
+        // TODO add your handling code here:
+        int key = evt.getKeyChar(); // Obtén la tecla que se presionó
+        //65 al 90 = letras en minuscula
+        //97 al 122 = letras en mayusculas
+        //192 al 255 = caracteres especiales (Letras con acentos)
+        //32 = barra espaciadora (Espacio)
+        boolean esLetra = (key >= 65 && key <= 90) || (key >= 97 && key <= 122) || (key == 32) || (key >= 192 && key <= 255);
+
+        if (!esLetra) {
+            // La tecla presionada no es una letra o caracter especial permitido, por lo que no se escribirá en el campo de entrada
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtnomyapellKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

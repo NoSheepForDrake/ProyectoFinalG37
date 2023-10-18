@@ -288,6 +288,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtY.setText(String.valueOf(c.getCoord_Y()));
         jrbEstado.setSelected(c.isEstado());
         jtID.setText(String.valueOf(c.getCodCuartel()));
+        limpiarJList();
         cargarJList();
 
     }//GEN-LAST:event_jcCuartelesActionPerformed
