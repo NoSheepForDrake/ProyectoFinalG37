@@ -4,6 +4,7 @@ package cuartelbomberos.vistas;
 import cuartelbomberos.accesoADatos.BrigadaData;
 import cuartelbomberos.accesoADatos.CuartelData;
 import cuartelbomberos.accesoADatos.siniestroData;
+import cuartelbomberos.entidades.Brigada;
 import cuartelbomberos.entidades.Cuartel;
 import cuartelbomberos.entidades.Siniestro;
 import java.sql.Date;
@@ -211,40 +212,42 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                             .addComponent(jDinicio, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                             .addComponent(jDfinalizo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jBguardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBmodificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBaniadirC)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTpuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel10)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRsiOno)
-                                .addGap(41, 41, 41)
-                                .addComponent(jLabel12)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTcuartelDispo)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTcodBriga, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBlimpiarCampos)
-                    .addComponent(jLdistMetros, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBguardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBmodificar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBaniadirC)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBbuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTpuntuacion, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel11))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jRsiOno)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(jLabel12)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTcuartelDispo)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTcodBriga, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBlimpiarCampos)
+                            .addComponent(jLdistMetros, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -341,7 +344,9 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             siniestroData sis = new siniestroData();
             sis.guardarSiniestro(siniestro);
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Valor nulo: " + e);
+            JOptionPane.showMessageDialog(null, "Los valores no pueden ser nulos");
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Puntuacion o Coordenadas Vacias / No hay brigada disponible.");
         }
     }//GEN-LAST:event_jBguardarActionPerformed
 
@@ -407,7 +412,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             List<Cuartel> asd = tip.listarCuartel();
 
             if (jTcoordX.getText().isEmpty() || jTcoordY.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Debe ingresar las coordenadas primero para poder hacer el calculo.");
+                JOptionPane.showMessageDialog(null, "Debe ingresar las coordenadas primero para poder hacer el cálculo.");
             } else {
                 int corX = Integer.parseInt(jTcoordX.getText());
                 int corY = Integer.parseInt(jTcoordY.getText());
@@ -433,19 +438,41 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
                         cuartelMasCercano = i;
                     }
                 }
-                
-                if (cuartelMasCercano != -1) {
-                    
-                    jTcuartelDispo.setText(tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getNombreCuartel());
-                    int h = bri.buscarBrigadaEsp((String) jCtipo.getSelectedItem()).getCodBrigada();
-                    jTcodBriga.setText(String.valueOf(h));
-                    jLdistMetros.setText("Distancia: " + String.valueOf(distanciaMinima));
 
+                if (cuartelMasCercano != -1) {
+                    int op = tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getCodCuartel();
+                    String tipoSiniestro = (String) jCtipo.getSelectedItem();
+
+                    List<Brigada> abc = bri.listarBrigadas();
+                    boolean brigadaEncontrada = false;
+
+                    for (Brigada brigada : abc) {
+                        if (brigada.getCuartel().getCodCuartel() == op && brigada.getEspecialidad().equals(tipoSiniestro)) {
+                            jTcodBriga.setText(String.valueOf(brigada.getCodBrigada()));
+                            brigadaEncontrada = true;
+                            break;
+                        }
+                    }
+
+                    if (!brigadaEncontrada) {
+                        JOptionPane.showMessageDialog(null, "No hay brigada disponible en ese cuartel para el tipo de siniestro seleccionado.");
+                        jTcodBriga.setText("");
+                        jTcuartelDispo.setText("");
+                    }
+
+                    jTcuartelDispo.setText(tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getNombreCuartel());
+                    jLdistMetros.setText("Distancia: " + String.valueOf(distanciaMinima));
                 }
             }
 
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor, ingrese coordenadas válidas.");
+            jTcodBriga.setText("");
+            jTcuartelDispo.setText("");
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "No hay brigada disponible en ese cuartel.");
+            JOptionPane.showMessageDialog(null, "No hay brigadas disponibles en ese cuartel.");
+            jTcodBriga.setText("");
+            jTcuartelDispo.setText("");
         }
     }//GEN-LAST:event_jBaniadirCActionPerformed
 
