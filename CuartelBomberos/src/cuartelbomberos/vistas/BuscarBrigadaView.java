@@ -173,21 +173,34 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         tabla.addColumn("Correo");
         Tabla.setModel(tabla);
     }
-    private void cargarTabla(){
-        tabla.setRowCount(0);//limpiar
-        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-        BrigadaData bd=new BrigadaData();
-        List<Brigada> brigadas=bd.listarBrigadas();
-        Brigada brig=bd.buscarBrigadaEsp(especialidadSelec);
-        for (Brigada brigada:brigadas){
-            
-            //JOptionPane.showMessageDialog(null, brig);
-//            int id=brig.getCuartel().getCodCuartel();
-//            CuartelData cd=new CuartelData();
-//            Cuartel cuartel=cd.buscarCuartel(id);
-        
-            tabla.addRow(new Object[]{brig.getNombreBriga(),brig.getCuartel().getNombreCuartel(),
-            brig.getCuartel().getDireccion(),brig.getCuartel().getTelefono(),brig.getCuartel().getCorreo()});
-            }
+//    private void cargarTabla() {
+//        tabla.setRowCount(0); // Limpiar la tabla
+//        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+//        BrigadaData bd = new BrigadaData();
+//        List <Brigada> brig = bd.buscarBrigadasPorEspecialidad(especialidadSelec);
+//
+//        if (brig != null) {
+//            Cuartel cuartel = brig.getCuartel();
+//            tabla.addRow(new Object[]{
+//                brig.getNombreBriga(),
+//                cuartel.getNombreCuartel(),
+//                cuartel.getDireccion(),
+//                cuartel.getTelefono(),
+//                cuartel.getCorreo()
+//            });
+//        }
+//    }
+    
+    private void cargarTabla() {
+    tabla.setRowCount(0); // Limpiar la tabla
+    String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+    BrigadaData bd = new BrigadaData();
+    List<Brigada> brigadas = bd.buscarBrigadasPorEspecialidad(especialidadSelec);
+
+    for (Brigada brigada : brigadas) {
+        tabla.addRow(new Object[]{brigada.getNombreBriga(), brigada.getCuartel().getNombreCuartel(),
+            brigada.getCuartel().getDireccion(), brigada.getCuartel().getTelefono(), brigada.getCuartel().getCorreo()});
     }
+}
+
 }
