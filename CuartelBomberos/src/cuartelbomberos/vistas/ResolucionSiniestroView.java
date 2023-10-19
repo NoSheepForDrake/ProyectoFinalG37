@@ -2,10 +2,7 @@ package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.siniestroData;
 import cuartelbomberos.entidades.Siniestro;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;

@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class CuartelBomberos {
 
     public static void main(String[] args) {
-        
+        BrigadaData bri = new BrigadaData();
         //NO BORRAR ESTO POR FAVOR!!!!!
         CuartelData tip = new CuartelData();
         List<Cuartel> asd = tip.listarCuartel();
@@ -58,6 +58,22 @@ public class CuartelBomberos {
         
         System.out.println(tip.cuartelPorCoord(30, 42).getNombreCuartel());
         //NO BORRAR ESTO POR FAVOR!!!!
+        
+//        int op = tip.cuartelPorCoord(cx[cuartelMasCercano], cy[cuartelMasCercano]).getCodCuartel();
+//        //int ap = bri.buscarBrigadaCuartel(op).getCodBrigada();
+//        //int xp = bri.buscarBrigadaEsp((String) jCtipo.getSelectedItem()).getCodBrigada();
+//        List<Brigada> abc = bri.listarBrigadas();
+//        int[] codBri = new int[abc.size()];
+//        for (int i = 0; i < abc.size(); i++) {
+//            Brigada qwe = abc.get(i);
+//            codBri[i] = qwe.getCodBrigada();
+//        }
+//        
+//        for(int i = 0; i<codBri.length;i++){
+//            
+//        }
+        
+        
     }
     
 }
