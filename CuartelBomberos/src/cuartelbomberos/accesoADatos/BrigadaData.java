@@ -56,6 +56,7 @@ public class BrigadaData {
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
             ps.setInt(4, brigada.getCuartel().getCodCuartel());
+            ps.setInt(5, brigada.getCodBrigada());
 
             int exito = ps.executeUpdate();
 
