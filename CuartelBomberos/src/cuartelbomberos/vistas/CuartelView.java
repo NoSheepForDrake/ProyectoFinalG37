@@ -270,6 +270,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtTelefonoActionPerformed
 
     private void jcCuartelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCuartelesActionPerformed
+        try{
         //obtengo el cuartel seleccionado en el combo box
         String cuartelSelec = (String) jcCuarteles.getSelectedItem();
         CuartelData cua = new CuartelData();
@@ -290,6 +291,9 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtID.setText(String.valueOf(c.getCodCuartel()));
         limpiarJList();
         cargarJList();
+        }catch(NullPointerException e){
+            //JOptionPane.showMessageDialog(null,e);
+        }
 
     }//GEN-LAST:event_jcCuartelesActionPerformed
 
@@ -351,14 +355,17 @@ public class CuartelView extends javax.swing.JInternalFrame {
                 return;
             }
             Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
-
-            if (c.existeCuartel(dire)) {
+            boolean existe=c.existeCuartel(dire);
+            if (existe!=false) {
                 JOptionPane.showMessageDialog(null, "Existe un cuartel con la direccion ingresada");
             } else {
                 c.guardarCuartel(cuartel);
             }
+            cargarComboBox();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
+        }catch (NullPointerException e){
+            JOptionPane.showMessageDialog(null,e);
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 

@@ -5,18 +5,32 @@
  */
 package cuartelbomberos.vistas;
 
+import cuartelbomberos.accesoADatos.BrigadaData;
+import cuartelbomberos.accesoADatos.CuartelData;
+import cuartelbomberos.entidades.Brigada;
+import cuartelbomberos.entidades.Cuartel;
+import java.util.Arrays;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author PC
  */
 public class BuscarBrigadaView extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form BuscarBrigadaView
-     */
+    private DefaultTableModel tabla = new DefaultTableModel() {
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
+
     public BuscarBrigadaView() {
         initComponents();
         setTitle("Listar Brigadas");
+        cargarComboBox();
+        crearCabecera();
     }
 
     /**
@@ -30,16 +44,21 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbEspecialidad = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Buscar Brigada por especialidad");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Incendios", "Salvamento en derrumbes", "Rescate en montaña", "Rescate en accidente de tráfico", "Socorrer inundaciones", "Operativo de prevención" }));
+        jcbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "buscar" }));
+        jcbEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbEspecialidadActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -50,7 +69,7 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
                 "Brigada", "Cuartel", "Dirección", "Telefono", "Correo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabla);
 
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,7 +86,7 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
@@ -85,7 +104,7 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(70, 70, 70)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
@@ -112,13 +131,63 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         setVisible(false);  //Cerrar ventana
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jcbEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbEspecialidadActionPerformed
+       try{
+        String brigadaSelec = (String) jcbEspecialidad.getSelectedItem();
+        if ("buscar".equals(brigadaSelec)) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
+        }
+        cargarTabla();
+       }catch (NullPointerException e){
+           //JOptionPane.showMessageDialog(null,e);
+       }
+
+    }//GEN-LAST:event_jcbEspecialidadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tabla;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JComboBox<String> jcbEspecialidad;
     // End of variables declaration//GEN-END:variables
+    private void cargarComboBox() {
+
+        String tipos[] = {"Incendio", "Accidente", "Rescate", "Emergencias", "Derrumbes", "Materiales Peligrosos", "Otros..."};
+
+        List<String> taps = Arrays.asList(tipos);
+
+        for (String especialidad : taps) {
+            jcbEspecialidad.addItem(especialidad.toString());
+        }
+
+    }
+
+    private void crearCabecera() {
+        tabla.addColumn("Brigada");
+        tabla.addColumn("Cuartel");
+        tabla.addColumn("Direccion");
+        tabla.addColumn("Telefono");
+        tabla.addColumn("Correo");
+        Tabla.setModel(tabla);
+    }
+    private void cargarTabla(){
+        tabla.setRowCount(0);//limpiar
+        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+        BrigadaData bd=new BrigadaData();
+        List<Brigada> brigadas=bd.listarBrigadas();
+        Brigada brig=bd.buscarBrigadaEsp(especialidadSelec);
+        for (Brigada brigada:brigadas){
+            
+            //JOptionPane.showMessageDialog(null, brig);
+//            int id=brig.getCuartel().getCodCuartel();
+//            CuartelData cd=new CuartelData();
+//            Cuartel cuartel=cd.buscarCuartel(id);
+        
+            tabla.addRow(new Object[]{brig.getNombreBriga(),brig.getCuartel().getNombreCuartel(),
+            brig.getCuartel().getDireccion(),brig.getCuartel().getTelefono(),brig.getCuartel().getCorreo()});
+            }
+    }
 }

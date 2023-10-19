@@ -219,7 +219,7 @@ public class BrigadaData {
                 brigada.setCuartel(cuartel);
                 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe una brigada con ese código de identificación");
+                JOptionPane.showMessageDialog(null, "No existe una brigada asignada al cuartel");
                 ps.close();
             }
             

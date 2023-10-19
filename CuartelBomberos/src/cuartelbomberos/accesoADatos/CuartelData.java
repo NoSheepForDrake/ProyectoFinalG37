@@ -71,7 +71,7 @@ public class CuartelData {
             ps.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla cuartel"+e);
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla cuartel" + e);
         }
     }
 
@@ -226,7 +226,7 @@ public class CuartelData {
             String sql = "SELECT codCuartel FROM cuartel WHERE direccion=? AND (estado = 1 OR estado = 0)";
             ps = con.prepareStatement(sql);
             ps.setString(1, direccion);
-            rs=ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 boolean estado = rs.getBoolean("estado");
                 if (estado) {
@@ -236,17 +236,17 @@ public class CuartelData {
                 }
             }
             ps.close();
-
             if (inactivo) {
                 JOptionPane.showMessageDialog(null, "Exite un cuartel con la direccion ingresada con estado inactivo");
             }
+
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al verificar la dirección en la base de datos" + " ," + e);
+            //JOptionPane.showMessageDialog(null, "Error al verificar la dirección en la base de datos" + " ," + e);
         }
         return existe;
     }
-    
-    public Cuartel cuartelPorCoord(int x, int y){
+
+    public Cuartel cuartelPorCoord(int x, int y) {
         Cuartel cuartel = null;
         String sql = "SELECT codCuartel, nombreCuartel FROM cuartel WHERE coord_X = ? AND coord_Y = ?";
         PreparedStatement ps = null;
@@ -270,7 +270,6 @@ public class CuartelData {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla cuartel");
         }
         return cuartel;
-    
+
     }
 }
-
