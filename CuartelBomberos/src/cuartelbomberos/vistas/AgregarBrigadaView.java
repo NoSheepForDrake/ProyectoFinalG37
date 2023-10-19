@@ -112,10 +112,15 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Asignar Especialidad");
 
+        jtEspecialidad.setEditable(false);
+
         jLabel8.setText("Cuartel");
+
+        jtCuartel.setEditable(false);
 
         jLabel9.setText("Codigo Brigada");
 
+        jtID.setEditable(false);
         jtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtIDActionPerformed(evt);
@@ -271,11 +276,15 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             return;
         }
         Brigada briga = bd.buscarBrigadaXNombre(brigada);
+        if(briga!=null){
         jtBrigada.setText(briga.getNombreBriga());
         jtEspecialidad.setText(briga.getEspecialidad());
         jtCuartel.setText(briga.getCuartel().getNombreCuartel());
         jrbEstado.setSelected(briga.isLibre());
         jtID.setText(String.valueOf(briga.getCodBrigada()));
+        }else{
+            JOptionPane.showMessageDialog(null,"No existe una brigada con el nombre ingresado");
+        }
     }//GEN-LAST:event_buscarActionPerformed
 
     private void jtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDActionPerformed
@@ -295,6 +304,41 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         BrigadaData bd = new BrigadaData();
         String nombre = jtBrigada.getText();
         boolean est = jrbEstado.isSelected();
+        int id = Integer.parseInt(jtID.getText());
+        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+        if ("Especialidad".equals(especialidadSelec)) {
+                String especialidad=jtEspecialidad.getText();
+                
+            }else{
+            jtEspecialidad.setText(especialidadSelec);
+        }
+        String especialidad=jtEspecialidad.getText();
+        //JOptionPane.showMessageDialog(null,especialidad);
+        String cuartelSelec = (String) jcbCuartel.getSelectedItem();
+        
+        if ("Buscar cuartel".equals(cuartelSelec)) {
+                String cuartelSele=jtCuartel.getText();
+                
+            }else{
+           jtCuartel.setText(cuartelSelec);
+        }
+        
+        if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                return;
+            }
+            if (cuartelSelec != null) {
+                // Dividir el elemento seleccionado 
+                String[] partes = cuartelSelec.split(" - ");
+                if (partes.length > 0) {
+                    String nombrecuartel = partes[0].trim();
+                    CuartelData cd = new CuartelData();
+                    Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
+                    Brigada b = new Brigada( id,nombre, especialidad, est, cuartel);
+                    //JOptionPane.showMessageDialog(null, nombre + "," + especialidad + "," + cuartel);
+                    bd.editarBrigada(b);
+                }
+            }
 
     }//GEN-LAST:event_EditarActionPerformed
 
@@ -303,16 +347,21 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             BrigadaData bd = new BrigadaData();
             String nombre = jtBrigada.getText();
             boolean est = jrbEstado.isSelected();
+            
             String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-            if ("Buscar brigada".equals(especialidadSelec)) {
+            if ("Especialidad".equals(especialidadSelec)) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una brigada");
                 return;
             }
+            jtEspecialidad.setText(especialidadSelec);
+            
             String cuartelSelec = (String) jcbCuartel.getSelectedItem();
             if ("Buscar cuartel".equals(cuartelSelec)) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
                 return;
             }
+            jtCuartel.setText(cuartelSelec);
+
             if (nombre.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
                 return;
@@ -324,13 +373,13 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                     String nombrecuartel = partes[0].trim();
                     CuartelData cd = new CuartelData();
                     Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
-                    Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
+                    Brigada b = new Brigada( nombre, especialidadSelec, est, cuartel);
                     //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
                     bd.guardarBrigada(b);
                 }
             }
         } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, e);
+            //JOptionPane.showMessageDialog(null, e);
         }
 
 

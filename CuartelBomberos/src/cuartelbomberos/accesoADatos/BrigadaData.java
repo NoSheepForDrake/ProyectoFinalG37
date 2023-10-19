@@ -21,6 +21,7 @@ public class BrigadaData {
     }
 
     public void guardarBrigada(Brigada brigada) {
+        CuartelData cd= new CuartelData();
         String sql = "INSERT INTO brigada( nombreBriga, especialidad, libre, nroCuartel) "
                 + "VALUES (?,?,?,?)";
         try {
@@ -30,6 +31,8 @@ public class BrigadaData {
             ps.setString(2, brigada.getEspecialidad());
             ps.setBoolean(3, brigada.isLibre());
             ps.setInt(4, brigada.getCuartel().getCodCuartel());
+            //JOptionPane.showMessageDialog(null,brigada.getCuartel().getCodCuartel());
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
 
@@ -64,7 +67,7 @@ public class BrigadaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada");
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada"+ ex);
         }
     }
 

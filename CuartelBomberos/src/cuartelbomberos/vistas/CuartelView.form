@@ -316,6 +316,9 @@
         <Component class="javax.swing.JTextField" name="jtY">
         </Component>
         <Component class="javax.swing.JTextField" name="jtID">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

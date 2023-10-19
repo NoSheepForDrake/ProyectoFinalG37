@@ -227,6 +227,7 @@ public class CuartelData {
             ps = con.prepareStatement(sql);
             ps.setString(1, direccion);
             rs = ps.executeQuery();
+            JOptionPane.showMessageDialog(null,direccion);
             if (rs.next()) {
                 boolean estado = rs.getBoolean("estado");
                 if (estado) {

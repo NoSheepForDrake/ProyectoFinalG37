@@ -141,6 +141,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Codigo");
 
+        jtID.setEditable(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -356,6 +358,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
             Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
             boolean existe=c.existeCuartel(dire);
+            //JOptionPane.showMessageDialog(null,existe);
             if (existe!=false) {
                 JOptionPane.showMessageDialog(null, "Existe un cuartel con la direccion ingresada");
             } else {

@@ -82,21 +82,20 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(549, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(50, 50, 50))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jcbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(50, 50, 50))))
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,25 +172,24 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         tabla.addColumn("Correo");
         Tabla.setModel(tabla);
     }
-//    private void cargarTabla() {
-//        tabla.setRowCount(0); // Limpiar la tabla
+//    private void cargarTabla(){
+//        tabla.setRowCount(0);//limpiar
 //        String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-//        BrigadaData bd = new BrigadaData();
-//        List <Brigada> brig = bd.buscarBrigadasPorEspecialidad(especialidadSelec);
-//
-//        if (brig != null) {
-//            Cuartel cuartel = brig.getCuartel();
-//            tabla.addRow(new Object[]{
-//                brig.getNombreBriga(),
-//                cuartel.getNombreCuartel(),
-//                cuartel.getDireccion(),
-//                cuartel.getTelefono(),
-//                cuartel.getCorreo()
-//            });
-//        }
+//        BrigadaData bd=new BrigadaData();
+//        List<Brigada> brigadas=bd.listarBrigadas();
+//        Brigada brig=bd.buscarBrigadaEsp(especialidadSelec);
+//        for (Brigada brigada:brigadas){
+//            
+//            JOptionPane.showMessageDialog(null, brig);
+//            int id=brig.getCuartel().getCodCuartel();
+//            CuartelData cd=new CuartelData();
+//            Cuartel cuartel=cd.buscarCuartel(id);
+//        
+//            tabla.addRow(new Object[]{brig.getNombreBriga(),brig.getCuartel().getNombreCuartel(),
+//            brig.getCuartel().getDireccion(),brig.getCuartel().getTelefono(),brig.getCuartel().getCorreo()});
+//            }
 //    }
-    
-    private void cargarTabla() {
+     private void cargarTabla() {
     tabla.setRowCount(0); // Limpiar la tabla
     String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
     BrigadaData bd = new BrigadaData();
@@ -201,6 +199,5 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         tabla.addRow(new Object[]{brigada.getNombreBriga(), brigada.getCuartel().getNombreCuartel(),
             brigada.getCuartel().getDireccion(), brigada.getCuartel().getTelefono(), brigada.getCuartel().getCorreo()});
     }
-}
-
+     }
 }
