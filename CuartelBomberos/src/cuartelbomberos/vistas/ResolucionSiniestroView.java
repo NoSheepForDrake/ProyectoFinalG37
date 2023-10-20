@@ -45,6 +45,9 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jTablaSiniestro.setBackground(new java.awt.Color(0, 0, 0));
+        jTablaSiniestro.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
+        jTablaSiniestro.setForeground(new java.awt.Color(255, 255, 255));
         jTablaSiniestro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null, null},
@@ -60,7 +63,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "Title 10", "Title 11"
+                "Codigo", "Tipo", "Fecha Ini", "X", "Y", "Detalle", "Fecha Fin", "Puntuación", "Cod. Bri.", "Resuelto", "Activo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -71,13 +74,29 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTablaSiniestro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTablaSiniestro.setGridColor(new java.awt.Color(255, 255, 153));
+        jTablaSiniestro.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        jTablaSiniestro.setSelectionForeground(new java.awt.Color(255, 255, 51));
+        jTablaSiniestro.setShowGrid(false);
         jTablaSiniestro.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTablaSiniestro);
+        if (jTablaSiniestro.getColumnModel().getColumnCount() > 0) {
+            jTablaSiniestro.getColumnModel().getColumn(0).setMinWidth(0);
+            jTablaSiniestro.getColumnModel().getColumn(0).setPreferredWidth(70);
+            jTablaSiniestro.getColumnModel().getColumn(0).setMaxWidth(70);
+        }
 
+        jLabel1.setFont(new java.awt.Font("FreeMono", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Registro de Siniestros");
 
+        jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 255));
         jLabel2.setText("Filtrar por:");
 
+        jComboBox1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tipo..." }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +104,8 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
+        jCfecha.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jCfecha.setForeground(new java.awt.Color(102, 102, 255));
         jCfecha.setText("Fecha");
         jCfecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,6 +113,8 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,6 +122,8 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Limpiar Tabla");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +131,8 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
+        jBfilterF.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jBfilterF.setForeground(new java.awt.Color(0, 0, 0));
         jBfilterF.setText("Filtrar Fecha");
         jBfilterF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,29 +145,30 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(516, 516, 516)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(47, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(24, 24, 24)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jCfecha)
-                                .addComponent(jDfechaIni, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                .addComponent(jDfechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jBfilterF)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton1)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton2))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(24, 24, 24)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jCfecha)
+                                        .addComponent(jDfechaIni, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                        .addComponent(jDfechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jBfilterF)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jButton2))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(47, 47, 47))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(455, 455, 455))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,14 +193,14 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
                         .addComponent(jButton1)
                         .addComponent(jButton2)
                         .addComponent(jBfilterF)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCfechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCfechaActionPerformed
-        
+        //Este codigo permite que la ventana se inicie con las fechas deshabilitadas y se habilitan al seleccionar el checkbox.
         if (jCfecha.isSelected()){
             jDfechaFin.setEnabled(true);
             jDfechaIni.setEnabled(true);   
@@ -189,17 +217,21 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
+        //Seleccion del tipo de siniestro /-/ esto permite filtrar la lista por tipo de siniestro.
         try {
             String a = (String) jComboBox1.getSelectedItem();
-            List<Siniestro> listaTsini = si.listarSiniXtipo(a);
-            llenarTabla(listaTsini);
-        } catch (NullPointerException e) {
+            if (a.equals("Tipo...")) {
+                llenarTabla2();
+            } else {
+                List<Siniestro> listaTsini = si.listarSiniXtipo(a);
+                llenarTabla(listaTsini);}
+        }catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Error: " + e);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jBfilterFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfilterFActionPerformed
+        //Boton filtrar por fecha /-/ Luego de seleccionarse la casilla de fecha, el accionar este boton trae la lista de siniestros entre F a y F b.
         if (jCfecha.isSelected()) {
             java.util.Date utilDate = jDfechaIni.getDate();
             java.sql.Date sqlDateInicio = new java.sql.Date(utilDate.getTime());
