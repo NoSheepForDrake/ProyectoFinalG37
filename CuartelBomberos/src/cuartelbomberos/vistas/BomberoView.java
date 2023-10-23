@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -21,11 +22,12 @@ public class BomberoView extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Bombero");
         cargarComboBox();
+        cargarComboGS();
 
     }
 
     @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
@@ -43,8 +45,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
         jblimpiar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jtgSang = new javax.swing.JTextField();
         jdcfechaNac = new com.toedter.calendar.JDateChooser();
+        jcbgSang = new javax.swing.JComboBox<>();
 
         jLabel1.setText("DNI: ");
 
@@ -117,6 +119,13 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Grupo Sanguineo");
 
+        jcbgSang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione tipo" }));
+        jcbgSang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbgSangActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +170,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jcbgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -192,8 +201,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jtgSang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                    .addComponent(jcbgSang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbsalir)
                     .addComponent(jbeliminar)
@@ -202,17 +211,17 @@ public class BomberoView extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
-    private void jcbbrigadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbbrigadaActionPerformed
+    private void jcbbrigadaActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here               
-    }//GEN-LAST:event_jcbbrigadaActionPerformed
+    }                                          
 
-    private void jtdniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtdniActionPerformed
+    private void jtdniActionPerformed(java.awt.event.ActionEvent evt) {                                      
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtdniActionPerformed
+    }                                     
 
-    private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbbuscarActionPerformed
+    private void jbbuscarActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
         String dni = jtdni.getText();
         BomberoData bd = new BomberoData();
@@ -229,7 +238,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
             if (bombero != null) {
                 jtnomyapell.setText(bombero.getNombreApellido());
                 jtcelular.setText(bombero.getCelular());
-                jtgSang.setText(bombero.getgSanguineo());
+                jcbgSang.setSelectedItem(bombero.getgSanguineo());
                 if (bombero.getFechaNac() != null) {
                     jdcfechaNac.setDate(Date.valueOf(bombero.getFechaNac()));
                 } else {
@@ -246,19 +255,19 @@ public class BomberoView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
 
         }
-    }//GEN-LAST:event_jbbuscarActionPerformed
+    }                                        
 
-    private void jblimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jblimpiarActionPerformed
+    private void jblimpiarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         limpiarPlanilla();
-    }//GEN-LAST:event_jblimpiarActionPerformed
+    }                                         
 
-    private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbsalirActionPerformed
+    private void jbsalirActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
         setVisible(false);  //Cerrar ventana
-    }//GEN-LAST:event_jbsalirActionPerformed
+    }                                       
 
-    private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbguardarActionPerformed
+    private void jbguardarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:
         // Obtener los valores de los campos
         String dni = jtdni.getText();
@@ -266,11 +275,11 @@ public class BomberoView extends javax.swing.JInternalFrame {
         String celular = jtcelular.getText();
         // Obtener la fecha de nacimiento en formato Date
         java.util.Date utilDate = jdcfechaNac.getDate();
-        String gSanguineo = jtgSang.getText();
+        String gSanguineo = String.valueOf(jcbgSang.getSelectedItem());
 
          // Verificar que los campos obligatorios no estén vacíos
                 if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
-                        || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
+                        || gSanguineo.equals("Seleccione tipo") || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
                         || jdcfechaNac.getDate() == null) {
                     JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
                     return;
@@ -341,9 +350,9 @@ public class BomberoView extends javax.swing.JInternalFrame {
                 }
             }
         }
-    }//GEN-LAST:event_jbguardarActionPerformed
+    }                                         
 
-    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbeliminarActionPerformed
+    private void jbeliminarActionPerformed(java.awt.event.ActionEvent evt) {                                           
         // TODO add your handling code here:
         // Obtener los valores de los campos
         String dni = jtdni.getText();
@@ -369,16 +378,16 @@ public class BomberoView extends javax.swing.JInternalFrame {
         }
 
 
-    }//GEN-LAST:event_jbeliminarActionPerformed
+    }                                          
 
-    private void jtdniKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtdniKeyTyped
+    private void jtdniKeyTyped(java.awt.event.KeyEvent evt) {                               
         // TODO add your handling code here:
         if (jtdni.getText().trim().length() == 8) {
             evt.consume();// si ya se coloco 8 numeros no me deja escribir mas 
         }
-    }//GEN-LAST:event_jtdniKeyTyped
+    }                              
 
-    private void jtnomyapellKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtnomyapellKeyTyped
+    private void jtnomyapellKeyTyped(java.awt.event.KeyEvent evt) {                                     
         // TODO add your handling code here:
         int key = evt.getKeyChar(); // Obtén la tecla que se presionó
         //65 al 90 = letras en minuscula
@@ -391,10 +400,14 @@ public class BomberoView extends javax.swing.JInternalFrame {
             // La tecla presionada no es una letra o caracter especial permitido, por lo que no se escribirá en el campo de entrada
             evt.consume();
         }
-    }//GEN-LAST:event_jtnomyapellKeyTyped
+    }                                    
+
+    private void jcbgSangActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+    }                                        
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+    // Variables declaration - do not modify                     
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -407,18 +420,18 @@ public class BomberoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jblimpiar;
     private javax.swing.JButton jbsalir;
     private javax.swing.JComboBox<String> jcbbrigada;
+    private javax.swing.JComboBox<String> jcbgSang;
     private com.toedter.calendar.JDateChooser jdcfechaNac;
     private javax.swing.JTextField jtcelular;
     private javax.swing.JTextField jtdni;
-    private javax.swing.JTextField jtgSang;
     private javax.swing.JTextField jtnomyapell;
-    // End of variables declaration//GEN-END:variables
+    // End of variables declaration                   
 
     public void limpiarPlanilla() {
         jtdni.setText(""); // Limpia los campos
         jtnomyapell.setText("");
         jtcelular.setText("");
-        jtgSang.setText("");
+        jcbgSang.setSelectedIndex(0);
         jdcfechaNac.setDate(null);
         jcbbrigada.setSelectedIndex(0);
     }
@@ -439,4 +452,13 @@ public class BomberoView extends javax.swing.JInternalFrame {
         return cadena.matches("[0-9]+");
     }
 
+    public void cargarComboGS(){
+     String gSang[] = {"A+", "A-", "B+", "B-", "0+", "0-", "AB+", "AB-"};
+
+        List<String> taps = Arrays.asList(gSang);
+
+        for (String tipo : taps) {
+            jcbgSang.addItem(tipo.toString());
+        }
+    }
 }
