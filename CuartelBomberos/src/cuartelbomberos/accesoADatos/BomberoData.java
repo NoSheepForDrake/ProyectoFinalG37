@@ -44,7 +44,7 @@ public class BomberoData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla bombero2 " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla bombero " + ex.getMessage());
         }
     }
 
@@ -106,7 +106,8 @@ public class BomberoData {
         BrigadaData bd = new BrigadaData();
         Bombero bomber = null;
 
-        String sql = "SELECT idBombero, dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo, estado FROM bombero WHERE dni = ? and estado = 1";
+        String sql = "SELECT idBombero, dni, nombreApellido, fechaNac, celular, codBrigada, gSanguineo, estado "
+                + "FROM bombero WHERE dni = ? and estado = 1";
         PreparedStatement ps = null;
         //JOptionPane.showMessageDialog(null, dni);
 
@@ -134,7 +135,7 @@ public class BomberoData {
                 bomber.setBrigada(brigada);
 
             } else {
-               // JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
+               JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
                 ps.close();
             }
 
