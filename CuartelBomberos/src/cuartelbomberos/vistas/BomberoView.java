@@ -249,7 +249,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
                 jcbbrigada.setSelectedItem(brigadaDelBombero.getNombreBriga() + " - " + brigadaDelBombero.getEspecialidad());
 
             } else {
-                JOptionPane.showMessageDialog(null, "El Bombero no se encuentra en la Base de Datos.");
+               // JOptionPane.showMessageDialog(null, "El Bombero no se encuentra en la Base de Datos.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
@@ -356,6 +356,10 @@ public class BomberoView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         // Obtener los valores de los campos
         String dni = jtdni.getText();
+        if(dni.isEmpty()){
+        JOptionPane.showMessageDialog(null, "El campo documento esta vacio, debe estar completo");
+        return;
+        }
 
         //creamos una instancia de bomberodata
         BomberoData bd = new BomberoData();
@@ -364,18 +368,21 @@ public class BomberoView extends javax.swing.JInternalFrame {
         Bombero bom = bd.buscarBombero(dni);
 //        JOptionPane.showMessageDialog(null, "DNI del bombero: " + bom.getDni());
 //        JOptionPane.showMessageDialog(null, "Estado del bombero: " + bom.isEstado());
+        
+        // Verificar si el bombero es nulo
+        if (bom == null) {
+        //JOptionPane.showMessageDialog(null, "El bombero con DNI " + dni + " no existe en la base de datos.");
+        return; 
+    }
         //verificamos si el estado del bombero es true o false
-        if (bom.isEstado() == false) {
-            JOptionPane.showMessageDialog(null, "El bombero no se puede eliminar, no hay registros del mismo");
-        } else {
+        if (bom.isEstado() == true) {
             int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea borrar el bombero?", "Confirmación", JOptionPane.YES_NO_OPTION);
 
             // Si el usuario elige "Sí" (YES_OPTION), entonces borra el bombero
             if (confirmacion == JOptionPane.YES_OPTION) {
                 bd.eliminarBombero(bom.getDni());
             }
-
-        }
+        } 
 
 
     }                                          
