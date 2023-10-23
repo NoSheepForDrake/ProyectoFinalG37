@@ -92,7 +92,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
         jLabel1.setText("Registro de Siniestros");
 
         jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 51, 204));
         jLabel2.setText("Filtrar por:");
 
         jComboBox1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
@@ -105,7 +105,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
         });
 
         jCfecha.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jCfecha.setForeground(new java.awt.Color(102, 102, 255));
+        jCfecha.setForeground(new java.awt.Color(0, 51, 204));
         jCfecha.setText("Fecha");
         jCfecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
