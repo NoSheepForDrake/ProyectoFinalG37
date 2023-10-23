@@ -2,16 +2,18 @@ package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.BrigadaData;
 import cuartelbomberos.accesoADatos.CuartelData;
+import cuartelbomberos.entidades.Brigada;
 import cuartelbomberos.entidades.Cuartel;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 public class CuartelView extends javax.swing.JInternalFrame {
 
-    ArrayList array = new ArrayList();
+//    ArrayList array = new ArrayList();
     DefaultListModel modelo = new DefaultListModel();
 
     public CuartelView() {
@@ -272,28 +274,28 @@ public class CuartelView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtTelefonoActionPerformed
 
     private void jcCuartelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcCuartelesActionPerformed
-        try{
-        //obtengo el cuartel seleccionado en el combo box
-        String cuartelSelec = (String) jcCuarteles.getSelectedItem();
-        CuartelData cua = new CuartelData();
-        //me aseguro que se seleccione un cuetel
-        if ("Buscar cuartel".equals(cuartelSelec)) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
-            return;
-        }
-        //obtengo los datos de direccion, tel y correo de a cuerdo con el nombre del cuartel seleccionado
-        Cuartel c = cua.buscarCuartelNombre(cuartelSelec);
-        jtDireccion.setText(c.getDireccion());
-        jtTelefono.setText(c.getTelefono());
-        jtCorreo.setText(c.getCorreo());
-        jtNombre.setText(cuartelSelec);
-        jtX.setText(String.valueOf(c.getCoord_X()));
-        jtY.setText(String.valueOf(c.getCoord_Y()));
-        jrbEstado.setSelected(c.isEstado());
-        jtID.setText(String.valueOf(c.getCodCuartel()));
-        limpiarJList();
-        cargarJList();
-        }catch(NullPointerException e){
+        try {
+            //obtengo el cuartel seleccionado en el combo box
+            String cuartelSelec = (String) jcCuarteles.getSelectedItem();
+            CuartelData cua = new CuartelData();
+            //me aseguro que se seleccione un cuetel
+            if ("Buscar cuartel".equals(cuartelSelec)) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
+                return;
+            }
+            //obtengo los datos de direccion, tel y correo de a cuerdo con el nombre del cuartel seleccionado
+            Cuartel c = cua.buscarCuartelNombre(cuartelSelec);
+            jtDireccion.setText(c.getDireccion());
+            jtTelefono.setText(c.getTelefono());
+            jtCorreo.setText(c.getCorreo());
+            jtNombre.setText(cuartelSelec);
+            jtX.setText(String.valueOf(c.getCoord_X()));
+            jtY.setText(String.valueOf(c.getCoord_Y()));
+            jrbEstado.setSelected(c.isEstado());
+            jtID.setText(String.valueOf(c.getCodCuartel()));
+            borrarJList();
+            cargarJList();
+        } catch (NullPointerException e) {
             //JOptionPane.showMessageDialog(null,e);
         }
 
@@ -333,7 +335,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtY.setText("");
         jtID.setText("");
         jrbEstado.setSelected(false);
-        limpiarJList();
+        borrarJList();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
@@ -357,9 +359,9 @@ public class CuartelView extends javax.swing.JInternalFrame {
                 return;
             }
             Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
-            boolean existe=c.existeCuartel(dire);
+            boolean existe = c.existeCuartel(dire);
             //JOptionPane.showMessageDialog(null,existe);
-            if (existe!=false) {
+            if (existe) {
                 JOptionPane.showMessageDialog(null, "Existe un cuartel con la direccion ingresada");
             } else {
                 c.guardarCuartel(cuartel);
@@ -367,8 +369,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
             cargarComboBox();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
-        }catch (NullPointerException e){
-            JOptionPane.showMessageDialog(null,e);
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, e);
         }
     }//GEN-LAST:event_jbNuevoActionPerformed
 
@@ -441,20 +443,20 @@ public void cargarComboBox() {
         }
     }
 
-    public DefaultListModel cargarJList() {
-        DefaultListModel modelo = (DefaultListModel) jlBrigadas.getModel();
+    public void cargarJList() {
         BrigadaData bd = new BrigadaData();
         int id = Integer.parseInt(jtID.getText());
-        String b = bd.buscarBrigadaCuartel(id).getNombreBriga();
-        //JOptionPane.showMessageDialog(null, b);
-        modelo.addElement(b);
-        return modelo;
-    }
-
-    public DefaultListModel limpiarJList() {
-        DefaultListModel modelo = new DefaultListModel();
+        List<Brigada> brigadas = bd.buscarBrigadaXCuartel(id);
         jlBrigadas.setModel(modelo);
-        return modelo;
+        for (int i = 0; i < brigadas.size(); i++) {
+            modelo.addElement(brigadas.get(i).getNombreBriga() + " - " + brigadas.get(i).getEspecialidad());
+        }
+    }
+    public void borrarJList() {
+        jlBrigadas.setModel(modelo);
+        for (int i = 0; i < 50; i++) {
+            modelo.clear();
+        }
     }
 
 }

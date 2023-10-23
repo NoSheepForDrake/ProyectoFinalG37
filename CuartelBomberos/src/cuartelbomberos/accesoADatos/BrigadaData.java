@@ -294,4 +294,36 @@ public class BrigadaData {
         }
         return brigadas;
     }
+    public List <Brigada> buscarBrigadaXCuartel(int nroCuartel) {
+        CuartelData cd = new CuartelData();
+        List<Brigada> brigadas = new ArrayList<>();
+        String sql = "SELECT nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE nroCuartel=?";
+        PreparedStatement ps = null;
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, nroCuartel);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Brigada brigada = new Brigada();
+
+                
+                brigada.setNombreBriga(rs.getString("nombreBriga"));
+                brigada.setEspecialidad(rs.getString("especialidad"));
+                brigada.setLibre(true);
+                
+                int codigoCuartel = rs.getInt("nroCuartel"); // Obtener el código del cuartel
+                Cuartel cuartel = cd.buscarCuartel(codigoCuartel); // Buscar el cuartel por su código
+                brigada.setCuartel(cuartel);
+                brigadas.add(brigada);
+                
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+        }
+        return brigadas;
+    }
 }

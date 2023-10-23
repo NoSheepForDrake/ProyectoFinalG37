@@ -330,7 +330,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             String cuartelSele = jtCuartel.getText();
             CuartelData cd = new CuartelData();
             Cuartel cuartel = cd.buscarCuartelNombre(cuartelSele);
-            JOptionPane.showMessageDialog(null,cuartel.getCodCuartel());
+            //JOptionPane.showMessageDialog(null,cuartel.getCodCuartel());
             Brigada b = new Brigada(id, nombre, especialidad, est, cuartel);
             bd.editarBrigada(b);
                  

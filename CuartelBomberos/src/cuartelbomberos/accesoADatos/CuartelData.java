@@ -218,33 +218,29 @@ public class CuartelData {
     }
 
     public boolean existeCuartel(String direccion) {
-        boolean existe = false;
-        boolean inactivo = false;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            String sql = "SELECT codCuartel FROM cuartel WHERE direccion=? AND (estado = 1 OR estado = 0)";
+            String sql = "SELECT * FROM cuartel WHERE direccion=?";
             ps = con.prepareStatement(sql);
             ps.setString(1, direccion);
             rs = ps.executeQuery();
-            JOptionPane.showMessageDialog(null,direccion);
+//            JOptionPane.showMessageDialog(null,direccion);
             if (rs.next()) {
-                boolean estado = rs.getBoolean("estado");
-                if (estado) {
-                    existe = true;
-                } else {
-                    inactivo = true;
-                }
-            }
-            ps.close();
-            if (inactivo) {
-                JOptionPane.showMessageDialog(null, "Exite un cuartel con la direccion ingresada con estado inactivo");
+                ps.close();
+                rs.close();
+                return true;
+            } else {
+                ps.close();
+                rs.close();
+                return false;
             }
 
         } catch (SQLException e) {
-            //JOptionPane.showMessageDialog(null, "Error al verificar la dirección en la base de datos" + " ," + e);
+            JOptionPane.showMessageDialog(null, "Error al verificar la dirección en la base de datos" + " ," + e);
+            return false;
         }
-        return existe;
+
     }
 
     public Cuartel cuartelPorCoord(int x, int y) {
