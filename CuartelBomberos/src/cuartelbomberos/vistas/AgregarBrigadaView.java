@@ -336,6 +336,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             jtID.setText(String.valueOf(briga.getCodBrigada()));
         } else {
             JOptionPane.showMessageDialog(null, "No existe una brigada con el nombre ingresado");
+            limpiar();
         }
     }//GEN-LAST:event_buscarActionPerformed
 
@@ -344,14 +345,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtIDActionPerformed
 
     private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
-        jtNombre.setText("");
-        jtBrigada.setText("");
-        jtCuartel.setText("");
-        jtEspecialidad.setText("");
-        jcbCuartel.setSelectedIndex(0);
-        jcbEspecialidad.setSelectedIndex(0);
-        jrbEstado.setSelected(false);
-        jtID.setText("");
+        limpiar();
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditarActionPerformed
@@ -408,6 +402,10 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             BrigadaData bd = new BrigadaData();
             String nombre = jtBrigada.getText();
             boolean est = jrbEstado.isSelected();
+            String existe=bd.buscarBrigadaXNombre(nombre).getNombreBriga();
+            if(existe!=null){
+                JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
+            }else{
 
             String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
             if ("Especialidad".equals(especialidadSelec)) {
@@ -438,7 +436,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                     //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
                     bd.guardarBrigada(b);
                 }
-            }
+            }}
         } catch (NullPointerException e) {
             //JOptionPane.showMessageDialog(null, e);
         }
@@ -496,5 +494,15 @@ private void cargarComboBox() {
         for (Cuartel cuartel : listaCuartel) {
             jcbCuartel.addItem(cuartel.getNombreCuartel());
         }
+    }
+    public void limpiar(){
+        jtNombre.setText("");
+        jtBrigada.setText("");
+        jtCuartel.setText("");
+        jtEspecialidad.setText("");
+        jcbCuartel.setSelectedIndex(0);
+        jcbEspecialidad.setSelectedIndex(0);
+        jrbEstado.setSelected(false);
+        jtID.setText("");
     }
 }

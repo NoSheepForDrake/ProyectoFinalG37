@@ -88,7 +88,7 @@ public class menuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("Editar o Agregar  Brigada");
+        jMenuItem1.setText("Formulario Brigada");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
