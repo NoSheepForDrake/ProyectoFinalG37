@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
@@ -25,7 +26,6 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         setTitle("Siniestro");
         cargarComboBox();
     }
-
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -68,11 +68,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         setTitle("Siniestro");
 
         jLabel1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Código:");
 
         jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Tipo:");
 
         jTcod.setBackground(new java.awt.Color(0, 0, 0));
@@ -81,7 +81,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcod.setToolTipText("Solo ingresar número para buscar.");
 
         jLabel3.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Detalle:");
 
         jTAdetalle.setBackground(new java.awt.Color(0, 0, 0));
@@ -93,11 +93,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTAdetalle);
 
         jLabel4.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Ubicacion:");
 
         jLabel5.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
         jLabel5.setText("X");
 
         jTcoordX.setBackground(new java.awt.Color(0, 0, 0));
@@ -106,7 +106,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcoordX.setToolTipText("Coordenada X");
 
         jLabel6.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 51));
         jLabel6.setText("Y");
 
         jTcoordY.setBackground(new java.awt.Color(0, 0, 0));
@@ -115,19 +115,21 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcoordY.setToolTipText("Coordenada Y");
 
         jLabel7.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Fecha Inicio:");
 
         jLabel8.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Fecha Term:");
 
+        jDinicio.setForeground(new java.awt.Color(255, 255, 255));
         jDinicio.setToolTipText("Seleccione la fecha de comienzo del siniestro.");
 
+        jDfinalizo.setForeground(new java.awt.Color(255, 255, 255));
         jDfinalizo.setToolTipText("Seleccione la fecha de finalizacion del siniestro");
 
         jLabel9.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Puntuacion:");
 
         jTpuntuacion.setBackground(new java.awt.Color(0, 0, 0));
@@ -141,11 +143,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         });
 
         jLabel10.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Resuelto?:");
 
         jRsiOno.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jRsiOno.setForeground(new java.awt.Color(0, 51, 204));
+        jRsiOno.setForeground(new java.awt.Color(255, 255, 255));
         jRsiOno.setText("Si/No");
         jRsiOno.setToolTipText("Marque para Si, desmarque para No.");
         jRsiOno.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +166,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jBguardar.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jBguardar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jBguardar.setForeground(new java.awt.Color(0, 0, 0));
         jBguardar.setText("Guardar");
         jBguardar.addActionListener(new java.awt.event.ActionListener() {
@@ -173,7 +175,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jBmodificar.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jBmodificar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jBmodificar.setForeground(new java.awt.Color(0, 0, 0));
         jBmodificar.setText("Modificar");
         jBmodificar.addActionListener(new java.awt.event.ActionListener() {
@@ -182,7 +184,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jBaniadirC.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
+        jBaniadirC.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jBaniadirC.setForeground(new java.awt.Color(0, 0, 0));
         jBaniadirC.setText("Añadir cuartel");
         jBaniadirC.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +194,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         });
 
         jLabel11.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Cuartel disponible:");
 
         jTcuartelDispo.setEditable(false);
@@ -203,7 +205,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcuartelDispo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
         jLabel12.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("codBrigada:");
 
         jTcodBriga.setEditable(false);
@@ -213,7 +215,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcodBriga.setToolTipText("Brigada a cargo de ejecucion bajo orden del cuartel que se muesta arriba.");
         jTcodBriga.setDisabledTextColor(new java.awt.Color(0, 0, 0));
 
-        jBbuscar.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
+        jBbuscar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jBbuscar.setForeground(new java.awt.Color(0, 0, 0));
         jBbuscar.setText("Buscar");
         jBbuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -222,7 +224,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             }
         });
 
-        jBlimpiarCampos.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
+        jBlimpiarCampos.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jBlimpiarCampos.setForeground(new java.awt.Color(0, 0, 0));
         jBlimpiarCampos.setText("Limpiar");
         jBlimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
@@ -232,7 +234,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         });
 
         jLdistMetros.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
-        jLdistMetros.setForeground(new java.awt.Color(0, 0, 0));
+        jLdistMetros.setForeground(new java.awt.Color(255, 255, 255));
         jLdistMetros.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jLdistMetrosPropertyChange(evt);
@@ -240,7 +242,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         });
 
         jLnumerodi.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
-        jLnumerodi.setForeground(new java.awt.Color(0, 0, 0));
+        jLnumerodi.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -577,7 +579,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
     private void jBlimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarCamposActionPerformed
         // Boton limpiar /-/ Hace un set en blanco en todos los campos de texto.
-        
+        Calendar a = Calendar.getInstance(Locale.getDefault());
         jLdistMetros.setText("");
         jRsiOno.setSelected(false);
         jTAdetalle.setText("");
@@ -587,6 +589,8 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcoordY.setText("");
         jTcuartelDispo.setText("");
         jTpuntuacion.setText("");
+        jDfinalizo.setCalendar(a);
+        jDinicio.setCalendar(a);
         jCtipo.setSelectedIndex(0);
         
     }//GEN-LAST:event_jBlimpiarCamposActionPerformed

@@ -301,6 +301,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         jtBrigada.setText("");
         jtCuartel.setText("");
         jtEspecialidad.setText("");
+        jcbCuartel.setSelectedIndex(0);
+        jcbEspecialidad.setSelectedIndex(0);
         jrbEstado.setSelected(false);
         jtID.setText("");
     }//GEN-LAST:event_LimpiarActionPerformed
