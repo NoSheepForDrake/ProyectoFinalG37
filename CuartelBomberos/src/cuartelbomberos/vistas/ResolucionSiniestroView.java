@@ -88,11 +88,11 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
         }
 
         jLabel1.setFont(new java.awt.Font("FreeMono", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Registro de Siniestros");
 
         jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 51, 204));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Filtrar por:");
 
         jComboBox1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
@@ -105,7 +105,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
         });
 
         jCfecha.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
-        jCfecha.setForeground(new java.awt.Color(0, 51, 204));
+        jCfecha.setForeground(new java.awt.Color(255, 255, 255));
         jCfecha.setText("Fecha");
         jCfecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +113,11 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jDfechaIni.setForeground(new java.awt.Color(255, 255, 255));
+
+        jDfechaFin.setForeground(new java.awt.Color(255, 255, 255));
+
+        jButton1.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Eliminar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +126,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jButton2.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Limpiar Tabla");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +135,7 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
             }
         });
 
-        jBfilterF.setFont(new java.awt.Font("FreeMono", 0, 12)); // NOI18N
+        jBfilterF.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jBfilterF.setForeground(new java.awt.Color(0, 0, 0));
         jBfilterF.setText("Filtrar Fecha");
         jBfilterF.addActionListener(new java.awt.event.ActionListener() {
