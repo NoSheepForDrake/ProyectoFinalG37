@@ -133,7 +133,7 @@ public class menuPrincipal extends javax.swing.JFrame {
 
         jMenu4.setText("Siniestros");
 
-        jMenuItem5.setText("Siniestro activo");
+        jMenuItem5.setText("Registro de siniestro");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
@@ -141,7 +141,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem5);
 
-        jMenuItem6.setText("Resolucion del siniestro");
+        jMenuItem6.setText("Lista de siniestros");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
