@@ -215,6 +215,7 @@
         <Component class="javax.swing.JRadioButton" name="jrbEstado">
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jrbEstadoStateChanged"/>
+            <EventHandler event="vetoableChange" listener="java.beans.VetoableChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jrbEstadoVetoableChange"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">

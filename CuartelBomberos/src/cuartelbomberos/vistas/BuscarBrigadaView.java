@@ -12,7 +12,9 @@ import cuartelbomberos.entidades.Cuartel;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -31,6 +33,7 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         setTitle("Listar Brigadas");
         cargarComboBox();
         crearCabecera();
+        
     }
 
     /**
@@ -200,4 +203,5 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
             brigada.getCuartel().getDireccion(), brigada.getCuartel().getTelefono(), brigada.getCuartel().getCorreo()});
     }
      }
+     
 }

@@ -68,6 +68,11 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                 jrbEstadoStateChanged(evt);
             }
         });
+        jrbEstado.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jrbEstadoVetoableChange(evt);
+            }
+        });
 
         jLabel5.setText("Buscar por Nombre");
 
@@ -326,15 +331,15 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
             return;
         }
-        if("Buscar cuartel".equals(cuartelSelec)) {
+        if ("Buscar cuartel".equals(cuartelSelec)) {
             String cuartelSele = jtCuartel.getText();
             CuartelData cd = new CuartelData();
             Cuartel cuartel = cd.buscarCuartelNombre(cuartelSele);
             //JOptionPane.showMessageDialog(null,cuartel.getCodCuartel());
             Brigada b = new Brigada(id, nombre, especialidad, est, cuartel);
             bd.editarBrigada(b);
-                 
-        } else if  (cuartelSelec != null) {
+
+        } else if (cuartelSelec != null) {
             // Dividir el elemento seleccionado 
             String[] partes = cuartelSelec.split(" - ");
             if (partes.length > 0) {
@@ -357,7 +362,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
 
             String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
             if ("Especialidad".equals(especialidadSelec)) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una brigada");
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
                 return;
             }
             jtEspecialidad.setText(especialidadSelec);
@@ -391,15 +396,11 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
 
 
     }//GEN-LAST:event_GuardarActionPerformed
-//private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {                                       
-    //        if (jrbEstado.isSelected()) {
-    //            jtEstado.setForeground(Color.BLUE);
-    //            jtEstado.setText("Activo");
-    //        } else {
-    //            jtEstado.setForeground(Color.RED);
-    //            jtEstado.setText("Inactivo");
-    //        }
-    //    }   
+
+    private void jrbEstadoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jrbEstadoVetoableChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbEstadoVetoableChange
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Editar;
