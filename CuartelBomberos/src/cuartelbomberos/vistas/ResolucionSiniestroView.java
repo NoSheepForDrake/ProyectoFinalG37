@@ -3,7 +3,9 @@ package cuartelbomberos.vistas;
 import cuartelbomberos.accesoADatos.siniestroData;
 import cuartelbomberos.entidades.Siniestro;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -217,6 +219,9 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // Boton limpiar tabla /-/ deja la tabla en blanco nuevamente.
+        Calendar a = Calendar.getInstance(Locale.getDefault());
+        jDfechaFin.setCalendar(a);
+        jDfechaIni.setCalendar(a);
         llenarTabla2();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -236,16 +241,24 @@ public class ResolucionSiniestroView extends javax.swing.JInternalFrame {
 
     private void jBfilterFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBfilterFActionPerformed
         //Boton filtrar por fecha /-/ Luego de seleccionarse la casilla de fecha, el accionar este boton trae la lista de siniestros entre F a y F b.
-        if (jCfecha.isSelected()) {
-            java.util.Date utilDate = jDfechaIni.getDate();
-            java.sql.Date sqlDateInicio = new java.sql.Date(utilDate.getTime());
-
-            utilDate = jDfechaFin.getDate();
-            java.sql.Date sqlDateFin = new java.sql.Date(utilDate.getTime());
-
-            List<Siniestro> listaNsiniestros = si.listarSiniXfecha(sqlDateInicio, sqlDateFin);
-            llenarTabla(listaNsiniestros);
-        }else{tabla.setRowCount(0);}
+        try {
+            if (jCfecha.isSelected()) {
+                java.util.Date utilDate = jDfechaIni.getDate();
+                java.sql.Date sqlDateInicio = new java.sql.Date(utilDate.getTime());
+                
+                utilDate = jDfechaFin.getDate();
+                java.sql.Date sqlDateFin = new java.sql.Date(utilDate.getTime());
+                
+                List<Siniestro> listaNsiniestros = si.listarSiniXfecha(sqlDateInicio, sqlDateFin);
+                llenarTabla(listaNsiniestros);
+            } else {
+                tabla.setRowCount(0);
+                jCfecha.setSelected(false);
+            }
+            
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar las fechas primero.");
+        }
     }//GEN-LAST:event_jBfilterFActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

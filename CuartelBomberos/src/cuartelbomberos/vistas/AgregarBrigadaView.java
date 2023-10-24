@@ -50,17 +50,29 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
 
         jToggleButton1.setText("jToggleButton1");
 
+        jtBrigada.setBackground(new java.awt.Color(0, 0, 0));
+        jtBrigada.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtBrigada.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre de Brigada");
 
+        jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Especialidad");
 
-        jcbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especialidad" }));
+        jcbEspecialidad.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jcbEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
+        jcbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especialidad..." }));
         jcbEspecialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbEspecialidadActionPerformed(evt);
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Estado");
 
         jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -74,8 +86,16 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Buscar por Nombre");
 
+        jtNombre.setBackground(new java.awt.Color(0, 0, 0));
+        jtNombre.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtNombre.setForeground(new java.awt.Color(255, 255, 255));
+
+        buscar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        buscar.setForeground(new java.awt.Color(0, 0, 0));
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,10 +103,16 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Asignarle un cuartel");
 
+        jcbCuartel.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jcbCuartel.setForeground(new java.awt.Color(255, 255, 255));
         jcbCuartel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar cuartel" }));
 
+        Salir.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        Salir.setForeground(new java.awt.Color(0, 0, 0));
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +120,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        Guardar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        Guardar.setForeground(new java.awt.Color(0, 0, 0));
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +129,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        Editar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        Editar.setForeground(new java.awt.Color(0, 0, 0));
         Editar.setText("Editar");
         Editar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +138,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        Limpiar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        Limpiar.setForeground(new java.awt.Color(0, 0, 0));
         Limpiar.setText("Limpiar");
         Limpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,17 +147,32 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel7.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Asignar Especialidad");
 
         jtEspecialidad.setEditable(false);
+        jtEspecialidad.setBackground(new java.awt.Color(0, 0, 0));
+        jtEspecialidad.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel8.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Cuartel");
 
         jtCuartel.setEditable(false);
+        jtCuartel.setBackground(new java.awt.Color(0, 0, 0));
+        jtCuartel.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtCuartel.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel9.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Codigo Brigada");
 
         jtID.setEditable(false);
+        jtID.setBackground(new java.awt.Color(0, 0, 0));
+        jtID.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtID.setForeground(new java.awt.Color(255, 255, 255));
         jtID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtIDActionPerformed(evt);
@@ -171,7 +218,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jtCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jLabel6)
