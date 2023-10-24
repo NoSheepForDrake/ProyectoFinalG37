@@ -357,8 +357,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             boolean est = jrbEstado.isSelected();
             String existe=bd.buscarBrigadaXNombre(nombre).getNombreBriga();
             if(existe!=null){
-                JOptionPane.showMessageDialog(null, "Existe un cuartel con la direccion ingresada");
-            }
+                JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
+            }else{
 
             String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
             if ("Especialidad".equals(especialidadSelec)) {
@@ -389,7 +389,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                     //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
                     bd.guardarBrigada(b);
                 }
-            }
+            }}
         } catch (NullPointerException e) {
             //JOptionPane.showMessageDialog(null, e);
         }
