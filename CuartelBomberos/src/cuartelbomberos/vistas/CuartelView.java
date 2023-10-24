@@ -143,6 +143,18 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
         jLabel11.setText("Codigo");
 
+        jtX.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtXKeyTyped(evt);
+            }
+        });
+
+        jtY.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtYKeyTyped(evt);
+            }
+        });
+
         jtID.setEditable(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -302,27 +314,33 @@ public class CuartelView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcCuartelesActionPerformed
 
     private void jbEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEditarActionPerformed
-        try {
-            CuartelData c = new CuartelData();
-            //obtengo lo ingresado por la persona
-            String dire = jtDireccion.getText();
-            String tel = jtTelefono.getText();
-            String cor = jtCorreo.getText();
-            String nom = jtNombre.getText();
-            int x = Integer.parseInt(jtX.getText());
-            int y = Integer.parseInt(jtY.getText());
-            boolean est = jrbEstado.isSelected();
-            int id = Integer.parseInt(jtID.getText());
+        String dire = jtDireccion.getText();
+        String tel = jtTelefono.getText();
+        String cor = jtCorreo.getText();
+        String nom = jtNombre.getText();
 
-            if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty() || jtX.getText().isEmpty() || jtY.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
-                return;
-            }
-            Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
-            c.editarCuartel(cuartel);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
+        if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
+            return;
         }
+        String coordX = jtX.getText();
+        String coordY = jtY.getText();
+        String iden = jtID.getText();
+        if (coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
+            return;
+        }
+        int x = Integer.parseInt(jtX.getText());
+        int y = Integer.parseInt(jtY.getText());
+        int id = Integer.parseInt(jtID.getText());
+        boolean est = jrbEstado.isSelected();
+
+        CuartelData c = new CuartelData();
+        //obtengo lo ingresado por la persona
+
+        Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
+        c.editarCuartel(cuartel);
+
 
     }//GEN-LAST:event_jbEditarActionPerformed
 
@@ -343,35 +361,40 @@ public class CuartelView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtNombreActionPerformed
 
     private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
-        try {
-            CuartelData c = new CuartelData();
-            //obtengo lo ingresado por la persona
-            String dire = jtDireccion.getText();
-            String tel = jtTelefono.getText();
-            String cor = jtCorreo.getText();
-            String nom = jtNombre.getText();
-            int x = Integer.parseInt(jtX.getText());
-            int y = Integer.parseInt(jtY.getText());
-            boolean est = jrbEstado.isSelected();
 
-            if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty() || jtX.getText().isEmpty() || jtY.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
-                return;
-            }
-            Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
-            boolean existe = c.existeCuartel(dire);
-            //JOptionPane.showMessageDialog(null,existe);
-            if (existe) {
-                JOptionPane.showMessageDialog(null, "Existe un cuartel con la direccion ingresada");
-            } else {
-                c.guardarCuartel(cuartel);
-            }
-            cargarComboBox();
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Las coordenadas solo deben contener numeros" + e);
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, e);
+        CuartelData c = new CuartelData();
+        //obtengo lo ingresado por la persona
+        String dire = jtDireccion.getText();
+        String tel = jtTelefono.getText();
+        String cor = jtCorreo.getText();
+        String nom = jtNombre.getText();
+
+        boolean est = jrbEstado.isSelected();
+
+        if (jtDireccion.getText().isEmpty() || jtTelefono.getText().isEmpty() || jtCorreo.getText().isEmpty()
+                || jtNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
+            return;
         }
+        String coordX = jtX.getText();
+        String coordY = jtY.getText();
+        String iden = jtID.getText();
+        if (coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
+            return;
+        }
+        int x = Integer.parseInt(jtX.getText());
+        int y = Integer.parseInt(jtY.getText());
+        Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
+        boolean existe = c.existeCuartel(dire);
+        //JOptionPane.showMessageDialog(null,existe);
+        if (existe) {
+            JOptionPane.showMessageDialog(null, "Existe un cuartel con la direccion ingresada");
+        } else {
+            c.guardarCuartel(cuartel);
+        }
+        cargarComboBox();
+
     }//GEN-LAST:event_jbNuevoActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -385,13 +408,31 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
     private void jrbEstadoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jrbEstadoStateChanged
         if (jrbEstado.isSelected()) {
-            jlEstado.setForeground(Color.BLUE);
+            jlEstado.setForeground(Color.YELLOW);
             jlEstado.setText("Activo");
         } else {
-            jlEstado.setForeground(Color.RED);
+            jlEstado.setForeground(Color.YELLOW);
             jlEstado.setText("Inactivo");
         }
     }//GEN-LAST:event_jrbEstadoStateChanged
+
+    private void jtXKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtXKeyTyped
+        //este metodo hace que solo permita escribir numeros y de no ser asi no lo escribe
+        int key = evt.getKeyChar(); //obtengo la tecla que se preciono
+        boolean numero = key >= 48 && key <= 57; //esto significa que recorro los numeros del 0 al 9, xq alt48=0
+        if (!numero) {
+            evt.consume();//evita que se coloque letras o caracteres
+        }
+    }//GEN-LAST:event_jtXKeyTyped
+
+    private void jtYKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtYKeyTyped
+        //este metodo hace que solo permita escribir numeros y de no ser asi no lo escribe
+        int key = evt.getKeyChar(); //obtengo la tecla que se preciono
+        boolean numero = key >= 48 && key <= 57; //esto significa que recorro los numeros del 0 al 9, xq alt48=0
+        if (!numero) {
+            evt.consume();//evita que se coloque letras o caracteres
+        }
+    }//GEN-LAST:event_jtYKeyTyped
     private void jtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {
         //este metodo hace que solo permita escribir numeros y de no ser asi no lo escribe
         int key = evt.getKeyChar(); //obtengo la tecla que se preciono
@@ -452,6 +493,7 @@ public void cargarComboBox() {
             modelo.addElement(brigadas.get(i).getNombreBriga() + " - " + brigadas.get(i).getEspecialidad());
         }
     }
+
     public void borrarJList() {
         jlBrigadas.setModel(modelo);
         for (int i = 0; i < 50; i++) {
