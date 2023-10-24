@@ -5,15 +5,15 @@ import cuartelbomberos.accesoADatos.CuartelData;
 import cuartelbomberos.entidades.Brigada;
 import cuartelbomberos.entidades.Cuartel;
 import java.awt.Color;
-import java.util.ArrayList;
+
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
+
 import javax.swing.JOptionPane;
 
 public class CuartelView extends javax.swing.JInternalFrame {
 
-//    ArrayList array = new ArrayList();
+
     DefaultListModel modelo = new DefaultListModel();
 
     public CuartelView() {
@@ -318,18 +318,16 @@ public class CuartelView extends javax.swing.JInternalFrame {
         String tel = jtTelefono.getText();
         String cor = jtCorreo.getText();
         String nom = jtNombre.getText();
-
-        if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
-            return;
-        }
         String coordX = jtX.getText();
         String coordY = jtY.getText();
         String iden = jtID.getText();
-        if (coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+
+        if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty()
+                ||coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
             return;
         }
+        
         int x = Integer.parseInt(jtX.getText());
         int y = Integer.parseInt(jtY.getText());
         int id = Integer.parseInt(jtID.getText());
@@ -368,21 +366,18 @@ public class CuartelView extends javax.swing.JInternalFrame {
         String tel = jtTelefono.getText();
         String cor = jtCorreo.getText();
         String nom = jtNombre.getText();
-
-        boolean est = jrbEstado.isSelected();
-
-        if (jtDireccion.getText().isEmpty() || jtTelefono.getText().isEmpty() || jtCorreo.getText().isEmpty()
-                || jtNombre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
-            return;
-        }
         String coordX = jtX.getText();
         String coordY = jtY.getText();
         String iden = jtID.getText();
-        if (coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+
+        boolean est = jrbEstado.isSelected();
+
+        if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty()
+                || nom.isEmpty()||coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
             return;
         }
+        
         int x = Integer.parseInt(jtX.getText());
         int y = Integer.parseInt(jtY.getText());
         Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
