@@ -218,7 +218,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                         .addComponent(jtCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(jLabel6)
@@ -352,7 +352,11 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         BrigadaData bd = new BrigadaData();
         String nombre = jtBrigada.getText();
         boolean est = jrbEstado.isSelected();
-        int id = Integer.parseInt(jtID.getText());
+        
+        if (nombre.isEmpty()||jtID.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+            return;
+        }
         String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
         if ("Especialidad".equals(especialidadSelec)) {
             String especialidad = jtEspecialidad.getText();
@@ -363,17 +367,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         String especialidad = jtEspecialidad.getText();
         //JOptionPane.showMessageDialog(null,especialidad);
         String cuartelSelec = (String) jcbCuartel.getSelectedItem();
-
-//        if ("Buscar cuartel".equals(cuartelSelec)) {
-//                String cuartelSele=jtCuartel.getText();
-//                
-//            }else{
-//           jtCuartel.setText(cuartelSelec);
-//        }
-        if (nombre.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
-            return;
-        }
+       
+        int id = Integer.parseInt(jtID.getText());
         if ("Buscar cuartel".equals(cuartelSelec)) {
             String cuartelSele = jtCuartel.getText();
             CuartelData cd = new CuartelData();
@@ -402,6 +397,10 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             BrigadaData bd = new BrigadaData();
             String nombre = jtBrigada.getText();
             boolean est = jrbEstado.isSelected();
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+                return;
+            }
             String existe=bd.buscarBrigadaXNombre(nombre).getNombreBriga();
             if(existe!=null){
                 JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
@@ -421,10 +420,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             }
             jtCuartel.setText(cuartelSelec);
 
-            if (nombre.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
-                return;
-            }
+            
             if (cuartelSelec != null) {
                 // Dividir el elemento seleccionado 
                 String[] partes = cuartelSelec.split(" - ");
