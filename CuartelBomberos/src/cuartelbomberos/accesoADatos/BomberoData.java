@@ -135,7 +135,7 @@ public class BomberoData {
                 bomber.setBrigada(brigada);
 
             } else {
-               JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
+               //JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
                 ps.close();
             }
 

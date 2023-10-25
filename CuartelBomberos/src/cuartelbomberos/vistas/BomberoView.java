@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -21,6 +22,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Bombero");
         cargarComboBox();
+        cargarComboGS();
 
     }
 
@@ -43,8 +45,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
         jblimpiar = new javax.swing.JButton();
         jbbuscar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        jtgSang = new javax.swing.JTextField();
         jdcfechaNac = new com.toedter.calendar.JDateChooser();
+        jcbgSang = new javax.swing.JComboBox<>();
 
         jLabel1.setText("DNI: ");
 
@@ -117,6 +119,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Grupo Sanguineo");
 
+        jcbgSang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione tipo" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,7 +165,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
                                 .addGap(23, 23, 23)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jcbgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 20, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -192,8 +196,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jtgSang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                    .addComponent(jcbgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbsalir)
                     .addComponent(jbeliminar)
@@ -229,7 +233,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
             if (bombero != null) {
                 jtnomyapell.setText(bombero.getNombreApellido());
                 jtcelular.setText(bombero.getCelular());
-                jtgSang.setText(bombero.getgSanguineo());
+                jcbgSang.setSelectedItem(bombero.getgSanguineo());
                 if (bombero.getFechaNac() != null) {
                     jdcfechaNac.setDate(Date.valueOf(bombero.getFechaNac()));
                 } else {
@@ -266,11 +270,11 @@ public class BomberoView extends javax.swing.JInternalFrame {
         String celular = jtcelular.getText();
         // Obtener la fecha de nacimiento en formato Date
         java.util.Date utilDate = jdcfechaNac.getDate();
-        String gSanguineo = jtgSang.getText();
+        String gSanguineo = String.valueOf(jcbgSang.getSelectedItem());
 
          // Verificar que los campos obligatorios no estén vacíos
                 if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
-                        || gSanguineo.isEmpty() || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
+                        ||gSanguineo.equals("Seleccione tipo") || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
                         || jdcfechaNac.getDate() == null) {
                     JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
                     return;
@@ -279,6 +283,10 @@ public class BomberoView extends javax.swing.JInternalFrame {
         // Validar que el DNI contenga solo números
         if (!contieneSoloNumeros(dni)) {
             JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
+            return;
+        }
+        if (!contieneSoloNumeros(celular)) {
+            JOptionPane.showMessageDialog(null, "El N° de telefono debe contener solo números.");
             return;
         }
 
@@ -407,10 +415,10 @@ public class BomberoView extends javax.swing.JInternalFrame {
     private javax.swing.JButton jblimpiar;
     private javax.swing.JButton jbsalir;
     private javax.swing.JComboBox<String> jcbbrigada;
+    private javax.swing.JComboBox<String> jcbgSang;
     private com.toedter.calendar.JDateChooser jdcfechaNac;
     private javax.swing.JTextField jtcelular;
     private javax.swing.JTextField jtdni;
-    private javax.swing.JTextField jtgSang;
     private javax.swing.JTextField jtnomyapell;
     // End of variables declaration//GEN-END:variables
 
@@ -418,7 +426,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
         jtdni.setText(""); // Limpia los campos
         jtnomyapell.setText("");
         jtcelular.setText("");
-        jtgSang.setText("");
+        jcbgSang.setSelectedIndex(0);
         jdcfechaNac.setDate(null);
         jcbbrigada.setSelectedIndex(0);
     }
@@ -438,5 +446,13 @@ public class BomberoView extends javax.swing.JInternalFrame {
         // Utiliza una expresión regular para verificar si la cadena contiene solo números
         return cadena.matches("[0-9]+");
     }
+public void cargarComboGS(){
+     String gSang[] = {"A+", "A-", "B+", "B-", "0+", "0-", "AB+", "AB-"};
 
+        List<String> tgs = Arrays.asList(gSang);
+
+        for (String tipo : tgs) {
+            jcbgSang.addItem(tipo);
+        }
+    }
 }
