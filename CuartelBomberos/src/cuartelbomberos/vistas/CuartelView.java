@@ -338,8 +338,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
         Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
         c.editarCuartel(cuartel);
-
-
+        cargarComboBox();
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
