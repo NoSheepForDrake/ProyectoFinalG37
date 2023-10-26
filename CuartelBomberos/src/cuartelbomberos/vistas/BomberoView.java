@@ -48,14 +48,25 @@ public class BomberoView extends javax.swing.JInternalFrame {
         jdcfechaNac = new com.toedter.calendar.JDateChooser();
         jcbgSang = new javax.swing.JComboBox<>();
 
+        jLabel1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("DNI: ");
 
+        jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombre y Apellido: ");
 
+        jLabel3.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fecha Nacimiento: ");
 
+        jLabel4.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Celular: ");
 
+        jtdni.setBackground(new java.awt.Color(0, 0, 0));
+        jtdni.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtdni.setForeground(new java.awt.Color(255, 255, 255));
         jtdni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtdniActionPerformed(evt);
@@ -67,14 +78,26 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jtnomyapell.setBackground(new java.awt.Color(0, 0, 0));
+        jtnomyapell.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtnomyapell.setForeground(new java.awt.Color(255, 255, 255));
         jtnomyapell.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtnomyapellKeyTyped(evt);
             }
         });
 
+        jtcelular.setBackground(new java.awt.Color(0, 0, 0));
+        jtcelular.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtcelular.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel5.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Asignar a Brigada");
 
+        jcbbrigada.setBackground(new java.awt.Color(0, 0, 0));
+        jcbbrigada.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jcbbrigada.setForeground(new java.awt.Color(255, 255, 255));
         jcbbrigada.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione una brigada" }));
         jcbbrigada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,6 +105,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbsalir.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbsalir.setForeground(new java.awt.Color(0, 0, 0));
         jbsalir.setText("Salir");
         jbsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,6 +114,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbeliminar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbeliminar.setForeground(new java.awt.Color(0, 0, 0));
         jbeliminar.setText("Eliminar");
         jbeliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +123,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbguardar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbguardar.setForeground(new java.awt.Color(0, 0, 0));
         jbguardar.setText("Guardar");
         jbguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,6 +132,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jblimpiar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jblimpiar.setForeground(new java.awt.Color(0, 0, 0));
         jblimpiar.setText("Limpiar");
         jblimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,6 +141,8 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbbuscar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbbuscar.setForeground(new java.awt.Color(0, 0, 0));
         jbbuscar.setText("Buscar");
         jbbuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -117,8 +150,13 @@ public class BomberoView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Grupo Sanguineo");
 
+        jcbgSang.setBackground(new java.awt.Color(0, 0, 0));
+        jcbgSang.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jcbgSang.setForeground(new java.awt.Color(255, 255, 255));
         jcbgSang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione tipo" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,7 +204,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jcbbrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jcbgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                        .addGap(0, 9, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -197,7 +235,7 @@ public class BomberoView extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jcbgSang, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbsalir)
                     .addComponent(jbeliminar)

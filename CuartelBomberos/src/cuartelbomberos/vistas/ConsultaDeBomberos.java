@@ -37,14 +37,21 @@ private DefaultTableModel tabla = new DefaultTableModel(){
         jScrollPane2 = new javax.swing.JScrollPane();
         Tabla = new javax.swing.JTable();
 
+        jLabel1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar");
 
+        jtbuscar.setBackground(new java.awt.Color(0, 0, 0));
+        jtbuscar.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtbuscar.setForeground(new java.awt.Color(255, 255, 255));
         jtbuscar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jtbuscarKeyReleased(evt);
             }
         });
 
+        jbsalir.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbsalir.setForeground(new java.awt.Color(0, 0, 0));
         jbsalir.setText("Salir");
         jbsalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,6 +59,9 @@ private DefaultTableModel tabla = new DefaultTableModel(){
             }
         });
 
+        Tabla.setBackground(new java.awt.Color(0, 0, 0));
+        Tabla.setFont(new java.awt.Font("FreeMono", 0, 14)); // NOI18N
+        Tabla.setForeground(new java.awt.Color(255, 255, 255));
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -63,6 +73,9 @@ private DefaultTableModel tabla = new DefaultTableModel(){
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        Tabla.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        Tabla.setSelectionForeground(new java.awt.Color(255, 255, 0));
+        Tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(Tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,7 +108,7 @@ private DefaultTableModel tabla = new DefaultTableModel(){
                     .addComponent(jLabel1)
                     .addComponent(jtbuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jbsalir)
                 .addContainerGap())

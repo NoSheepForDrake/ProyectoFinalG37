@@ -38,9 +38,10 @@ public class CuartelData {
 
                 cuartel.setCodCuartel(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Cuartel Guardado");
+            } else {
+                rs.close();
+                ps.close();
             }
-            ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla cuartel");
         }
@@ -119,6 +120,7 @@ public class CuartelData {
                 cuartel.setEstado(true);
 
             } else {
+                rs.close();
                 JOptionPane.showMessageDialog(null, "No existe un cuartel con ese codigo de identificación");
                 ps.close();
             }
@@ -147,6 +149,7 @@ public class CuartelData {
                 cuart.setEstado(rs.getBoolean("estado"));
                 cuartel.add(cuart);
             }
+            rs.close();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla cuartel" + ex.getMessage());
@@ -176,6 +179,9 @@ public class CuartelData {
                 boolean estado = rs.getBoolean("estado");
 
                 cuartel = new Cuartel(codCuartel, nombreCuartel, direccion, coordX, coordY, telefono, correo, estado);
+            } else {
+                rs.close();
+                ps.close();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -206,6 +212,7 @@ public class CuartelData {
                 cuartel.setCoord_Y(rs.getInt("coord_Y"));
 
             } else {
+                rs.close();
                 JOptionPane.showMessageDialog(null, "No existe un cuartel con ese codigo de identificación");
                 ps.close();
             }
@@ -259,6 +266,7 @@ public class CuartelData {
                 cuartel.setCodCuartel(rs.getInt("codCuartel"));
                 cuartel.setNombreCuartel(rs.getString("nombreCuartel"));
             } else {
+                rs.close();
                 JOptionPane.showMessageDialog(null, "No existe un cuartel con esas coordenadas.");
                 ps.close();
             }

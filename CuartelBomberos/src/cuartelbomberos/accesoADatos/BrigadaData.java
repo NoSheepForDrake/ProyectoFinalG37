@@ -21,7 +21,7 @@ public class BrigadaData {
     }
 
     public void guardarBrigada(Brigada brigada) {
-        CuartelData cd= new CuartelData();
+        CuartelData cd = new CuartelData();
         String sql = "INSERT INTO brigada( nombreBriga, especialidad, libre, nroCuartel) "
                 + "VALUES (?,?,?,?)";
         try {
@@ -39,10 +39,11 @@ public class BrigadaData {
                 brigada.setCodBrigada(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Brigada Guardado");
             }
+            rs.close();
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada");
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada. " + ex.getMessage());
         }
     }
 
@@ -68,7 +69,7 @@ public class BrigadaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada"+ ex);
+            JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla brigada. " + ex.getMessage());
         }
     }
 
@@ -88,7 +89,7 @@ public class BrigadaData {
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada. " + ex.getMessage());
         }
     }
 
@@ -116,12 +117,13 @@ public class BrigadaData {
                 brigada.setCuartel(cuartel);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe una brigada con ese código de identificación");
+                rs.close();
                 ps.close();
+                JOptionPane.showMessageDialog(null, "No existe una brigada con ese código de identificación");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada. " + ex.getMessage());
         }
         return brigada;
     }
@@ -149,10 +151,10 @@ public class BrigadaData {
                 brigadas.add(brigada);
 
             }
-
+            rs.close();
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada AA" + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla brigada AA. " + ex.getMessage());
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Error:" + e.getMessage());
         }
@@ -184,7 +186,9 @@ public class BrigadaData {
                 Cuartel cuartel = cd.buscarCuartel(codigoCuartel); // Buscar el cuartel por su código
                 brigada.setCuartel(cuartel);
 
+            } else {
                 ps.close();
+                rs.close();
             }
 
         } catch (SQLException ex) {
@@ -217,12 +221,13 @@ public class BrigadaData {
                 brigada.setCuartel(cuartel);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe una brigada asignada al cuartel");
+                rs.close();
                 ps.close();
+                JOptionPane.showMessageDialog(null, "No existe una brigada asignada al cuartel");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada. " + ex.getMessage());
         }
         return brigada;
     }
@@ -251,12 +256,13 @@ public class BrigadaData {
                 brigada.setCuartel(cuartel);
 
             } else {
-                JOptionPane.showMessageDialog(null, "No existe una brigada con ese código de identificación");
+                rs.close();
                 ps.close();
+                JOptionPane.showMessageDialog(null, "No existe una brigada con ese código de identificación.");
             }
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada. " + ex.getMessage());
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "No hay brigada disponible.");
         }
@@ -288,13 +294,15 @@ public class BrigadaData {
 
                 brigadas.add(brigada);
             }
+            rs.close();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada: " + ex.getMessage());
         }
         return brigadas;
     }
-    public List <Brigada> buscarBrigadaXCuartel(int nroCuartel) {
+
+    public List<Brigada> buscarBrigadaXCuartel(int nroCuartel) {
         CuartelData cd = new CuartelData();
         List<Brigada> brigadas = new ArrayList<>();
         String sql = "SELECT nombreBriga, especialidad, libre, nroCuartel FROM brigada WHERE nroCuartel=?";
@@ -308,21 +316,21 @@ public class BrigadaData {
 
                 Brigada brigada = new Brigada();
 
-                
                 brigada.setNombreBriga(rs.getString("nombreBriga"));
                 brigada.setEspecialidad(rs.getString("especialidad"));
                 brigada.setLibre(true);
-                
+
                 int codigoCuartel = rs.getInt("nroCuartel"); // Obtener el código del cuartel
                 Cuartel cuartel = cd.buscarCuartel(codigoCuartel); // Buscar el cuartel por su código
                 brigada.setCuartel(cuartel);
                 brigadas.add(brigada);
-                
+
             }
+            rs.close();
             ps.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada");
+            JOptionPane.showMessageDialog(null, "Error al acceder a tabla brigada. " + ex.getMessage());
         }
         return brigadas;
     }

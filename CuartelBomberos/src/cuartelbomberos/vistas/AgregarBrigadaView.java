@@ -401,38 +401,38 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
                 return;
             }
-            String existe=bd.buscarBrigadaXNombre(nombre).getNombreBriga();
-            if(existe!=null){
+            String existe = bd.buscarBrigadaXNombre(nombre).getNombreBriga();
+            if (existe != null) {
                 JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
-            }else{
+            } else {
 
-            String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-            if ("Especialidad".equals(especialidadSelec)) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
-                return;
-            }
-            jtEspecialidad.setText(especialidadSelec);
-
-            String cuartelSelec = (String) jcbCuartel.getSelectedItem();
-            if ("Buscar cuartel".equals(cuartelSelec)) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
-                return;
-            }
-            jtCuartel.setText(cuartelSelec);
-
-            
-            if (cuartelSelec != null) {
-                // Dividir el elemento seleccionado 
-                String[] partes = cuartelSelec.split(" - ");
-                if (partes.length > 0) {
-                    String nombrecuartel = partes[0].trim();
-                    CuartelData cd = new CuartelData();
-                    Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
-                    Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
-                    //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
-                    bd.guardarBrigada(b);
+                String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+                if ("Especialidad".equals(especialidadSelec)) {
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
+                    return;
                 }
-            }}
+                jtEspecialidad.setText(especialidadSelec);
+
+                String cuartelSelec = (String) jcbCuartel.getSelectedItem();
+                if ("Buscar cuartel".equals(cuartelSelec)) {
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
+                    return;
+                }
+                jtCuartel.setText(cuartelSelec);
+
+                if (cuartelSelec != null) {
+                    // Dividir el elemento seleccionado 
+                    String[] partes = cuartelSelec.split(" - ");
+                    if (partes.length > 0) {
+                        String nombrecuartel = partes[0].trim();
+                        CuartelData cd = new CuartelData();
+                        Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
+                        Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
+                        //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
+                        bd.guardarBrigada(b);
+                    }
+                }
+            }
         } catch (NullPointerException e) {
             //JOptionPane.showMessageDialog(null, e);
         }

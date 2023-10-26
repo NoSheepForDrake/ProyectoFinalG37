@@ -52,8 +52,13 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         Tabla = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        jLabel1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar Brigada por especialidad");
 
+        jcbEspecialidad.setBackground(new java.awt.Color(0, 0, 0));
+        jcbEspecialidad.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jcbEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
         jcbEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "buscar" }));
         jcbEspecialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,6 +66,9 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
             }
         });
 
+        Tabla.setBackground(new java.awt.Color(0, 0, 0));
+        Tabla.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        Tabla.setForeground(new java.awt.Color(255, 255, 255));
         Tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -72,8 +80,12 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
                 "Brigada", "Cuartel", "Dirección", "Telefono", "Correo"
             }
         ));
+        Tabla.setSelectionBackground(new java.awt.Color(0, 0, 0));
+        Tabla.setSelectionForeground(new java.awt.Color(255, 255, 0));
         jScrollPane1.setViewportView(Tabla);
 
+        jButton1.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Salir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,19 +97,19 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(675, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(50, 50, 50))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jcbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(272, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -107,11 +119,11 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jcbEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -56,8 +56,13 @@ public class CuartelView extends javax.swing.JInternalFrame {
         jtY = new javax.swing.JTextField();
         jtID = new javax.swing.JTextField();
 
+        jLabel5.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Seleccione el Cuartel");
 
+        jcCuarteles.setBackground(new java.awt.Color(0, 0, 0));
+        jcCuarteles.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jcCuarteles.setForeground(new java.awt.Color(255, 255, 255));
         jcCuarteles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Buscar cuartel" }));
         jcCuarteles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,6 +70,13 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jtDireccion.setBackground(new java.awt.Color(0, 0, 0));
+        jtDireccion.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtDireccion.setForeground(new java.awt.Color(255, 255, 255));
+
+        jtTelefono.setBackground(new java.awt.Color(0, 0, 0));
+        jtTelefono.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtTelefono.setForeground(new java.awt.Color(255, 255, 255));
         jtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtTelefonoActionPerformed(evt);
@@ -76,16 +88,33 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jtCorreo.setBackground(new java.awt.Color(0, 0, 0));
+        jtCorreo.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtCorreo.setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Dirección");
 
+        jLabel7.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Telefono");
 
+        jLabel8.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Correo");
 
+        jLabel9.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Brigadas");
 
+        jlBrigadas.setBackground(new java.awt.Color(0, 0, 0));
+        jlBrigadas.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jlBrigadas.setForeground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setViewportView(jlBrigadas);
 
+        jbLimpiar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         jbLimpiar.setText("Limpiar");
         jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +122,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbEditar.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbEditar.setForeground(new java.awt.Color(0, 0, 0));
         jbEditar.setText("Editar");
         jbEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +131,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jbSalir.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,14 +140,21 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nombre del cuartel");
 
+        jtNombre.setBackground(new java.awt.Color(0, 0, 0));
+        jtNombre.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtNombre.setForeground(new java.awt.Color(255, 255, 255));
         jtNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtNombreActionPerformed(evt);
             }
         });
 
+        jbNuevo.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
+        jbNuevo.setForeground(new java.awt.Color(0, 0, 0));
         jbNuevo.setText("Nuevo");
         jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,12 +162,20 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Coordenadas");
 
+        jLabel3.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 51));
         jLabel3.setText("X");
 
+        jLabel4.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 51));
         jLabel4.setText("Y");
 
+        jLabel10.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Estado");
 
         jrbEstado.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -141,14 +189,22 @@ public class CuartelView extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Codigo");
 
+        jtX.setBackground(new java.awt.Color(0, 0, 0));
+        jtX.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtX.setForeground(new java.awt.Color(255, 255, 255));
         jtX.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtXKeyTyped(evt);
             }
         });
 
+        jtY.setBackground(new java.awt.Color(0, 0, 0));
+        jtY.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtY.setForeground(new java.awt.Color(255, 255, 255));
         jtY.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtYKeyTyped(evt);
@@ -156,6 +212,9 @@ public class CuartelView extends javax.swing.JInternalFrame {
         });
 
         jtID.setEditable(false);
+        jtID.setBackground(new java.awt.Color(0, 0, 0));
+        jtID.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
+        jtID.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -206,7 +265,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
                             .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(19, 19, 19))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +302,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 4, Short.MAX_VALUE)
+                        .addGap(0, 5, Short.MAX_VALUE)
                         .addComponent(jrbEstado))
                     .addComponent(jlEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -252,11 +311,11 @@ public class CuartelView extends javax.swing.JInternalFrame {
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel11)
                                 .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 8, Short.MAX_VALUE)))
+                        .addGap(0, 10, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jbLimpiar)

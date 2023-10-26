@@ -40,9 +40,10 @@ public class BomberoData {
 
                 bomber.setIdBombero(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Bombero Guardado");
+            } else {
+                rs.close();
+                ps.close();
             }
-            ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla bombero " + ex.getMessage());
         }
@@ -120,7 +121,7 @@ public class BomberoData {
 
                 bomber = new Bombero();
                 bomber.setIdBombero(rs.getInt("idBombero"));
-                bomber.setDni(rs.getString("dni"));  
+                bomber.setDni(rs.getString("dni"));
                 bomber.setNombreApellido(rs.getString("nombreApellido"));
                 bomber.setFechaNac(rs.getDate("fechaNac").toLocalDate());
                 bomber.setCelular(rs.getString("celular"));
@@ -130,12 +131,13 @@ public class BomberoData {
                 int codbrig = rs.getInt("codBrigada");
                 //JOptionPane.showMessageDialog(null, codbrig);
                 Brigada brigada = bd.buscarBrigada(codbrig);
-       //JOptionPane.showMessageDialog(null, brigada.getNombreBriga());
+                //JOptionPane.showMessageDialog(null, brigada.getNombreBriga());
                 // Asignar la brigada al bombero
                 bomber.setBrigada(brigada);
 
             } else {
-               //JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
+                rs.close();
+                //JOptionPane.showMessageDialog(null, "No existe un bombero con ese DNI");
                 ps.close();
             }
 
@@ -147,7 +149,7 @@ public class BomberoData {
     }
 
     public List<Bombero> listarBombero() {
-    BrigadaData bd = new BrigadaData();
+        BrigadaData bd = new BrigadaData();
         List<Bombero> bomberos = new ArrayList<>();
         try {
             String sql = "SELECT * FROM bombero WHERE estado = 1";
@@ -170,10 +172,10 @@ public class BomberoData {
 //                JOptionPane.showMessageDialog(null, bri.getNombreBriga());
                 // Asignar la brigada al bombero
                 bomber.setBrigada(bri);
-                
+
                 bomberos.add(bomber);
             }
-
+            rs.close();
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Bombero6" + ex.getMessage());
@@ -182,7 +184,7 @@ public class BomberoData {
         }
         return bomberos;
     }
-    
+
     public boolean existeDni(String dni) { //metodo para verificar si exite el dni en la base de dato
         boolean existe = false;
 
@@ -200,77 +202,80 @@ public class BomberoData {
                 existe = true; // Hay un registro con el mismo DNI y estado activo
 
             }
+            rs.close();
             ps.close();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al verificar el DNI en la base de datos: " + ex.getMessage());
         }
 
         return existe;
     }
-    
-    public int idBombero (String dni){
-     String sql = "SELECT idBombero FROM bombero WHERE dni = ? and estado = 1";
-     
-     int idbom = 0;
+
+    public int idBombero(String dni) {
+        String sql = "SELECT idBombero FROM bombero WHERE dni = ? and estado = 1";
+
+        int idbom = 0;
 
         try {
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, dni);
             ResultSet rs = ps.executeQuery();
-                if(rs.next()){
-               idbom = rs.getInt("idBombero");
-                }
-            ps.close();
-        
-        }catch(SQLException ex){
-        JOptionPane.showMessageDialog(null, "Error");
+            if (rs.next()) {
+                idbom = rs.getInt("idBombero");
+            } else {
+                rs.close();
+                ps.close();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error");
         }
         return idbom;
-     }
-    
+    }
+
     //metodo para contar bomberos en brigada....
     public int contarBomberosEnBrigada(int codBrigada) {
-    int contar = 0;
-    try {
-        String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? and estado = 1";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setInt(1, codBrigada);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            contar = rs.getInt(1);
+        int contar = 0;
+        try {
+            String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? and estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, codBrigada);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                contar = rs.getInt(1);
+            } else {
+                rs.close();
+                ps.close();
+            }
+        } catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Error: " + ex.getMessage());
         }
-        ps.close();
-        
-    } catch (SQLException ex) {
-        
-        JOptionPane.showMessageDialog(null, "Error: "+ ex.getMessage());
-    }
-    return contar;
-}
-
-public int contarBomberosEnBrigadaExcluyendoBombero(int codBrigada, String dniBomberoExcluir) {
-    // Consulta SQL para contar bomberos en una brigada, excluyendo un bombero específico
-    String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? AND estado = 1 AND dni != ?";
-    PreparedStatement ps = null;
-
-    try {
-        ps = con.prepareStatement(sql);
-        ps.setInt(1, codBrigada);
-        ps.setString(2, dniBomberoExcluir); // Excluir al bombero por su DNI
-        ResultSet rs = ps.executeQuery();
-
-        if (rs.next()) {
-            return rs.getInt(1);
-        }
-    } catch (SQLException ex) {
-        JOptionPane.showMessageDialog(null, "Error al contar bomberos en la brigada: " + ex.getMessage());
+        return contar;
     }
 
-    return 0; // Si ocurre un error, retornamos 0.
-}
+    public int contarBomberosEnBrigadaExcluyendoBombero(int codBrigada, String dniBomberoExcluir) {
+        // Consulta SQL para contar bomberos en una brigada, excluyendo un bombero específico
+        String sql = "SELECT COUNT(*) FROM bombero WHERE codBrigada = ? AND estado = 1 AND dni != ?";
+        PreparedStatement ps = null;
 
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, codBrigada);
+            ps.setString(2, dniBomberoExcluir); // Excluir al bombero por su DNI
+            ResultSet rs = ps.executeQuery();
 
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                rs.close();
+                ps.close();
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al contar bomberos en la brigada: " + ex.getMessage());
+        }
+
+        return 0; // Si ocurre un error, retornamos 0.
+    }
 
 }
