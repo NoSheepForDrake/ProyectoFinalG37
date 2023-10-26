@@ -13,7 +13,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
     public AgregarBrigadaView() {
         initComponents();
         setTitle("Brigadas");
-        cargarComboBox();
+        cargarComboBox2();
         cargarCombobox();
     }
 
@@ -473,7 +473,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtID;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
-private void cargarComboBox() {
+
+    private void cargarComboBox2() {
 
         String tipos[] = {"Incendio", "Accidente", "Rescate", "Emergencias", "Derrumbes", "Materiales Peligrosos", "Otros..."};
 
@@ -485,7 +486,7 @@ private void cargarComboBox() {
 
     }
 
-    public void cargarCombobox() {
+    private void cargarCombobox() {
         CuartelData cuar = new CuartelData();
         List<Cuartel> listaCuartel = cuar.listarCuartel();
         for (Cuartel cuartel : listaCuartel) {

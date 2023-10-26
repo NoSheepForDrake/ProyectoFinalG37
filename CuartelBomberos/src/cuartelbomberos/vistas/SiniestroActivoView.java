@@ -25,6 +25,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Siniestro");
         cargarComboBox();
+        setFechaIni();
     }
     
     @SuppressWarnings("unchecked")
@@ -431,6 +432,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto, activo);
             siniestroData sis = new siniestroData();
             sis.guardarSiniestro(siniestro);
+            limpiarCampos();
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Los valores no pueden ser nulos");
         } catch (NumberFormatException ex){
@@ -599,20 +601,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
     private void jBlimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarCamposActionPerformed
         // Boton limpiar /-/ Hace un set en blanco en todos los campos de texto.
-        Calendar a = Calendar.getInstance(Locale.getDefault());
-        jLdistMetros.setText("");
-        jRsiOno.setSelected(false);
-        jTAdetalle.setText("");
-        jTcod.setText("");
-        jTcodBriga.setText("");
-        jTcoordX.setText("");
-        jTcoordY.setText("");
-        jTcuartelDispo.setText("");
-        jTpuntuacion.setText("");
-        jDfinalizo.setCalendar(a);
-        jDinicio.setCalendar(a);
-        jCtipo.setSelectedIndex(0);
-        
+        limpiarCampos();
     }//GEN-LAST:event_jBlimpiarCamposActionPerformed
 
     private void jTcoordXKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcoordXKeyTyped
@@ -693,5 +682,30 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         }
 
     }
-
+    
+    private void setFechaIni (){
+        
+        Calendar a = Calendar.getInstance(Locale.getDefault());
+        Date fechaActual = Date.valueOf(LocalDate.now());
+        jDinicio.setCalendar(a);
+        jDinicio.setMaxSelectableDate(fechaActual);
+        jDfinalizo.setCalendar(a);
+        jDfinalizo.setMinSelectableDate(fechaActual);
+    }
+    
+    private void limpiarCampos () {
+        Calendar a = Calendar.getInstance(Locale.getDefault());
+        jLdistMetros.setText("");
+        jRsiOno.setSelected(false);
+        jTAdetalle.setText("");
+        jTcod.setText("");
+        jTcodBriga.setText("");
+        jTcoordX.setText("");
+        jTcoordY.setText("");
+        jTcuartelDispo.setText("");
+        jTpuntuacion.setText("");
+        jDfinalizo.setCalendar(a);
+        jDinicio.setCalendar(a);
+        jCtipo.setSelectedIndex(0);
+    }
 }

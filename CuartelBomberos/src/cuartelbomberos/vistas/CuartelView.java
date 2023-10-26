@@ -13,7 +13,6 @@ import javax.swing.JOptionPane;
 
 public class CuartelView extends javax.swing.JInternalFrame {
 
-
     DefaultListModel modelo = new DefaultListModel();
 
     public CuartelView() {
@@ -382,11 +381,11 @@ public class CuartelView extends javax.swing.JInternalFrame {
         String iden = jtID.getText();
 
         if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty() || nom.isEmpty()
-                ||coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+                || coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
             return;
         }
-        
+
         int x = Integer.parseInt(jtX.getText());
         int y = Integer.parseInt(jtY.getText());
         int id = Integer.parseInt(jtID.getText());
@@ -397,7 +396,7 @@ public class CuartelView extends javax.swing.JInternalFrame {
 
         Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
         c.editarCuartel(cuartel);
-        cargarComboBox();
+        //cargarComboBox();
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -431,11 +430,11 @@ public class CuartelView extends javax.swing.JInternalFrame {
         boolean est = jrbEstado.isSelected();
 
         if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty()
-                || nom.isEmpty()||coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+                || nom.isEmpty() || coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
             return;
         }
-        
+
         int x = Integer.parseInt(jtX.getText());
         int y = Integer.parseInt(jtY.getText());
         Cuartel cuartel = new Cuartel(nom, dire, x, y, tel, cor, est);
