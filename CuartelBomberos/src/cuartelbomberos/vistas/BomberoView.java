@@ -1,7 +1,6 @@
 /*El Boton guardar va a tener doble funcionalidad, va a corroborar que el bombero no se encuentre en la base
 de datos(a traves del DNI), de encontrarse se van a modificar los datos, caso contrario se va a guardar 
 como un bombero nuevo*/
-
 package cuartelbomberos.vistas;
 
 import cuartelbomberos.accesoADatos.BomberoData;
@@ -266,6 +265,10 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
         // Valida que el DNI contenga solo números antes de buscar en la base de datos
         if (contieneSoloNumeros(dni)) {
+            if (bd.existeDniInactivo(dni) == true) {
+                JOptionPane.showMessageDialog(null, "El DNI que intenta buscar se encuentra registrado pero esta dado de BAJA");
+                return;
+            }
             Bombero bombero = bd.buscarBombero(dni); // Buscamos en la BD el DNI
 
             if (bombero != null) {
@@ -310,14 +313,14 @@ public class BomberoView extends javax.swing.JInternalFrame {
         java.util.Date utilDate = jdcfechaNac.getDate();
         String gSanguineo = String.valueOf(jcbgSang.getSelectedItem());
 
-         // Verificar que los campos obligatorios no estén vacíos
-                if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
-                        ||gSanguineo.equals("Seleccione tipo") || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
-                        || jdcfechaNac.getDate() == null) {
-                    JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
-                    return;
-                }
-                
+        // Verificar que los campos obligatorios no estén vacíos
+        if (jtdni.getText().isEmpty() || nombreApellido.isEmpty() || celular.isEmpty()
+                || gSanguineo.equals("Seleccione tipo") || jcbbrigada.getSelectedItem().equals("Seleccione una brigada")
+                || jdcfechaNac.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios.");
+            return;
+        }
+
         // Validar que el DNI contenga solo números
         if (!contieneSoloNumeros(dni)) {
             JOptionPane.showMessageDialog(null, "El DNI debe contener solo números.");
@@ -340,8 +343,6 @@ public class BomberoView extends javax.swing.JInternalFrame {
 
                 // Buscamos la brigada por el nombre
                 Brigada brigada = bd.buscarBrigadaXNombre(nombreBrigada);
-
-               
 
                 // Convertir la fecha de util.Date a LocalDate
                 Instant instant = utilDate.toInstant();
@@ -381,6 +382,10 @@ public class BomberoView extends javax.swing.JInternalFrame {
                         JOptionPane.showMessageDialog(null, "La brigada seleccionada ya tiene el cupo máximo de bomberos. Elige otra brigada.");
                         return;
                     }
+                    if (bdata.existeDniInactivo(dni) == true) {
+                        JOptionPane.showMessageDialog(null, "El DNI que intenta registrar ya se encuentra registrado pero esta dado de BAJA");
+                        return;
+                    }
                     Bombero bombero = new Bombero(dni, nombreApellido, fechaNac, celular, brigada, gSanguineo, true);
                     bdata.guardarBombero(bombero);
 
@@ -393,6 +398,10 @@ public class BomberoView extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         // Obtener los valores de los campos
         String dni = jtdni.getText();
+        if (dni.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Debe colocar un DNI Valido para eliminar");
+            return;
+        }
 
         //creamos una instancia de bomberodata
         BomberoData bd = new BomberoData();
@@ -401,8 +410,12 @@ public class BomberoView extends javax.swing.JInternalFrame {
         Bombero bom = bd.buscarBombero(dni);
 //        JOptionPane.showMessageDialog(null, "DNI del bombero: " + bom.getDni());
 //        JOptionPane.showMessageDialog(null, "Estado del bombero: " + bom.isEstado());
-        //verificamos si el estado del bombero es true o false
-        if (bom.isEstado() == false) {
+        if (bd.existeDniInactivo(dni) == true) {
+            JOptionPane.showMessageDialog(null, "El Bombero que intenta eliminar ya se encuentra Eliminado");
+            return;
+        }
+//      verificamos si el bombero no es NULL
+        if (bom == null) {
             JOptionPane.showMessageDialog(null, "El bombero no se puede eliminar, no hay registros del mismo");
         } else {
             int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea borrar el bombero?", "Confirmación", JOptionPane.YES_NO_OPTION);
@@ -484,8 +497,9 @@ public class BomberoView extends javax.swing.JInternalFrame {
         // Utiliza una expresión regular para verificar si la cadena contiene solo números
         return cadena.matches("[0-9]+");
     }
-public void cargarComboGS(){
-     String gSang[] = {"A+", "A-", "B+", "B-", "0+", "0-", "AB+", "AB-"};
+
+    public void cargarComboGS() {
+        String gSang[] = {"A+", "A-", "B+", "B-", "0+", "0-", "AB+", "AB-"};
 
         List<String> tgs = Arrays.asList(gSang);
 

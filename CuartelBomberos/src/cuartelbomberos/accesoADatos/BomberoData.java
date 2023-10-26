@@ -99,6 +99,8 @@ public class BomberoData {
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla bombero5");
+        }catch(NullPointerException ex){
+        JOptionPane.showMessageDialog(null, "No se puede eliminar bombero, el mismo no esta registrado");
         }
 
     }
@@ -143,6 +145,8 @@ public class BomberoData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se puede acceder a la tabla bombero1");
+        }catch(NullPointerException ex){
+        JOptionPane.showMessageDialog(null, "No se puede eliminar bomberooo, el mismo no esta registrado");
         }
 
         return bomber;
@@ -278,4 +282,29 @@ public class BomberoData {
         return 0; // Si ocurre un error, retornamos 0.
     }
 
+    public boolean existeDniInactivo(String dni) { //metodo para verificar si exite el dni en la base de dato inactivo
+        boolean existe = false;
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT idBombero FROM bombero WHERE dni = ? and estado = 0";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, dni);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                existe = true; // Hay un registro con el mismo DNI y estado inactivo
+
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al verificar el DNI en la base de datos: " + ex.getMessage());
+        }
+
+        return existe;
+    }
 }
