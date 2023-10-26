@@ -357,7 +357,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
             return;
         }
         String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-        if ("Especialidad".equals(especialidadSelec)) {
+        if ("Especialidad...".equals(especialidadSelec)) {
             String especialidad = jtEspecialidad.getText();
 
         } else {
@@ -386,6 +386,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                 Brigada b = new Brigada(id, nombre, especialidad, est, cuartel);
                 //JOptionPane.showMessageDialog(null, nombre + "," + especialidad + "," + cuartel);
                 bd.editarBrigada(b);
+                jtCuartel.setText(cuartelSelec);
             }
         }
 
@@ -414,11 +415,13 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
                     return;
                 }
+                jtEspecialidad.setText(especialidadSeleccionada);
 
                 if ("Buscar cuartel".equalsIgnoreCase(cuartelSeleccionado)) {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
                     return;
                 }
+                jtCuartel.setText(cuartelSeleccionado);
 
                 // Dividir el elemento seleccionado 
                 String[] partes = cuartelSeleccionado.split(" - ");
@@ -428,7 +431,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                     Cuartel cuartel = cd.buscarCuartelNombre(nombreCuartel);
                     Brigada nuevaBrigada = new Brigada(nombre, especialidadSeleccionada, est, cuartel);
                     bd.guardarBrigada(nuevaBrigada);
-                    JOptionPane.showMessageDialog(null, "Brigada guardada correctamente");
+                    //JOptionPane.showMessageDialog(null, "Brigada guardada correctamente");
                 }
             }
         } catch (NullPointerException e) {
