@@ -216,35 +216,34 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                             .addGroup(jPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                        .addComponent(jtCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel6)
+                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(106, 106, 106)
+                                .addComponent(jtCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel6)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jcbCuartel, 0, 197, Short.MAX_VALUE)
                             .addComponent(jcbEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18))
-                    .addGroup(jPanelLayout.createSequentialGroup()
-                        .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(jtEspecialidad)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jLabel7))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jtBrigada, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(18, 18, 18))))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,8 +351,8 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         BrigadaData bd = new BrigadaData();
         String nombre = jtBrigada.getText();
         boolean est = jrbEstado.isSelected();
-        
-        if (nombre.isEmpty()||jtID.getText().isEmpty()) {
+
+        if (nombre.isEmpty() || jtID.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
             return;
         }
@@ -367,7 +366,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
         String especialidad = jtEspecialidad.getText();
         //JOptionPane.showMessageDialog(null,especialidad);
         String cuartelSelec = (String) jcbCuartel.getSelectedItem();
-       
+
         int id = Integer.parseInt(jtID.getText());
         if ("Buscar cuartel".equals(cuartelSelec)) {
             String cuartelSele = jtCuartel.getText();
@@ -401,6 +400,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
                 return;
             }
+<<<<<<< HEAD
             String existe = bd.buscarBrigadaXNombre(nombre).getNombreBriga();
             if (existe != null) {
                 JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
@@ -408,6 +408,14 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
 
                 String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
                 if ("Especialidad".equals(especialidadSelec)) {
+=======
+            Brigada existe = bd.buscarBrigadaXNombre(nombre);
+            if (existe != null) {
+                JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
+            } else {
+                String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
+                if ("Especialidad...".equals(especialidadSelec)) {
+>>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
                     JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
                     return;
                 }
@@ -421,6 +429,10 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                 jtCuartel.setText(cuartelSelec);
 
                 if (cuartelSelec != null) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
                     // Dividir el elemento seleccionado 
                     String[] partes = cuartelSelec.split(" - ");
                     if (partes.length > 0) {
@@ -428,11 +440,19 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                         CuartelData cd = new CuartelData();
                         Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
                         Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
+<<<<<<< HEAD
                         //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
+=======
+                        
+>>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
                         bd.guardarBrigada(b);
                     }
                 }
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
         } catch (NullPointerException e) {
             //JOptionPane.showMessageDialog(null, e);
         }
@@ -443,7 +463,7 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
     private void jrbEstadoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jrbEstadoVetoableChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbEstadoVetoableChange
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Editar;
@@ -491,7 +511,8 @@ private void cargarComboBox() {
             jcbCuartel.addItem(cuartel.getNombreCuartel());
         }
     }
-    public void limpiar(){
+
+    public void limpiar() {
         jtNombre.setText("");
         jtBrigada.setText("");
         jtCuartel.setText("");
