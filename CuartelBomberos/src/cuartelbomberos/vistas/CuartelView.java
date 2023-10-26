@@ -392,23 +392,22 @@ public class CuartelView extends javax.swing.JInternalFrame {
         boolean est = jrbEstado.isSelected();
 
         CuartelData c = new CuartelData();
-        //obtengo lo ingresado por la persona
-
+        
+        String nombreAnterior = (String) jcCuarteles.getSelectedItem();
         Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
         c.editarCuartel(cuartel);
+<<<<<<< HEAD
         //cargarComboBox();
+=======
+        jcCuarteles.removeItem(nombreAnterior);
+        jcCuarteles.addItem(nom);
+       jcCuarteles.repaint();
+        limpiar();
+>>>>>>> a6cc3a81e654fff07f8d7a9c13032d0db82f86f0
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        jtCorreo.setText("");
-        jtDireccion.setText("");
-        jtTelefono.setText("");
-        jtNombre.setText("");
-        jtX.setText("");
-        jtY.setText("");
-        jtID.setText("");
-        jrbEstado.setSelected(false);
-        borrarJList();
+        limpiar();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreActionPerformed
@@ -528,7 +527,8 @@ public class CuartelView extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtX;
     private javax.swing.JTextField jtY;
     // End of variables declaration//GEN-END:variables
-public void cargarComboBox() {
+    
+    public void cargarComboBox() {
         CuartelData cuar = new CuartelData();
         List<Cuartel> listaCuartel = cuar.listarCuartel();
         for (Cuartel cuartel : listaCuartel) {
@@ -551,6 +551,19 @@ public void cargarComboBox() {
         for (int i = 0; i < 50; i++) {
             modelo.clear();
         }
+    }
+
+    public void limpiar() {
+        jtCorreo.setText("");
+        jtDireccion.setText("");
+        jtTelefono.setText("");
+        jtNombre.setText("");
+        jtX.setText("");
+        jtY.setText("");
+        jtID.setText("");
+        jrbEstado.setSelected(false);
+        borrarJList();
+//        jcCuarteles.setSelectedIndex(0);
     }
 
 }
