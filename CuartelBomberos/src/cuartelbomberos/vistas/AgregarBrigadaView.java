@@ -4,7 +4,6 @@ import cuartelbomberos.accesoADatos.BrigadaData;
 import cuartelbomberos.accesoADatos.CuartelData;
 import cuartelbomberos.entidades.Brigada;
 import cuartelbomberos.entidades.Cuartel;
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -271,11 +270,12 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
                     .addComponent(jrbEstado)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jcbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(jtCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel6)
+                        .addComponent(jcbCuartel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
@@ -394,72 +394,50 @@ public class AgregarBrigadaView extends javax.swing.JInternalFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         try {
             BrigadaData bd = new BrigadaData();
-            String nombre = jtBrigada.getText();
+            String nombre = jtBrigada.getText().trim();
             boolean est = jrbEstado.isSelected();
+
             if (nombre.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
                 return;
             }
-<<<<<<< HEAD
-            String existe = bd.buscarBrigadaXNombre(nombre).getNombreBriga();
-            if (existe != null) {
-                JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
-            } else {
 
-                String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-                if ("Especialidad".equals(especialidadSelec)) {
-=======
-            Brigada existe = bd.buscarBrigadaXNombre(nombre);
-            if (existe != null) {
+            // Verificar si la brigada ya existe
+            Brigada existeBrigada = bd.buscarBrigadaXNombre(nombre);
+            if (existeBrigada != null) {
                 JOptionPane.showMessageDialog(null, "Existe una brigada con el nombre ingresado");
             } else {
-                String especialidadSelec = (String) jcbEspecialidad.getSelectedItem();
-                if ("Especialidad...".equals(especialidadSelec)) {
->>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
+                String especialidadSeleccionada = (String) jcbEspecialidad.getSelectedItem();
+                String cuartelSeleccionado = (String) jcbCuartel.getSelectedItem();
+
+                if ("Especialidad...".equalsIgnoreCase(especialidadSeleccionada)) {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
                     return;
                 }
-                jtEspecialidad.setText(especialidadSelec);
 
-                String cuartelSelec = (String) jcbCuartel.getSelectedItem();
-                if ("Buscar cuartel".equals(cuartelSelec)) {
+                if ("Buscar cuartel".equalsIgnoreCase(cuartelSeleccionado)) {
                     JOptionPane.showMessageDialog(null, "Debe seleccionar un cuartel");
                     return;
                 }
-                jtCuartel.setText(cuartelSelec);
 
-                if (cuartelSelec != null) {
-<<<<<<< HEAD
-=======
-
->>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
-                    // Dividir el elemento seleccionado 
-                    String[] partes = cuartelSelec.split(" - ");
-                    if (partes.length > 0) {
-                        String nombrecuartel = partes[0].trim();
-                        CuartelData cd = new CuartelData();
-                        Cuartel cuartel = cd.buscarCuartelNombre(nombrecuartel);
-                        Brigada b = new Brigada(nombre, especialidadSelec, est, cuartel);
-<<<<<<< HEAD
-                        //JOptionPane.showMessageDialog(null, nombre + "," + especialidadSelec + "," + cuartel);
-=======
-                        
->>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
-                        bd.guardarBrigada(b);
-                    }
+                // Dividir el elemento seleccionado 
+                String[] partes = cuartelSeleccionado.split(" - ");
+                if (partes.length > 0) {
+                    String nombreCuartel = partes[0].trim();
+                    CuartelData cd = new CuartelData();
+                    Cuartel cuartel = cd.buscarCuartelNombre(nombreCuartel);
+                    Brigada nuevaBrigada = new Brigada(nombre, especialidadSeleccionada, est, cuartel);
+                    bd.guardarBrigada(nuevaBrigada);
+                    JOptionPane.showMessageDialog(null, "Brigada guardada correctamente");
                 }
             }
-<<<<<<< HEAD
-=======
-
->>>>>>> e344215c65436efeb96b7833ad57559ace16ea51
         } catch (NullPointerException e) {
-            //JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
         }
-
-
     }//GEN-LAST:event_GuardarActionPerformed
-
+        
     private void jrbEstadoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jrbEstadoVetoableChange
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbEstadoVetoableChange
