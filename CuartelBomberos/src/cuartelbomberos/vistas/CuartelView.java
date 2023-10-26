@@ -396,14 +396,14 @@ public class CuartelView extends javax.swing.JInternalFrame {
         String nombreAnterior = (String) jcCuarteles.getSelectedItem();
         Cuartel cuartel = new Cuartel(id, nom, dire, x, y, tel, cor, est);
         c.editarCuartel(cuartel);
-<<<<<<< HEAD
+
         //cargarComboBox();
-=======
+
         jcCuarteles.removeItem(nombreAnterior);
         jcCuarteles.addItem(nom);
        jcCuarteles.repaint();
         limpiar();
->>>>>>> a6cc3a81e654fff07f8d7a9c13032d0db82f86f0
+
     }//GEN-LAST:event_jbEditarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
