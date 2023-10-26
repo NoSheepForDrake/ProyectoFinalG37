@@ -25,6 +25,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         initComponents();
         setTitle("Siniestro");
         cargarComboBox();
+        setFechaIni();
     }
     
     @SuppressWarnings("unchecked")
@@ -79,6 +80,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcod.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jTcod.setForeground(new java.awt.Color(255, 255, 255));
         jTcod.setToolTipText("Solo ingresar número para buscar.");
+        jTcod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTcodKeyTyped(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,6 +110,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcoordX.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N
         jTcoordX.setForeground(new java.awt.Color(255, 255, 255));
         jTcoordX.setToolTipText("Coordenada X");
+        jTcoordX.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTcoordXKeyTyped(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 51));
@@ -113,6 +124,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcoordY.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
         jTcoordY.setForeground(new java.awt.Color(255, 255, 255));
         jTcoordY.setToolTipText("Coordenada Y");
+        jTcoordY.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTcoordYKeyTyped(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("FreeMono", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -139,6 +155,11 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTpuntuacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTpuntuacionActionPerformed(evt);
+            }
+        });
+        jTpuntuacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTpuntuacionKeyTyped(evt);
             }
         });
 
@@ -411,6 +432,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto, activo);
             siniestroData sis = new siniestroData();
             sis.guardarSiniestro(siniestro);
+            limpiarCampos();
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(null, "Los valores no pueden ser nulos");
         } catch (NumberFormatException ex){
@@ -579,21 +601,41 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
     private void jBlimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBlimpiarCamposActionPerformed
         // Boton limpiar /-/ Hace un set en blanco en todos los campos de texto.
-        Calendar a = Calendar.getInstance(Locale.getDefault());
-        jLdistMetros.setText("");
-        jRsiOno.setSelected(false);
-        jTAdetalle.setText("");
-        jTcod.setText("");
-        jTcodBriga.setText("");
-        jTcoordX.setText("");
-        jTcoordY.setText("");
-        jTcuartelDispo.setText("");
-        jTpuntuacion.setText("");
-        jDfinalizo.setCalendar(a);
-        jDinicio.setCalendar(a);
-        jCtipo.setSelectedIndex(0);
-        
+        limpiarCampos();
     }//GEN-LAST:event_jBlimpiarCamposActionPerformed
+
+    private void jTcoordXKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcoordXKeyTyped
+        //este metodo hace que solo permita escribir numeros y de no ser asi no lo escribe
+        int key = evt.getKeyChar(); //obtengo la tecla que se presiono
+        boolean numero = key >= 48 && key <= 57; //esto significa que recorro los numeros del 0 al 9, xq alt48=0
+        if (!numero) {
+            evt.consume();//evita que se coloque letras o caracteres
+        }
+    }//GEN-LAST:event_jTcoordXKeyTyped
+
+    private void jTcoordYKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcoordYKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTcoordYKeyTyped
+
+    private void jTpuntuacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTpuntuacionKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTpuntuacionKeyTyped
+
+    private void jTcodKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTcodKeyTyped
+        int key = evt.getKeyChar();
+        boolean numero = key >= 48 && key <= 57;
+        if (!numero) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTcodKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBaniadirC;
@@ -640,5 +682,30 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         }
 
     }
-
+    
+    private void setFechaIni (){
+        
+        Calendar a = Calendar.getInstance(Locale.getDefault());
+        Date fechaActual = Date.valueOf(LocalDate.now());
+        jDinicio.setCalendar(a);
+        jDinicio.setMaxSelectableDate(fechaActual);
+        jDfinalizo.setCalendar(a);
+        jDfinalizo.setMinSelectableDate(fechaActual);
+    }
+    
+    private void limpiarCampos () {
+        Calendar a = Calendar.getInstance(Locale.getDefault());
+        jLdistMetros.setText("");
+        jRsiOno.setSelected(false);
+        jTAdetalle.setText("");
+        jTcod.setText("");
+        jTcodBriga.setText("");
+        jTcoordX.setText("");
+        jTcoordY.setText("");
+        jTcuartelDispo.setText("");
+        jTpuntuacion.setText("");
+        jDfinalizo.setCalendar(a);
+        jDinicio.setCalendar(a);
+        jCtipo.setSelectedIndex(0);
+    }
 }
