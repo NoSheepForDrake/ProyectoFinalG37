@@ -15,17 +15,20 @@ import javax.swing.plaf.basic.BasicLookAndFeel;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.multi.MultiLookAndFeel;
 import javax.swing.plaf.synth.SynthLookAndFeel;
-
+import java.awt.Toolkit;
 
 public class menuPrincipal extends javax.swing.JFrame {
 
-   
     public menuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
     }
 
-    
+    public Image getIconImage() {
+        Image retValue = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("cuartelbomberos/imagenes/logo.png"));
+        return retValue;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -52,6 +55,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(getIconImage());
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
@@ -171,10 +175,11 @@ public class menuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        AgregarBrigadaView b= new AgregarBrigadaView();
+        AgregarBrigadaView b = new AgregarBrigadaView();
         b.setVisible(true);
         jDesktopPane1.add(b);
         jDesktopPane1.moveToFront(b);
+        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -185,7 +190,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        CuartelView a= new CuartelView();
+        CuartelView a = new CuartelView();
         a.setVisible(true);
         jDesktopPane1.add(a);
         jDesktopPane1.moveToFront(a);
@@ -193,14 +198,14 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenu2ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-         jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        BuscarBrigadaView b= new BuscarBrigadaView();
+        BuscarBrigadaView b = new BuscarBrigadaView();
         b.setVisible(true);
         jDesktopPane1.add(b);
         jDesktopPane1.moveToFront(b);
@@ -212,9 +217,9 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         // TODO add your handling code here:
-         jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        BomberoView b= new BomberoView();
+        BomberoView b = new BomberoView();
         b.setVisible(true);
         jDesktopPane1.add(b);
         jDesktopPane1.moveToFront(b);
@@ -222,9 +227,9 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
-         jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        SiniestroActivoView b= new SiniestroActivoView();
+        SiniestroActivoView b = new SiniestroActivoView();
         b.setVisible(true);
         jDesktopPane1.add(b);
         jDesktopPane1.moveToFront(b);
@@ -232,9 +237,9 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-         jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        ResolucionSiniestroView b= new ResolucionSiniestroView();
+        ResolucionSiniestroView b = new ResolucionSiniestroView();
         b.setVisible(true);
         jDesktopPane1.add(b);
         jDesktopPane1.moveToFront(b);
@@ -242,9 +247,9 @@ public class menuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         // TODO add your handling code here:
-         jDesktopPane1.removeAll();
+        jDesktopPane1.removeAll();
         jDesktopPane1.repaint();
-        ConsultaDeBomberos cb= new ConsultaDeBomberos();
+        ConsultaDeBomberos cb = new ConsultaDeBomberos();
         cb.setVisible(true);
         jDesktopPane1.add(cb);
         jDesktopPane1.moveToFront(cb);
@@ -254,15 +259,14 @@ public class menuPrincipal extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-       
-            /* Set the Nimbus look and feel */
-            //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-            /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
             * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
-            */
+         */
         try {
-             UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.noire.NoireLookAndFeel");
         } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(menuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -278,7 +282,7 @@ public class menuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                 new menuPrincipal().setVisible(true);
+                new menuPrincipal().setVisible(true);
             }
         });
     }
