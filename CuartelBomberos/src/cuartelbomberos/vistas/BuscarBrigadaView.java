@@ -82,6 +82,7 @@ public class BuscarBrigadaView extends javax.swing.JInternalFrame {
         ));
         Tabla.setSelectionBackground(new java.awt.Color(0, 0, 0));
         Tabla.setSelectionForeground(new java.awt.Color(255, 255, 0));
+        Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(Tabla);
 
         jButton1.setFont(new java.awt.Font("FreeMono", 1, 12)); // NOI18N

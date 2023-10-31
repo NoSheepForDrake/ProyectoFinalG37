@@ -424,12 +424,11 @@ public class CuartelView extends javax.swing.JInternalFrame {
         String nom = jtNombre.getText();
         String coordX = jtX.getText();
         String coordY = jtY.getText();
-        String iden = jtID.getText();
-
+        
         boolean est = jrbEstado.isSelected();
 
         if (dire.isEmpty() || tel.isEmpty() || cor.isEmpty()
-                || nom.isEmpty() || coordX.isEmpty() || coordY.isEmpty() || iden.isEmpty()) {
+                || nom.isEmpty() || coordX.isEmpty() || coordY.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Los campos no deben estar vacíos");
             return;
         }

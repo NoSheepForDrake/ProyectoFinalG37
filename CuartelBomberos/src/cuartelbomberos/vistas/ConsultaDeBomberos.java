@@ -76,6 +76,7 @@ private DefaultTableModel tabla = new DefaultTableModel(){
         Tabla.setSelectionBackground(new java.awt.Color(0, 0, 0));
         Tabla.setSelectionForeground(new java.awt.Color(255, 255, 0));
         Tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        Tabla.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(Tabla);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

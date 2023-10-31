@@ -16,7 +16,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
-
+import javax.swing.text.AbstractDocument;
+import cuartelbomberos.entidades.FiltroNumeros;
 
 public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
@@ -26,6 +27,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         setTitle("Siniestro");
         cargarComboBox();
         setFechaIni();
+        checkPuntuacion();
     }
     
     @SuppressWarnings("unchecked")
@@ -410,7 +412,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
 
     private void jBguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBguardarActionPerformed
         //Boton guardar /-/ Carga los datos de un siniestro a la base de datos.
-        
+
         try {
             String tipo = String.valueOf(jCtipo.getSelectedItem());
             java.util.Date fechaI = jDinicio.getDate();
@@ -422,20 +424,27 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
             int brigada = Integer.parseInt(jTcodBriga.getText());
             boolean resuelto = jRsiOno.isSelected();
             boolean activo = true;
-            
+
             Instant instant = fechaI.toInstant();
             LocalDate fechaSiniestro = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-            
-            Instant instant2 = fechaF.toInstant();
-            LocalDate fechaResol = instant2.atZone(ZoneId.systemDefault()).toLocalDate();
-            
-            Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto, activo);
-            siniestroData sis = new siniestroData();
-            sis.guardarSiniestro(siniestro);
-            limpiarCampos();
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(null, "Los valores no pueden ser nulos");
-        } catch (NumberFormatException ex){
+            if (fechaF != null) {
+                Instant instant2 = fechaF.toInstant();
+                LocalDate fechaResol = instant2.atZone(ZoneId.systemDefault()).toLocalDate();
+                Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaResol, puntuacion, brigada, resuelto, activo);
+                siniestroData sis = new siniestroData();
+                sis.guardarSiniestro(siniestro);
+                limpiarCampos();
+            } else {
+                LocalDate fechaG = null;
+                Siniestro siniestro = new Siniestro(tipo, fechaSiniestro, x, y, detalle, fechaG, puntuacion, brigada, resuelto, activo);
+                siniestroData sis = new siniestroData();
+                sis.guardarSiniestro(siniestro);
+                limpiarCampos();
+            }
+
+//        } catch (NullPointerException e) {
+//            JOptionPane.showMessageDialog(null, "Los valores no pueden ser nulos");
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Puntuacion o Coordenadas Vacias / No hay brigada disponible.");
         }
     }//GEN-LAST:event_jBguardarActionPerformed
@@ -689,7 +698,7 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         Date fechaActual = Date.valueOf(LocalDate.now());
         jDinicio.setCalendar(a);
         jDinicio.setMaxSelectableDate(fechaActual);
-        jDfinalizo.setCalendar(a);
+        //jDfinalizo.setCalendar(a);
         jDfinalizo.setMinSelectableDate(fechaActual);
     }
     
@@ -704,8 +713,13 @@ public class SiniestroActivoView extends javax.swing.JInternalFrame {
         jTcoordY.setText("");
         jTcuartelDispo.setText("");
         jTpuntuacion.setText("");
-        jDfinalizo.setCalendar(a);
         jDinicio.setCalendar(a);
         jCtipo.setSelectedIndex(0);
+    }
+    
+    private void checkPuntuacion(){
+        javax.swing.text.Document doc = jTpuntuacion.getDocument();
+        if (doc instanceof AbstractDocument) {
+        ((AbstractDocument) doc).setDocumentFilter(new FiltroNumeros());}
     }
 }

@@ -24,8 +24,16 @@ public class siniestroData {
             ps.setInt(3, sini.getCoord_X());
             ps.setInt(4, sini.getCoord_Y());
             ps.setString(5, sini.getText());
-            ps.setDate(6, Date.valueOf(sini.getFechaResol()));
-            ps.setInt(7, sini.getPuntuacion());
+            if(sini.getFechaResol() == null){
+                ps.setNull(6, Types.NULL);
+            }else{
+                ps.setDate(6, Date.valueOf(sini.getFechaResol()));
+            }
+            if(sini.getPuntuacion() == 0){
+                ps.setNull(7, Types.INTEGER);
+            }else{
+                ps.setInt(7, sini.getPuntuacion());
+            }
             ps.setInt(8, sini.getCodBrigada());
             ps.setBoolean(9, sini.getResuelto());
             ps.setBoolean(10, sini.getActivo());
